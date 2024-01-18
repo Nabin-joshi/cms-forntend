@@ -19,14 +19,61 @@ body {
   color: #444444;
 }
 
-a NavLink {
+a {
   color: #4fa6d5;
   text-decoration: none;
 }
 
-a:hover Navlink:hover {
+a:hover {
   color: #45beff;
   text-decoration: none;
+}
+
+navLink {
+  color: #4fa6d5;
+  text-decoration: none;
+}
+
+navlink:hover {
+  color: #45beff;
+  text-decoration: none;
+}
+
+.cardIkhata {
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+}
+
+.cardIkhata-header,
+.cardIkhata-footer {
+  border-color: #ebeef4;
+  background-color: #fff;
+  color: #798eb3;
+  padding: 15px;
+}
+
+.cardIkhata-title {
+  padding: 20px 0 15px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+}
+
+.cardIkhata-title span {
+  color: #899bbd;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cardIkhata-body {
+  padding: 0 20px 20px 20px;
+}
+
+.cardIkhata-img-overlay {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 h1,
@@ -108,10 +155,26 @@ h6,
   text-decoration: none;
 }
 
-#header .logo img {
-  padding: 0;
-  margin: 0;
-  max-height: 40px;
+.logoIkhata {
+  line-height: 1;
+}
+
+@media (min-width: 1200px) {
+  .logoIkhata {
+    width: 280px;
+  }
+}
+
+.logoIkhata img {
+  max-height: 26px;
+  margin-right: 6px;
+}
+
+.logoIkhata span {
+  font-size: 26px;
+  font-weight: 700;
+  color: #012970;
+  font-family: "Nunito", sans-serif;
 }
 
 #main {
