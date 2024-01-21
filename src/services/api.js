@@ -20,3 +20,21 @@ export const login = async (data) => {
 
   return response;
 };
+
+export const saveContent = async (data) => {
+  try {
+    await api.put("/api/blog/update/65ad742140933d0ccc3563e8", data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getContent = async () => {
+  let response;
+  try {
+    response = await api.get("/api/blog/65ad742140933d0ccc3563e8");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};

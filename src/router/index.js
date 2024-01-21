@@ -1,24 +1,51 @@
 import React, { Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import routes from "./routes";
+import { mainRoutes } from "./routes";
 
-function index() {
+function Index() {
   return (
     <BrowserRouter>
       <Suspense fallback="...Loading">
         <Routes>
-          {routes.map((route, ind) => {
-            return (
-              route.element && (
-                <Route
-                  key={ind}
-                  path={route.path}
-                  exact={route.exact ? route.exact : false}
-                  name={route.name}
-                  element={<route.element />}
-                />
-              )
-            );
+          {mainRoutes.map((route, ind) => {
+            if (route && route.children) {
+              return (
+                route.element && (
+                  <Route
+                    key={ind}
+                    path={route.path}
+                    exact={route.exact ? route.exact : false}
+                    element={<route.element />}
+                  >
+                    {route.children.map((childRoute, index) => {
+                      return (
+                        childRoute.element && (
+                          <Route
+                            key={index}
+                            path={childRoute.path}
+                            exact={childRoute.exact ? childRoute.exact : false}
+                            name={childRoute.name}
+                            element={<childRoute.element />}
+                          />
+                        )
+                      );
+                    })}
+                  </Route>
+                )
+              );
+            } else {
+              return (
+                route.element && (
+                  <Route
+                    key={ind}
+                    path={route.path}
+                    exact={route.exact ? route.exact : false}
+                    name={route.name}
+                    element={<route.element />}
+                  />
+                )
+              );
+            }
           })}
         </Routes>
       </Suspense>
@@ -26,4 +53,4 @@ function index() {
   );
 }
 
-export default React.memo(index);
+export default React.memo(Index);
