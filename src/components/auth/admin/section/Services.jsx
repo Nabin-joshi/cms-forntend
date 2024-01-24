@@ -1,10 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import JoditEditor from "jodit-react";
-import { saveContent } from "../../../../services/api";
+import { getContent, saveContent } from "../../../../services/api";
+import { ToastContainer, toast } from "react-toastify";
 
 function Services() {
   const editor = useRef(null);
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getContent();
+        if (response) {
+          setContent(response.data.blog.content);
+        }
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
 
   let data = {
     author: "65999deb6b12774f3c5903ec",
@@ -33,10 +47,32 @@ function Services() {
   const saveService = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log(content);
     if (content) {
       data.content = content;
-      await saveContent(data);
+      let message = await saveContent(data);
+      if (message) {
+        toast.success("Content Saved Successfully!", {
+          position: "top-center",
+          autoClose: 700,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "colored",
+        });
+      } else {
+        toast.error("Too Much Content!", {
+          position: "top-center",
+          autoClose: 700,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "colored",
+        });
+      }
     }
   };
 
@@ -89,6 +125,7 @@ function Services() {
           </div>
         </section>
       </main>
+      <ToastContainer />
     </>
   );
 }

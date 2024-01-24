@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Logo from "../../../assets/img/logo.png";
 import TextInput from "../../shared/TextInput/TextInput";
 import loginSchema from "../../../schemas/loginSchema";
 import styles from "./Login.module.css";
@@ -75,8 +74,11 @@ export default function Login() {
               >
                 <div className="d-flex justify-content-center py-4">
                   <NavLink className="logoIkhata d-flex align-items-center navLink w-auto">
-                    <img src={Logo} alt="" />
-                    <span className="d-none d-lg-block">IsHani Technology</span>
+                    <img
+                      src="https://www.koshishnepal.org/wp-content/uploads/2021/09/cropped-main-koshish-1.png"
+                      alt=""
+                    />
+                    <span className="d-none d-lg-block">Koshish Nepal</span>
                   </NavLink>
                 </div>
 
@@ -110,7 +112,7 @@ export default function Login() {
                           name="email"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          placeholder="email"
+                          placeholder="Email"
                           error={errors.email && touched.email ? 1 : undefined}
                           errormessage={errors.email}
                         />
@@ -126,7 +128,7 @@ export default function Login() {
                           value={values.password}
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          placeholder="password"
+                          placeholder="Password"
                           error={
                             errors.password && touched.password ? 1 : undefined
                           }
@@ -183,7 +185,7 @@ export default function Login() {
             </div>
           </div>
           <div className="credits" style={{ marginTop: "10px" }}>
-            Developed by <a href="https://ishanitech.com/">Ishani Technology</a>
+            Developed by <NavLink>Volcosoft pvt ltd</NavLink>
           </div>
         </section>
       </div>

@@ -6,7 +6,7 @@ export default function TextInput(props) {
     <>
       <input className="form-control" {...props} />
       {props.error && (
-        <p className={styles.errorMessage}>{props.errormessage}</p>
+        <p className={styles.errorMessage}>{props.errormessage} !</p>
       )}
     </>
   );

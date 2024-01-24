@@ -29,10 +29,11 @@ export default function HomePageLayout() {
           <>
             <section className="services">
               <div className="container">
-                <div className="row">
-                  <h1 className="text-center">Dynamic Content</h1>
+                <div className="section-title">
+                  <h2>Our Services</h2>
+
                   <div dangerouslySetInnerHTML={{ __html: data.content }} />
-                </div>{" "}
+                </div>
               </div>
             </section>
           </>

@@ -334,8 +334,8 @@ navlink:hover {
 }
 
 @media (min-width: 1200px) {
-  #main,
-  #footer {
+  .main,
+  .footer {
     margin-left: 300px;
   }
 }
@@ -491,29 +491,29 @@ navlink:hover {
   color: #012970;
 }
 
-.footer {
+.Ikhatafooter {
   padding: 20px 0 !important;
   font-size: 14px !important;
   transition: all 0.3s !important;
   border-top: 1px solid #cddfff !important ;
-  background: #f6f9ff !important;
+  background: #fff !important;
 }
 
-.footer .copyright {
+.Ikhatafooter .copyright {
   text-align: center;
-  color: #012970;
+  color: #012970 !important;
 }
 
-.footer .credits {
+.Ikhatafooter .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
-  color: #012970;
+  color: #012970 !important;
 }
 
 @media (min-width: 1200px) {
   .toggle-sidebar .main,
-  .toggle-sidebar .footer {
+  .toggle-sidebar .Ikhatafooter {
     margin-left: 0;
   }
 
@@ -524,7 +524,7 @@ navlink:hover {
 
 @media (min-width: 1200px) {
   .main,
-  .footer {
+  .Ikhatafooter {
     margin-left: 300px;
   }
 }
@@ -588,7 +588,7 @@ h6,
 }
 
 #header.header-scrolled {
-  background: rgba(30, 67, 86, 0.8);
+  background: rgba(30, 67, 86, 0.8) !important;
   height: 60px;
 }
 

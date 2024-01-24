@@ -16,7 +16,7 @@ export default function Slider() {
           <div className="carousel-item active">
             <div className="carousel-container">
               <h2 className="animate__animated animate__fadeInDown">
-                Welcome to <span>Moderna</span>
+                Welcome to <span>Koshish Nepal</span>
               </h2>
               <p className="animate__animated animate__fadeInUp">
                 Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et

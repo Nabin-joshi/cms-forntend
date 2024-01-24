@@ -10,8 +10,11 @@ function AdminHeader() {
       >
         <div className="d-flex align-items-center justify-content-between">
           <NavLink className="logoIkhata d-flex align-items-center">
-            <img src={require("../../../assets/img/logo.png")} alt="" />
-            <span className="d-none d-lg-block">NiceAdmin</span>
+            <img
+              src="https://www.koshishnepal.org/wp-content/uploads/2021/09/cropped-main-koshish-1.png"
+              alt=""
+            />
+            <span className="d-none d-lg-block">Koshish Admin</span>
           </NavLink>
           <i className="bi bi-list toggle-sidebar-btn"></i>
         </div>
@@ -221,19 +224,19 @@ function AdminHeader() {
                 data-bs-toggle="dropdown"
               >
                 <img
-                  src="assets/img/profile-img.jpg"
+                  src="https://www.koshishnepal.org/wp-content/uploads/2021/09/cropped-main-koshish-1.png"
                   alt="Profile"
                   className="rounded-circle"
                 />
                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                  K. Anderson
+                  Nabin Joshi
                 </span>
               </NavLink>
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                <li className="dropdown-ikhataHeader">
-                  <h6>Kevin Anderson</h6>
-                  <span>Web Designer</span>
+                <li style={{ textAlign: "center" }} className="dropdown-Header">
+                  <h6>Nabin Joshi</h6>
+                  <span>Full Stack Developer</span>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />

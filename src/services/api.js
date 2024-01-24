@@ -24,8 +24,10 @@ export const login = async (data) => {
 export const saveContent = async (data) => {
   try {
     await api.put("/api/blog/update/65ad742140933d0ccc3563e8", data);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
