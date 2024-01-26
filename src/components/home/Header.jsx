@@ -5,13 +5,13 @@ export default function Header() {
     <>
       <header
         id="header"
-        className="fixed-top d-flex align-items-center header-transparent"
+        className="fixed-top d-flex align-items-center header-transparent header-scrolled"
       >
         <div className="container d-flex justify-content-between align-items-center">
           <div className="logo">
             <h1 className="text-light">
               <a href="index.html">
-                <span>Moderna</span>
+                <span>Koshish Nepal</span>
               </a>
             </h1>
           </div>

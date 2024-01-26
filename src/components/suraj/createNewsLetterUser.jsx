@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import URLS from "../../urls/urls";
+import { Button, Input } from "@mui/joy";
+import { ToastContainer, toast } from "react-toastify";
 
 const CreateNewsLetterUser = (props) => {
   const [userData, setUserData] = useState({
@@ -41,7 +44,7 @@ const CreateNewsLetterUser = (props) => {
     e.preventDefault();
     try {
       const res = await fetch(
-        "http://localhost:5000/api/newsLetter/newsLetterUser",
+        `${URLS.BASE_URL}/api/newsLetter/newsLetterUser`,
         {
           method: "POST",
           headers: {
@@ -59,21 +62,42 @@ const CreateNewsLetterUser = (props) => {
         });
         props.userAddedFunc(data.savedNewsLetterUser._id);
       } else {
-        alert(data.errormessage);
+        // alert(data.errormessage);
+        toast.error(`${data.errormessage}`, {
+          position: "top-center",
+          autoClose: 700,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "colored",
+        });
       }
     } catch (error) {
       // alert("Something went wrong !!!" + JSON.stringify(error));
+      toast.error(`Something went wrong`, {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
     }
   };
 
   useEffect(() => {}, []);
   return (
     <>
-      <h1>Add User in NewsLetter</h1>
+      <h5>Add User in NewsLetter</h5>
       <form action="" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="">Name: </label>
-          <input
+          <Input
+            variant="outlined"
             name="name"
             type="text"
             value={userData.name}
@@ -83,7 +107,8 @@ const CreateNewsLetterUser = (props) => {
         </div>
         <div className="form-group">
           <label htmlFor="">Email: </label>
-          <input
+          <Input
+            variant="outlined"
             type="email"
             name="email"
             value={userData.email}
@@ -91,9 +116,28 @@ const CreateNewsLetterUser = (props) => {
           />
           <small style={{ color: "red" }}>{errors.email}</small>
         </div>
-
-        <button type="submit">Add User</button>
+        <div
+          className="mt-2"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Button type="submit" color="primary" variant="soft">
+            Add User
+          </Button>
+          {/* <Button disabled variant="solid">
+            Add User
+          </Button>
+          <Button disabled color="neutral" variant="soft">
+            Add User
+          </Button>
+          <Button disabled color="success">
+            Add User
+          </Button>
+          <Button disabled color="danger" variant="plain">
+            Add User
+          </Button> */}
+        </div>
       </form>
+      <ToastContainer />
     </>
   );
 };

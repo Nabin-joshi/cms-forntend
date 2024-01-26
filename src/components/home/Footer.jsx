@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -62,23 +63,23 @@ export default function Footer() {
                 <ul>
                   <li>
                     <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Web Design</a>
+                    <a href="/">Empowerment Approach</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Web Development</a>
+                    <a href="/">UNCRPD</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Product Management</a>
+                    <a href="/">Constitution of Nepal</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Marketing</a>
+                    <a href="/">Disability Rights Act-Nepali</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Graphic Design</a>
+                    <a href="/">National Health Policy</a>
                   </li>
                 </ul>
               </div>
@@ -86,24 +87,30 @@ export default function Footer() {
               <div className="col-lg-3 col-md-6 footer-contact">
                 <h4>Contact Us</h4>
                 <p>
-                  A108 Adam Street <br />
-                  New York, NY 535022
+                  Lalitpur Metropolitan <br />
+                  City-14 Kusunti,Lalitpur
                   <br />
-                  United States <br />
+                  NEPAL <br />
                   <br />
-                  <strong>Phone:</strong> +1 5589 55488 55
+                  <strong>Phone:</strong> +977 1 5121230
                   <br />
-                  <strong>Email:</strong> info@example.com
+                  <strong>Email:</strong> info@koshishnepal.org
                   <br />
                 </p>
               </div>
 
               <div className="col-lg-3 col-md-6 footer-info">
-                <h3>About Moderna</h3>
+                <h3>About Koshish Nepal</h3>
                 <p>
-                  Cras fermentum odio eu feugiat lide par naso tierra. Justo
-                  eget nada terra videa magna derita valies darta donna mare
-                  fermentum iaculis eu non diam phasellus.
+                  Established in 2008, KOSHISH, a National Mental Health
+                  Organization is working in the promotion of mental health and
+                  psychosocial well-being in Nepal. KOSHISH promotes
+                  self-advocacy in the spirit of “NOTHING ABOUT US WITHOUT US.”
+                  KOSHISH aims to create model recovery oriented person centered
+                  mental health services, which includes mental health and
+                  psychosocial support (MHPSS) in health as well as beyond the
+                  health system (i.e. social protection, employment, etc.) that
+                  is replicable by the government and other stakeholders.
                 </p>
                 <div className="social-links mt-3">
                   <a href="/" className="twitter">
@@ -128,13 +135,12 @@ export default function Footer() {
           <div className="copyright">
             &copy; Copyright{" "}
             <strong>
-              <span>Moderna</span>
+              <span>Koshish Nepal</span>
             </strong>
             . All Rights Reserved
           </div>
           <div className="credits">
-            Designed by{" "}
-            <a href="https://bootstrapmade.com/">Ishani Technology</a>
+            Designed by <NavLink>Volcosoft pvt ltd</NavLink>
           </div>
         </div>
       </footer>

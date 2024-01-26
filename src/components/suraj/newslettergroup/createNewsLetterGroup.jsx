@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import URLS from "../../../urls/urls";
+import { Button, Input } from "@mui/joy";
+import { ToastContainer, toast } from "react-toastify";
 
 const CreateNewsLetterGroup = (props) => {
   const [formData, setFormData] = useState({
@@ -38,7 +41,7 @@ const CreateNewsLetterGroup = (props) => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/newsLetter/newsLetterGroup",
+        `${URLS.BASE_URL}/api/newsLetter/newsLetterGroup`,
         {
           method: "POST",
           headers: {
@@ -54,7 +57,16 @@ const CreateNewsLetterGroup = (props) => {
       });
       props.finishGroupAdding(data.savedNewsLetterUserGroup.name);
     } catch (error) {
-      alert("Error while adding group !!" + error.message);
+      toast.error(`Error while adding group !! ${error.message}`, {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
     }
   };
 
@@ -64,12 +76,14 @@ const CreateNewsLetterGroup = (props) => {
         <label htmlFor="">
           Enter group name:
           <br />
-          <input
+          <Input
+            className="mt-2"
             type="text"
             name="groupName"
             placeholder="Group Name"
             value={formData.groupName} //tied to state variable, set initial or current value
             onChange={handleChange}
+            variant="outlined"
           />
           {errors.groupName && (
             <p style={{ color: "red" }}>{errors.groupName}</p>
@@ -78,8 +92,13 @@ const CreateNewsLetterGroup = (props) => {
         <br />
 
         <br />
-        <button type="submit">Add Group</button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="solid" color="primary" type="submit">
+            Add Group
+          </Button>
+        </div>
       </form>
+      <ToastContainer />
     </>
   );
 };
