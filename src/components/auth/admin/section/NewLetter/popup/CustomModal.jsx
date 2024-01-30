@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import Modal from "react-modal";
-import "./customModal.css"; // Import your custom styles
-import { ModalClose, Sheet, Typography } from "@mui/joy";
+import "./customModal.css";
 
 const CustomModal = ({ isOpen, onRequestClose, contentComponent }) => {
   return (

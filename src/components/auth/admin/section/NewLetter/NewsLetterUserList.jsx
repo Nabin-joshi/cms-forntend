@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "./popup/CustomModal";
 import "./popup/customModal.css";
-import CreateNewsLetterUser from "./createNewsLetterUser";
-import URLS from "../../urls/urls";
+import CreateNewsLetterUser from "./newslettergroup/createNewsLetterGroup";
+import URLS from "../../../../../urls/urls";
 import { Button, Table } from "@mui/joy";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -65,13 +65,6 @@ const NewsLetterUserList = () => {
     });
     setModalOpen(false);
     fetchUserList();
-  };
-
-  const restrictOverflow = {
-    maxWidth: "150px", // Set a maximum width for the cells
-    overflow: "hidden",
-    textOverflow: "ellipsis", // Display an ellipsis (...) when content overflows
-    whiteSpace: "nowrap", // Prevent line breaks in the content
   };
 
   return (
