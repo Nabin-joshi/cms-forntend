@@ -8,6 +8,7 @@ import Admin from "../pages/admin/AdminPage.jsx";
 import Services from "../components/auth/admin/section/Services.jsx";
 import Features from "../components/auth/admin/section/Features.jsx";
 import NewsLetterGroupList from "../components/auth/admin/section/NewLetter/newslettergroup/NewsLetterGroupList.jsx";
+import Slider from "../components/auth/admin/section/Slider.jsx";
 
 export const mainRoutes = [
   { path: "/", name: "Home Page", element: Home },
@@ -30,6 +31,12 @@ export const mainRoutes = [
         name: "Admin Feature",
         exact: true,
         element: Features,
+      },
+      {
+        path: "/admin/slider",
+        name: "Admin Slider",
+        exact: true,
+        element: Slider,
       },
       {
         path: "/admin/nwusersgroupmap",
