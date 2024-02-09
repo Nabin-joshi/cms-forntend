@@ -7,9 +7,13 @@ const MapNewsLetterUserGroup = () => {
   const [newsLetterUsers, setNewsLetterUsers] = useState([]);
   const [newsLetterGroups, setNewsLetterGroup] = useState([]);
 
-  const [selectedNewsLetterUser, setSelectedNewsLetterUser] = useState({});
+  const [selectedNewsLetterUsers, setSelectedNewsLetterUsers] = useState([]); //learn-> {} will create . problem
   const [selectedNewsLetterGroup, setSelectedNewsLetterGroup] = useState({});
 
+  const [userGroups, setUserGroups] = useState({
+    groupId: "",
+    userIds: [],
+  });
   const fetchLikelyUsers = async (e) => {
     e.preventDefault();
     let response = await fetch(
@@ -41,14 +45,12 @@ const MapNewsLetterUserGroup = () => {
   const mapUserToGrop = async (e) => {
     e.preventDefault();
     if (
-      selectedNewsLetterUser._id !== undefined &&
+      selectedNewsLetterUsers.length <= 0 ||
       selectedNewsLetterGroup._id !== undefined
     ) {
-      const userGroupMap = {
-        userId: selectedNewsLetterUser._id,
-        groupId: selectedNewsLetterGroup._id,
-      };
-      // alert(JSON.stringify(userGroupMap));
+      const userGroupsData = userGroups;
+      alert(JSON.stringify(userGroupsData));
+
       let response = await fetch(
         `${URLS.BASE_URL}/api/newsLetter/newsLetterUserGroupMap`,
         {
@@ -56,12 +58,12 @@ const MapNewsLetterUserGroup = () => {
             "Content-Type": "application/json",
           },
           method: "post",
-          body: JSON.stringify(userGroupMap),
+          body: JSON.stringify(userGroupsData),
         }
       );
       let data = await response.json();
       if (data.success === true) {
-        toast.success(`User is successfully maped to the group`, {
+        toast.success(`Users are successfully maped to the group`, {
           position: "top-center",
           autoClose: 700,
           hideProgressBar: true,
@@ -97,6 +99,28 @@ const MapNewsLetterUserGroup = () => {
     }
   };
 
+  const selectGroup = (item) => {
+    setSelectedNewsLetterGroup(item);
+    setUserGroups((prevItem) => {
+      return { groupId: item._id, userIds: [...prevItem.userIds] };
+    });
+  };
+
+  const selectUser = (item) => {
+    const userId = item._id;
+    if (selectedNewsLetterUsers.includes(item)) {
+      return;
+    }
+    setSelectedNewsLetterUsers((prevItems) => {
+      return [...prevItems, item];
+    });
+    setUserGroups((prevItem) => {
+      return {
+        groupId: prevItem.groupId,
+        userIds: [...prevItem.userIds, item._id],
+      };
+    });
+  };
   return (
     <>
       <main id="main" className="main">
@@ -118,6 +142,88 @@ const MapNewsLetterUserGroup = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
+                  <div className="row">
+                    <div
+                      className="col-md-6"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        background: "pink",
+                      }}
+                    >
+                      <Input
+                        placeholder="Enter Group"
+                        onChange={fetchLikelyGroups}
+                      ></Input>
+                    </div>
+                    <div className="col-md-6">
+                      <Input
+                        placeholder="Enter User"
+                        onChange={fetchLikelyUsers}
+                      ></Input>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <ul>
+                        <span className="mt-2">
+                          {selectedNewsLetterGroup.name}
+                        </span>
+                      </ul>
+                      <hr />
+                      <ul>
+                        {newsLetterGroups &&
+                          newsLetterGroups.map((item, index) => {
+                            return (
+                              <li
+                                style={{ cursor: "pointer" }}
+                                key={index}
+                                onClick={() => selectGroup(item)}
+                              >
+                                {item.name}
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+                    <div className="col-md-6">
+                      <ul>
+                        {selectedNewsLetterUsers &&
+                          selectedNewsLetterUsers.map((item, index) => {
+                            return <li>{item.name}</li>;
+                          })}
+                      </ul>
+                      <hr></hr>
+                      <ul>
+                        {newsLetterUsers &&
+                          newsLetterUsers.map((item, index) => {
+                            return (
+                              <li
+                                style={{ cursor: "pointer" }}
+                                key={index}
+                                onClick={() => selectUser(item)}
+                              >
+                                {" "}
+                                {item.email}
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <button
+                          onClick={mapUserToGrop}
+                          className="btn btn-primary"
+                        >
+                          Map User To Group
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="card-body">
                   <h5 className="card-title">Map user to group</h5>
                   <hr className="border-2" />
                   <div className="row">
@@ -155,7 +261,7 @@ const MapNewsLetterUserGroup = () => {
                                 style={{ cursor: "pointer" }}
                                 key={index}
                                 onClick={(e) => {
-                                  setSelectedNewsLetterUser(item);
+                                  setSelectedNewsLetterUsers(item);
                                 }}
                               >
                                 {item.email}
@@ -198,7 +304,7 @@ const MapNewsLetterUserGroup = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

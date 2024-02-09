@@ -130,19 +130,21 @@ const NewsLetterUserList = () => {
                               <td>{item._id}</td>
                               <td> {item.name}</td>
                               <td>{item.email}</td>
-                              {item.groups.map((group, index) => {
-                                return (
-                                  <td
-                                    style={{
-                                      height: "auto",
-                                      width: "auto",
-                                    }}
-                                    key={index}
-                                  >
-                                    {group.name},{" "}
-                                  </td>
-                                );
-                              })}
+                              <td>
+                                {item.groups.map((group, index) => {
+                                  return (
+                                    <span
+                                      style={{
+                                        height: "auto",
+                                        width: "auto",
+                                      }}
+                                      key={index}
+                                    >
+                                      {group.name},{" "}
+                                    </span>
+                                  );
+                                })}
+                              </td>
                             </tr>
                           </>
                         );

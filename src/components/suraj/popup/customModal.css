@@ -17,6 +17,7 @@
 /* YourModalStyles.css */
 
 .custom-modal {
+  z-index: 1000;
   position: absolute;
   top: 26%;
   left: 50%;

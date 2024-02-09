@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { createNewsLetterUser } from "../../services/NewsLetterUserService";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const subscribe = async (event) => {
+    event.preventDefault();
+    let isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+      toast.error("Invalid Email !!!", {
+        position: "top-center",
+        autoClose: 800,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
+      return;
+    }
+    const name = email.split("@")[0];
+    const res = await createNewsLetterUser({ name: name, email: email });
+    if (res.success === true) {
+      toast.success(`suscribed with email ${email}`);
+    }
+
+    setEmail("");
+  };
+
   return (
     <>
       <footer
@@ -21,8 +49,12 @@ export default function Footer() {
                 </p>
               </div>
               <div className="col-lg-6">
-                <form action="" method="post">
-                  <input type="email" name="email" />
+                <form action="" onSubmit={subscribe} method="post">
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
                   <input type="submit" value="Subscribe" />
                 </form>
               </div>
@@ -150,6 +182,7 @@ export default function Footer() {
       >
         <i className="bi bi-arrow-up-short"></i>
       </a>
+      <ToastContainer />
     </>
   );
 }

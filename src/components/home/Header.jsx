@@ -1,6 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import { donateUs } from "../../services/NewsLetterUserService";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import CustomModal from "../suraj/popup/CustomModal";
+import CreateNewsLetterUser from "../suraj/createNewsLetterUser";
+import DonateModal from "../suraj/popup/DonateModal";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const payViaKhalti = async (amountInfo) => {
+    const formData = {
+      return_url: "http://localhost:5000/api/newsLetter/donateUs",
+      website_url: "https://www.google.com/",
+      amount: amountInfo.amount,
+      purchase_order_id: "Order01",
+      purchase_order_name: "test",
+      customer_info: amountInfo,
+    };
+    const data = await donateUs(formData);
+    console.log(data.responseData);
+    toast.success(`going to payment page`, {
+      position: "top-center",
+      autoClose: 700,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "colored",
+    });
+    window.location.href = `${data.responseData.payment_url}`;
+  };
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const enterAmount = (amount) => {
+    toast.info(` redirecting to payment page  `, {
+      position: "top-center",
+      autoClose: 700,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "colored",
+    });
+    setModalOpen(false);
+    payViaKhalti(amount);
+  };
+
   return (
     <>
       <header
@@ -83,10 +132,21 @@ export default function Header() {
               <li>
                 <a href="contact.html">Contact Us</a>
               </li>
+              <li>
+                <button className="ml-2" onClick={() => setModalOpen(true)}>
+                  Donate Us
+                </button>
+              </li>
             </ul>
             <i className="bi bi-list mobile-nav-toggle"></i>
           </nav>
         </div>
+        <CustomModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          contentComponent={<DonateModal enteredDonationAmount={enterAmount} />}
+        ></CustomModal>
+        <ToastContainer />
       </header>
     </>
   );
