@@ -21,9 +21,9 @@ export const login = async (data) => {
   return response;
 };
 
-export const saveContent = async (data) => {
+export const saveEnglishServiceTextEditorContent = async (data) => {
   try {
-    await api.put("/api/blog/update/65ad742140933d0ccc3563e8", data);
+    await api.put("/api/service/updateService/65c27f190558c09ed97fe186", data);
     return true;
   } catch (error) {
     console.log(error);
@@ -31,12 +31,149 @@ export const saveContent = async (data) => {
   }
 };
 
-export const getContent = async () => {
-  let response;
+export const saveNepaliServiceTextEditorContent = async (data) => {
   try {
-    response = await api.get("/api/blog/65ad742140933d0ccc3563e8");
+    await api.put("/api/service/updateService/65c27f080558c09ed97fe184", data);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishSliderContent = async (data) => {
+  try {
+    await api.put("/api/slider/updateSlider/65c28cfbaf2e3caae921f82f", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveNepaliSliderContent = async (data) => {
+  try {
+    await api.put("/api/slider/updateSlider/65c28d08af2e3caae921f835", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getNepaliSliderContent = async () => {
+  let response;
+  try {
+    response = await api.get("/api/slider/getSlider/65c28d08af2e3caae921f835");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getEnglishSliderContent = async () => {
+  let response;
+  try {
+    response = await api.get("/api/slider/getSlider/65c28cfbaf2e3caae921f82f");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getNepaliServiceTextEditorContent = async () => {
+  let response;
+  try {
+    response = await api.get(
+      "/api/service/getService/65c27f080558c09ed97fe184"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getEnglishServiceTextEditorContent = async () => {
+  let response;
+  try {
+    response = await api.get(
+      "/api/service/getService/65c27f190558c09ed97fe186"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const createNewLetterGroup = async (formData) => {
+  let response;
+  try {
+    response = await api.post("/api/newsLetter/newsLetterGroup", formData);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  return response;
+};
+
+export const fetchNewLetterGroup = async () => {
+  let response;
+  try {
+    response = await api.get("/api/newsLetter/newsLetterGroup");
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  return response;
+};
+
+export const createNewsLetterUser = async (userData) => {
+  let response;
+  try {
+    response = await api.post("/api/newsLetter/newsLetterGroup", userData);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  return response;
+};
+
+export const getLikelyUsers = async (data) => {
+  let response;
+  try {
+    response = await api.get(
+      `/api/newsLetter/newsLetterUsersLimited?emailLike=${data}`
+    );
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  return response;
+};
+
+export const getLikelyGroups = async (data) => {
+  let response;
+  try {
+    response = await api.get(
+      `/api/newsLetter/newsLetterGroupsLimited?groupNameLike=${data}`
+    );
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  return response;
+};
+
+export const addNewsLetterUserGroupMap = async (userGroupMap) => {
+  let response;
+  try {
+    response = await api.post(
+      "/api/newsLetter/newsLetterUserGroupMap",
+      userGroupMap
+    );
+  } catch (error) {
+    console.log(error);
+    return error;
   }
   return response;
 };

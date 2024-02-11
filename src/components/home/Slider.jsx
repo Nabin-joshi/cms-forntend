@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getEnglishSliderContent,
+  getNepaliSliderContent,
+} from "../../services/api";
 
 export default function Slider() {
+  const [englishData, setEnglishData] = useState(null);
+  const [nepaliData, setNepaliData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const englishResponse = await getEnglishSliderContent();
+        if (englishResponse) {
+          setEnglishData(englishResponse.data.slider);
+        }
+        const nepaliResponse = await getNepaliSliderContent();
+        if (nepaliResponse) {
+          setNepaliData(nepaliResponse.data.slider);
+        }
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <section
         id="hero"
-        className="d-flex justify-cntent-center align-items-center"
+        className="d-flex justify-content-center align-items-center"
       >
         <div
           id="heroCarousel"
@@ -16,13 +40,12 @@ export default function Slider() {
           <div className="carousel-item active">
             <div className="carousel-container">
               <h2 className="animate__animated animate__fadeInDown">
-                Welcome to <span>Koshish Nepal</span>
+                {englishData ? englishData.title : "Welcome to Koshish Nepal"}
               </h2>
               <p className="animate__animated animate__fadeInUp">
-                Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et
-                est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus
-                repellendus deleniti vel. Minus et tempore modi architecto.
+                {englishData
+                  ? englishData.content
+                  : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamusrepellendus deleniti vel. Minus et tempore modi architecto."}
               </p>
               <a
                 href="/"
@@ -36,13 +59,12 @@ export default function Slider() {
           <div className="carousel-item">
             <div className="carousel-container">
               <h2 className="animate__animated animate__fadeInDown">
-                Lorem Ipsum Dolor
+                {nepaliData ? nepaliData.title : "Lorem Ipsum Dolor"}
               </h2>
               <p className="animate__animated animate__fadeInUp">
-                Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et
-                est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus
-                repellendus deleniti vel. Minus et tempore modi architecto.
+                {nepaliData
+                  ? nepaliData.content
+                  : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut etest quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto."}
               </p>
               <a
                 href="/"

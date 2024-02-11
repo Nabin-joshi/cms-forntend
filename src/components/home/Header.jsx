@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { donateUs } from "../../services/NewsLetterUserService";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import CustomModal from "../suraj/popup/CustomModal";
-import CreateNewsLetterUser from "../suraj/createNewsLetterUser";
-import DonateModal from "../suraj/popup/DonateModal";
+import CustomModal from "../auth/admin/section/NewLetter/popup/CustomModal";
+import DonateModal from "../auth/admin/section/NewLetter/popup/DonateModal";
 
 export default function Header() {
   const navigate = useNavigate();

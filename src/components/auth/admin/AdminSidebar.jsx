@@ -35,9 +35,15 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/slider">
+                  <i className="bi bi-circle"></i>
+                  <span>Slider</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/features">
                   <i className="bi bi-circle"></i>
-                  <span>features</span>
+                  <span>Feature</span>
                 </NavLink>
               </li>
             </ul>

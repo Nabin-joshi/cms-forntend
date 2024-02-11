@@ -2,12 +2,13 @@
 import Home from "../pages/home/HomePageLayout";
 import Login from "../pages/login/LoginPageLayout";
 
-import NewsLetterUserList from "../components/suraj/NewsLetterUserList";
-import MapNewsLetterUserGroup from "../components/suraj/mapNewsLetterUserGroup";
+import NewsLetterUserList from "../components/auth/admin/section/NewLetter/NewsLetterUserList.jsx";
+import MapNewsLetterUserGroup from "../components/auth/admin/section/NewLetter/mapNewsLetterUserGroup.jsx";
 import Admin from "../pages/admin/AdminPage.jsx";
 import Services from "../components/auth/admin/section/Services.jsx";
 import Features from "../components/auth/admin/section/Features.jsx";
-import NewsLetterGroupList from "../components/suraj/newslettergroup/NewsLetterGroupList.jsx";
+import NewsLetterGroupList from "../components/auth/admin/section/NewLetter/newslettergroup/NewsLetterGroupList.jsx";
+import Slider from "../components/auth/admin/section/Slider.jsx";
 
 export const mainRoutes = [
   { path: "/", name: "Home Page", element: Home },
@@ -30,6 +31,12 @@ export const mainRoutes = [
         name: "Admin Feature",
         exact: true,
         element: Features,
+      },
+      {
+        path: "/admin/slider",
+        name: "Admin Slider",
+        exact: true,
+        element: Slider,
       },
       {
         path: "/admin/nwusersgroupmap",

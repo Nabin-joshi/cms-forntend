@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "../popup/CustomModal";
 import CreateNewsLetterGroup from "./createNewsLetterGroup";
-import URLS from "../../../urls/urls";
+import URLS from "../../../../../../urls/urls";
 import { ToastContainer, toast } from "react-toastify";
 
 const NewsLetterGroupList = () => {
