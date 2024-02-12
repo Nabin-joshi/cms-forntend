@@ -141,7 +141,10 @@ function Slider() {
                             placeholder="English Title"
                             value={englishFormContent.title}
                             onChange={(event) =>
-                              (setEnglishFormContent.title = event.target.value)
+                              setEnglishFormContent((prevState) => ({
+                                ...prevState,
+                                title: event.target.value,
+                              }))
                             }
                           />
                         </div>
@@ -151,8 +154,10 @@ function Slider() {
                             className="form-control"
                             value={englishFormContent.content}
                             onChange={(event) =>
-                              (setEnglishFormContent.content =
-                                event.target.value)
+                              setEnglishFormContent((prevState) => ({
+                                ...prevState,
+                                content: event.target.value,
+                              }))
                             }
                             rows="3"
                           ></textarea>
@@ -170,7 +175,10 @@ function Slider() {
                             placeholder="Nepali Title"
                             value={nepaliFormContent.title}
                             onChange={(event) =>
-                              (setNepaliFormContent.title = event.target.value)
+                              setNepaliFormContent((prevState) => ({
+                                ...prevState,
+                                title: event.target.value,
+                              }))
                             }
                           />
                         </div>
@@ -180,8 +188,10 @@ function Slider() {
                             className="form-control"
                             value={nepaliFormContent.content}
                             onChange={(event) =>
-                              (setNepaliFormContent.content =
-                                event.target.value)
+                              setNepaliFormContent((prevState) => ({
+                                ...prevState,
+                                content: event.target.value,
+                              }))
                             }
                             rows="3"
                           ></textarea>
