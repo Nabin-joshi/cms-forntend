@@ -9,6 +9,7 @@ import Services from "../components/auth/admin/section/Services.jsx";
 import Features from "../components/auth/admin/section/Features.jsx";
 import NewsLetterGroupList from "../components/auth/admin/section/NewLetter/newslettergroup/NewsLetterGroupList.jsx";
 import Slider from "../components/auth/admin/section/Slider.jsx";
+import Stories from "../components/auth/admin/section/Stories.jsx";
 
 export const mainRoutes = [
   { path: "/", name: "Home Page", element: Home },
@@ -37,6 +38,12 @@ export const mainRoutes = [
         name: "Admin Slider",
         exact: true,
         element: Slider,
+      },
+      {
+        path: "/admin/stories",
+        name: "Admin Stories",
+        exact: true,
+        element: Stories,
       },
       {
         path: "/admin/nwusersgroupmap",

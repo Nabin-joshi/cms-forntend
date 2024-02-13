@@ -8,6 +8,7 @@ import {
   getEnglishServiceTextEditorContent,
   getNepaliServiceTextEditorContent,
 } from "../../services/api";
+import Stories from "../../components/home/Stories";
 
 export default function HomePageLayout() {
   const [data, setData] = useState(null);
@@ -96,6 +97,7 @@ export default function HomePageLayout() {
             </div>
           </>
         )}
+        <Stories />
         <Services />
         <Features />
         <Footer />

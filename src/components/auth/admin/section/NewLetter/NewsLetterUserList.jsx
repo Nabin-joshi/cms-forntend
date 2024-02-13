@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "./popup/CustomModal";
 import "./popup/customModal.css";
-import CreateNewsLetterUser from "./newslettergroup/createNewsLetterGroup";
+import CreateNewsLetterUser from "./createNewsLetterUser";
 import URLS from "../../../../../urls/urls";
 import { Button, Table } from "@mui/joy";
 import { ToastContainer, toast } from "react-toastify";
