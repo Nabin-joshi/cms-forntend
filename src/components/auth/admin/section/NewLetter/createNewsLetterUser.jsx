@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import URLS from "../../urls/urls";
 import { Button, Input } from "@mui/joy";
 import { ToastContainer, toast } from "react-toastify";
-import { createNewsLetterUser } from "../../services/NewsLetterUserService";
 
 const CreateNewsLetterUser = (props) => {
   const [userData, setUserData] = useState({
@@ -43,7 +41,7 @@ const CreateNewsLetterUser = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await createNewsLetterUser(userData);
+    const data = await CreateNewsLetterUser(userData);
     setUserData({
       name: "",
       email: "",
