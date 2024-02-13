@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import URLS from "../../urls/urls";
 import { Button, Input } from "@mui/joy";
 import { ToastContainer, toast } from "react-toastify";
+import { createNewsLetterUser } from "../../services/NewsLetterUserService";
 
 const CreateNewsLetterUser = (props) => {
   const [userData, setUserData] = useState({
@@ -42,51 +43,12 @@ const CreateNewsLetterUser = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch(
-        `${URLS.BASE_URL}/api/newsLetter/newsLetterUser`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "Application/json",
-          },
-          body: JSON.stringify(userData),
-        }
-      );
-
-      const data = await res.json();
-      if (data.success === true) {
-        setUserData({
-          name: "",
-          email: "",
-        });
-        props.userAddedFunc(data.savedNewsLetterUser._id);
-      } else {
-        // alert(data.errormessage);
-        toast.error(`${data.errormessage}`, {
-          position: "top-center",
-          autoClose: 700,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          theme: "colored",
-        });
-      }
-    } catch (error) {
-      // alert("Something went wrong !!!" + JSON.stringify(error));
-      toast.error(`Something went wrong`, {
-        position: "top-center",
-        autoClose: 700,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "colored",
-      });
-    }
+    const data = await createNewsLetterUser(userData);
+    setUserData({
+      name: "",
+      email: "",
+    });
+    props.userAddedFunc(data.savedNewsLetterUser._id);
   };
 
   useEffect(() => {}, []);

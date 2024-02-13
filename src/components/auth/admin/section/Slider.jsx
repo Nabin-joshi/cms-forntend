@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { SketchPicker } from "react-color";
+import React, { useEffect, useState } from "react";
+// import { SketchPicker } from "react-color";
 import {
+  getEnglishSliderContent,
+  getNepaliSliderContent,
   saveEnglishSliderContent,
   saveNepaliSliderContent,
 } from "../../../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 
 function Slider() {
-  const [color, setColor] = useState("#aabbcc");
+  // const [color, setColor] = useState("#aabbcc");
   const [englishFormContent, setEnglishFormContent] = useState({
     title: "Bringing Smile Back and Transforming Lives ",
     content:
@@ -20,11 +22,34 @@ function Slider() {
       "हामी सुनिश्चित गर्छौं कि मानसिक स्वास्थ्य अवस्था र मनोसामाजिक अपाङ्गता भएका व्यक्तिहरूलाई समुदायमा समावेश गरिएको छ र उनीहरूलाई यसबाट अलग वा अलग गरिएको छैन।",
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const englishResponse = await getEnglishSliderContent();
+
+        const nepaliResponse = await getNepaliSliderContent();
+
+        if (englishResponse) {
+          setEnglishFormContent({
+            title: englishResponse.data.slider.title,
+            content: englishResponse.data.slider.content,
+          });
+        }
+        if (nepaliResponse) {
+          setNepaliFormContent({
+            title: nepaliResponse.data.slider.title,
+            content: nepaliResponse.data.slider.content,
+          });
+        }
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
+
   let data = {
     title: "",
     content: "",
-    locale: "",
-    readMoreButtonColor: "",
     author: "6599a99853629133eee6477d",
   };
 
@@ -34,8 +59,6 @@ function Slider() {
     if (englishFormContent) {
       data.title = englishFormContent.title;
       data.content = englishFormContent.content;
-      data.locale = "English";
-      data.readMoreButtonColor = color.hex;
 
       let response;
 
@@ -71,8 +94,6 @@ function Slider() {
     if (nepaliFormContent) {
       data.title = nepaliFormContent.title;
       data.content = nepaliFormContent.content;
-      data.locale = "Nepali";
-      data.readMoreButtonColor = color.hex;
 
       let response;
 
@@ -199,9 +220,45 @@ function Slider() {
                       </form>
                     </div>
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="form-label">Read More Button Color</label>
                     <SketchPicker color={color} onChange={setColor} />
+                  </div> */}
+
+                  <div className=" row">
+                    <div className="col-12">
+                      <div className="mb-3">
+                        <label for="formFile" className="form-label">
+                          Upload Image
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id="formFile"
+                        />
+                      </div>
+                      <div className="image">
+                        <img src="" alt="" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className=" row">
+                    <div className="col-12">
+                      <div className="mb-3">
+                        <label for="formFile" className="form-label">
+                          Upload Video
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id="formFile"
+                        />
+                      </div>
+                      <div className="image">
+                        <img src="" alt="" />
+                      </div>
+                    </div>
                   </div>
 
                   <div

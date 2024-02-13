@@ -23,7 +23,7 @@ export const login = async (data) => {
 
 export const saveEnglishServiceTextEditorContent = async (data) => {
   try {
-    await api.put("/api/service/updateService/65c27f190558c09ed97fe186", data);
+    await api.put("/api/service/updateService/eng", data);
     return true;
   } catch (error) {
     console.log(error);
@@ -33,7 +33,7 @@ export const saveEnglishServiceTextEditorContent = async (data) => {
 
 export const saveNepaliServiceTextEditorContent = async (data) => {
   try {
-    await api.put("/api/service/updateService/65c27f080558c09ed97fe184", data);
+    await api.put("/api/service/updateService/nep", data);
     return true;
   } catch (error) {
     console.log(error);
@@ -43,7 +43,7 @@ export const saveNepaliServiceTextEditorContent = async (data) => {
 
 export const saveEnglishSliderContent = async (data) => {
   try {
-    await api.put("/api/slider/updateSlider/65c28cfbaf2e3caae921f82f", data);
+    await api.put("/api/slider/updateSlider/eng", data);
     return true;
   } catch (error) {
     console.log(error);
@@ -53,7 +53,7 @@ export const saveEnglishSliderContent = async (data) => {
 
 export const saveNepaliSliderContent = async (data) => {
   try {
-    await api.put("/api/slider/updateSlider/65c28d08af2e3caae921f835", data);
+    await api.put("/api/slider/updateSlider/nep", data);
     return true;
   } catch (error) {
     console.log(error);
@@ -64,7 +64,7 @@ export const saveNepaliSliderContent = async (data) => {
 export const getNepaliSliderContent = async () => {
   let response;
   try {
-    response = await api.get("/api/slider/getSlider/65c28d08af2e3caae921f835");
+    response = await api.get("/api/slider/getSlider/nep");
   } catch (error) {
     console.log(error);
   }
@@ -74,7 +74,7 @@ export const getNepaliSliderContent = async () => {
 export const getEnglishSliderContent = async () => {
   let response;
   try {
-    response = await api.get("/api/slider/getSlider/65c28cfbaf2e3caae921f82f");
+    response = await api.get("/api/slider/getSlider/eng");
   } catch (error) {
     console.log(error);
   }
@@ -85,7 +85,7 @@ export const getNepaliServiceTextEditorContent = async () => {
   let response;
   try {
     response = await api.get(
-      "/api/service/getService/65c27f080558c09ed97fe184"
+      "/api/service/getService/nep"
     );
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ export const getEnglishServiceTextEditorContent = async () => {
   let response;
   try {
     response = await api.get(
-      "/api/service/getService/65c27f190558c09ed97fe186"
+      "/api/service/getService/eng"
     );
   } catch (error) {
     console.log(error);
