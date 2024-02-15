@@ -9,6 +9,7 @@ import {
   getNepaliServiceTextEditorContent,
 } from "../../services/api";
 import Stories from "../../components/home/Stories";
+import { ToastContainer } from "react-toastify";
 
 export default function HomePageLayout() {
   const [data, setData] = useState(null);
@@ -101,6 +102,7 @@ export default function HomePageLayout() {
         <Services />
         <Features />
         <Footer />
+        <ToastContainer />
       </main>
     </>
   );

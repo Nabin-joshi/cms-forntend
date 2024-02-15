@@ -6,7 +6,8 @@ import {
   saveEnglishSliderContent,
   saveNepaliSliderContent,
 } from "../../../../services/api";
-import { ToastContainer, toast } from "react-toastify";
+import { toastError, toastSuccess } from "../../../../services/ToastService";
+import { ToastContainer } from "react-toastify";
 
 function Slider() {
   // const [color, setColor] = useState("#aabbcc");
@@ -14,12 +15,14 @@ function Slider() {
     title: "Bringing Smile Back and Transforming Lives ",
     content:
       "We ensure that persons with mental health conditions and psychosocial disabilities are included in the community and that they are not isolated or segregated from it.",
+    learnMore: "",
   });
 
   const [nepaliFormContent, setNepaliFormContent] = useState({
     title: "मुस्कान फिर्ता ल्याउँदै र जीवन परिवर्तन गर्दै",
     content:
       "हामी सुनिश्चित गर्छौं कि मानसिक स्वास्थ्य अवस्था र मनोसामाजिक अपाङ्गता भएका व्यक्तिहरूलाई समुदायमा समावेश गरिएको छ र उनीहरूलाई यसबाट अलग वा अलग गरिएको छैन।",
+    lernMore: "",
   });
 
   useEffect(() => {
@@ -51,6 +54,7 @@ function Slider() {
     title: "",
     content: "",
     author: "6599a99853629133eee6477d",
+    learnMore: "",
   };
 
   const onSubmit = async (e) => {
@@ -59,33 +63,16 @@ function Slider() {
     if (englishFormContent) {
       data.title = englishFormContent.title;
       data.content = englishFormContent.content;
+      data.learnMore = englishFormContent.learnMore;
 
       let response;
 
       try {
         response = await saveEnglishSliderContent(data);
         if (response) {
-          toast.success("Content Saved Successfully!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastSuccess();
         } else {
-          toast.error("Too Much Content!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastError();
         }
       } catch (error) {
         console.log(error);
@@ -94,33 +81,16 @@ function Slider() {
     if (nepaliFormContent) {
       data.title = nepaliFormContent.title;
       data.content = nepaliFormContent.content;
+      data.learnMore = nepaliFormContent.lernMore;
 
       let response;
 
       try {
         response = await saveNepaliSliderContent(data);
         if (response) {
-          toast.success("Content Saved Successfully!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastSuccess();
         } else {
-          toast.error("Too Much Content!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastError();
         }
       } catch (error) {
         console.log(error);
@@ -228,7 +198,7 @@ function Slider() {
                   <div className=" row">
                     <div className="col-12">
                       <div className="mb-3">
-                        <label for="formFile" className="form-label">
+                        <label htmlFor="formFile" className="form-label">
                           Upload Image
                         </label>
                         <input
@@ -246,7 +216,7 @@ function Slider() {
                   <div className=" row">
                     <div className="col-12">
                       <div className="mb-3">
-                        <label for="formFile" className="form-label">
+                        <label htmlFor="formFile" className="form-label">
                           Upload Video
                         </label>
                         <input
