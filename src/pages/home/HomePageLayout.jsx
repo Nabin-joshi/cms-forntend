@@ -13,6 +13,7 @@ import OurImpacts from "../../components/home/OurImpacts";
 import OurValues from "../../components/home/OurValues";
 import TheJourney from "../../components/home/Journey";
 import OurPartners from "../../components/home/OurPartners";
+import { ToastContainer } from "react-toastify";
 
 export default function HomePageLayout() {
   const [data, setData] = useState(null);
@@ -109,6 +110,7 @@ export default function HomePageLayout() {
         <OurPartners />
         <Features />
         <Footer />
+        <ToastContainer />
       </main>
     </>
   );

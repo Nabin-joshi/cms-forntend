@@ -35,7 +35,6 @@ function Services() {
   let data = {
     author: "6599a99853629133eee6477d",
     content: "",
-    locale: "",
   };
 
   const config = {
@@ -75,7 +74,6 @@ function Services() {
     e.preventDefault();
     if (englishContent) {
       data.content = englishContent;
-      data.locale = "English";
       let message = await saveEnglishServiceTextEditorContent(data);
       if (message) {
         toast.success("Content Saved Successfully!", {
@@ -104,7 +102,6 @@ function Services() {
 
     if (nepaliContent) {
       data.content = nepaliContent;
-      data.locale = "Nepali";
       let message = await saveNepaliServiceTextEditorContent(data);
       if (message) {
         toast.success("Content Saved Successfully!", {

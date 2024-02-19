@@ -1,31 +1,60 @@
-import React, { useState } from "react";
-import { SketchPicker } from "react-color";
+import React, { useEffect, useState } from "react";
+// import { SketchPicker } from "react-color";
 import {
+  getEnglishSliderContent,
+  getNepaliSliderContent,
   saveEnglishSliderContent,
   saveNepaliSliderContent,
 } from "../../../../services/api";
-import { ToastContainer, toast } from "react-toastify";
+import { toastError, toastSuccess } from "../../../../services/ToastService";
+import { ToastContainer } from "react-toastify";
 
 function Slider() {
-  const [color, setColor] = useState("#aabbcc");
+  // const [color, setColor] = useState("#aabbcc");
   const [englishFormContent, setEnglishFormContent] = useState({
     title: "Bringing Smile Back and Transforming Lives ",
     content:
       "We ensure that persons with mental health conditions and psychosocial disabilities are included in the community and that they are not isolated or segregated from it.",
+    learnMore: "",
   });
 
   const [nepaliFormContent, setNepaliFormContent] = useState({
     title: "मुस्कान फिर्ता ल्याउँदै र जीवन परिवर्तन गर्दै",
     content:
       "हामी सुनिश्चित गर्छौं कि मानसिक स्वास्थ्य अवस्था र मनोसामाजिक अपाङ्गता भएका व्यक्तिहरूलाई समुदायमा समावेश गरिएको छ र उनीहरूलाई यसबाट अलग वा अलग गरिएको छैन।",
+    lernMore: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const englishResponse = await getEnglishSliderContent();
+
+        const nepaliResponse = await getNepaliSliderContent();
+
+        if (englishResponse) {
+          setEnglishFormContent({
+            title: englishResponse.data.slider.title,
+            content: englishResponse.data.slider.content,
+          });
+        }
+        if (nepaliResponse) {
+          setNepaliFormContent({
+            title: nepaliResponse.data.slider.title,
+            content: nepaliResponse.data.slider.content,
+          });
+        }
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
 
   let data = {
     title: "",
     content: "",
-    locale: "",
-    readMoreButtonColor: "",
     author: "6599a99853629133eee6477d",
+    learnMore: "",
   };
 
   const onSubmit = async (e) => {
@@ -34,35 +63,16 @@ function Slider() {
     if (englishFormContent) {
       data.title = englishFormContent.title;
       data.content = englishFormContent.content;
-      data.locale = "English";
-      data.readMoreButtonColor = color.hex;
+      data.learnMore = englishFormContent.learnMore;
 
       let response;
 
       try {
         response = await saveEnglishSliderContent(data);
         if (response) {
-          toast.success("Content Saved Successfully!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastSuccess();
         } else {
-          toast.error("Too Much Content!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastError();
         }
       } catch (error) {
         console.log(error);
@@ -71,35 +81,16 @@ function Slider() {
     if (nepaliFormContent) {
       data.title = nepaliFormContent.title;
       data.content = nepaliFormContent.content;
-      data.locale = "Nepali";
-      data.readMoreButtonColor = color.hex;
+      data.learnMore = nepaliFormContent.lernMore;
 
       let response;
 
       try {
         response = await saveNepaliSliderContent(data);
         if (response) {
-          toast.success("Content Saved Successfully!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastSuccess();
         } else {
-          toast.error("Too Much Content!", {
-            position: "top-center",
-            autoClose: 700,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: 0,
-            theme: "colored",
-          });
+          toastError();
         }
       } catch (error) {
         console.log(error);
@@ -141,7 +132,10 @@ function Slider() {
                             placeholder="English Title"
                             value={englishFormContent.title}
                             onChange={(event) =>
-                              (setEnglishFormContent.title = event.target.value)
+                              setEnglishFormContent((prevState) => ({
+                                ...prevState,
+                                title: event.target.value,
+                              }))
                             }
                           />
                         </div>
@@ -151,8 +145,10 @@ function Slider() {
                             className="form-control"
                             value={englishFormContent.content}
                             onChange={(event) =>
-                              (setEnglishFormContent.content =
-                                event.target.value)
+                              setEnglishFormContent((prevState) => ({
+                                ...prevState,
+                                content: event.target.value,
+                              }))
                             }
                             rows="3"
                           ></textarea>
@@ -170,7 +166,10 @@ function Slider() {
                             placeholder="Nepali Title"
                             value={nepaliFormContent.title}
                             onChange={(event) =>
-                              (setNepaliFormContent.title = event.target.value)
+                              setNepaliFormContent((prevState) => ({
+                                ...prevState,
+                                title: event.target.value,
+                              }))
                             }
                           />
                         </div>
@@ -180,8 +179,10 @@ function Slider() {
                             className="form-control"
                             value={nepaliFormContent.content}
                             onChange={(event) =>
-                              (setNepaliFormContent.content =
-                                event.target.value)
+                              setNepaliFormContent((prevState) => ({
+                                ...prevState,
+                                content: event.target.value,
+                              }))
                             }
                             rows="3"
                           ></textarea>
@@ -189,9 +190,45 @@ function Slider() {
                       </form>
                     </div>
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="form-label">Read More Button Color</label>
                     <SketchPicker color={color} onChange={setColor} />
+                  </div> */}
+
+                  <div className=" row">
+                    <div className="col-12">
+                      <div className="mb-3">
+                        <label htmlFor="formFile" className="form-label">
+                          Upload Image
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id="formFile"
+                        />
+                      </div>
+                      <div className="image">
+                        <img src="" alt="" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className=" row">
+                    <div className="col-12">
+                      <div className="mb-3">
+                        <label htmlFor="formFile" className="form-label">
+                          Upload Video
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id="formFile"
+                        />
+                      </div>
+                      <div className="image">
+                        <img src="" alt="" />
+                      </div>
+                    </div>
                   </div>
 
                   <div
