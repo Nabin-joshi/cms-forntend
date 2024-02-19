@@ -23,49 +23,87 @@ const Stories = () => {
     readMoreBtnColor: "",
   });
 
-  const submitStory = async (e) => {
+  const submitStoryHeading = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
-    formData.append("heading", headingRef.current.value);
-    formData.append("headingNepali", headingNepaliRef.current.value);
+    formData.append("heading", storyHeading.heading);
+    formData.append("headingNepali", storyHeading.headingNepali);
     formData.append("readMoreBtnColor", color);
     try {
       const response = await addStoryHeading(formData);
-      if (response) {
-        toast.success("stroy Saved Successfully!", {
-          position: "top-center",
-          autoClose: 700,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          theme: "colored",
-        });
-      } else {
-        toast.error("response.error", {
-          position: "top-center",
-          autoClose: 700,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          theme: "colored",
-        });
-      }
+      toast.success("stroy Saved Successfully!", {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
     } catch (error) {
+      toast.error(error.response.data.errormessage, {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
       // alert(error);
     }
   };
 
+  const submitStory = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("desc", descRef.current.value);
+    formData.append("descNepali", descNepaliRef.current.value);
+    formData.append("person", personRef.current.value);
+    formData.append("personNepali", personNepaliRef.current.value);
+    formData.append("image", imageRef.current.files[0]); // Append the file to FormData
+    try {
+      const response = await addStory(formData);
+      toast.success("stroy Saved Successfully!", {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
+    } catch (error) {
+      let msg;
+      if (error.code === "ERR_NETWORK") {
+        msg = "Something went wrong !!!";
+      } else {
+        msg = error.response.data.errorMessage;
+      }
+      toast.error(msg, {
+        position: "top-center",
+        autoClose: 700,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
+    }
+  };
   useEffect(() => {
     async function fetchStoryHeading() {
       const response = await getStoryHeading();
       // setStoryHeading(response.json);
       const rData = response.data.data;
-      setStoryHeading(rData);
-      alert(JSON.stringify(storyHeading));
+      if (rData) {
+        setStoryHeading(rData);
+      }
     }
     fetchStoryHeading();
   }, []);
@@ -132,17 +170,88 @@ const Stories = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    <div>
+                      <label className="form-label">
+                        Read More Button Color
+                      </label>
+                      <SketchPicker color={color} onChange={setColor} />
+                    </div>
 
-                  <div>
-                    <label className="form-label">Read More Button Color</label>
-                    <SketchPicker color={color} onChange={setColor} />
+                    <div
+                      style={{ marginTop: "10px" }}
+                      className="d-flex justify-content-center"
+                    >
+                      <button
+                        type="submit"
+                        onClick={(e) => submitStoryHeading(e)}
+                        className="btn btn-primary "
+                      >
+                        Create Story's Heading
+                      </button>
+                    </div>
                   </div>
+                  <hr />
+                  <h5>Add Story</h5>
+                  <div className="row">
+                    <div className="d-flex justify-content-between">
+                      <div className="col-5">
+                        <form>
+                          <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <textarea
+                              ref={descRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">Person Name</label>
+                            <textarea
+                              ref={personRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">Person Image</label>
+                            <input
+                              type="file"
+                              ref={imageRef}
+                              className="form-control"
+                              multiple
+                              rows="3"
+                            ></input>
+                          </div>
+                        </form>
+                      </div>
 
-                  <div
-                    style={{ marginTop: "10px" }}
-                    className="d-flex justify-content-center"
-                  >
+                      <div className="col-5">
+                        <form>
+                          <div className="mb-3">
+                            <label className="form-label">
+                              Description Nepali
+                            </label>
+                            <textarea
+                              ref={descNepaliRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">
+                              Person's Name Nepali
+                            </label>
+                            <textarea
+                              ref={personNepaliRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
                     <button
                       type="submit"
                       onClick={(e) => submitStory(e)}
