@@ -25,6 +25,9 @@ function Slider() {
     lernMore: "",
   });
 
+  const [sliderImage, setSliderImage] = useState("");
+  const [sliderVideo, setSliderVideo] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,6 +63,9 @@ function Slider() {
   const onSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
+    console.log(sliderImage);
+    console.log(sliderVideo);
+
     if (englishFormContent) {
       data.title = englishFormContent.title;
       data.content = englishFormContent.content;
@@ -203,8 +209,15 @@ function Slider() {
                         </label>
                         <input
                           className="form-control"
+                          onChange={(event) =>
+                            setSliderImage((previsousValue) => ({
+                              ...previsousValue,
+                              sliderImage: event.target.files[0],
+                            }))
+                          }
                           type="file"
                           id="formFile"
+                          accept=".jpg,.jpeg,.png,.gif"
                         />
                       </div>
                       <div className="image">
@@ -223,6 +236,13 @@ function Slider() {
                           className="form-control"
                           type="file"
                           id="formFile"
+                          onChange={(event) =>
+                            setSliderVideo((previsousValue) => ({
+                              ...previsousValue,
+                              sliderVideo: event.target.files[0],
+                            }))
+                          }
+                          accept=".mp4,.mkv,.3gp"
                         />
                       </div>
                       <div className="image">
