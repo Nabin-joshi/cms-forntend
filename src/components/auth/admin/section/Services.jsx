@@ -7,6 +7,10 @@ import {
   saveNepaliServiceTextEditorContent,
 } from "../../../../services/api";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  englishConfig,
+  nepaliConfig,
+} from "../../../../services/joditConfigService";
 
 function Services() {
   const editor = useRef(null);
@@ -35,38 +39,6 @@ function Services() {
   let data = {
     author: "6599a99853629133eee6477d",
     content: "",
-  };
-
-  const config = {
-    height: 400,
-    direction: "ltr",
-    language: "en",
-    debugLanguage: false,
-    i18n: "en",
-    tabIndex: -1,
-    toolbar: true,
-    events: {},
-    uploader: {
-      insertImageAsBase64URI: true,
-    },
-    placeholder: "You Can Create your View Here ...",
-    statusbar: false,
-  };
-
-  const Nepconfig = {
-    height: 400,
-    direction: "ltr",
-    language: "he",
-    debugLanguage: false,
-    i18n: "he",
-    tabIndex: -1,
-    toolbar: true,
-    events: {},
-    uploader: {
-      insertImageAsBase64URI: true,
-    },
-    placeholder: "You Can Create your View Here ...",
-    statusbar: false,
   };
 
   const saveService = async (e) => {
@@ -170,7 +142,7 @@ function Services() {
                       ref={editor}
                       value={englishContent}
                       tabIndex={1}
-                      config={config}
+                      config={englishConfig}
                       onBlur={(newContent) => setEnglishContent(newContent)}
                     />
                   </div>
@@ -185,18 +157,10 @@ function Services() {
                       ref={editor}
                       value={nepaliContent}
                       tabIndex={1}
-                      config={Nepconfig}
+                      config={nepaliConfig}
                       onBlur={(newContent) => setNepaliContent(newContent)}
                     />
                   </div>
-                  {/* <div>
-                    <iframe
-                      src="https://www.youtube.com/watch?v=HzQIbfGgvek"
-                      frameborder="0"
-                    >
-                      Video Link
-                    </iframe>
-                  </div> */}
                 </div>
               </div>
             </div>

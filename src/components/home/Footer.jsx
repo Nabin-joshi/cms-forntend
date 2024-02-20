@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { createNewsLetterUser } from "../../services/NewsLetterUserService";
+import { getFooter } from "../../services/footerService";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const [footer, setFooter] = useState({});
   const subscribe = async (event) => {
     event.preventDefault();
     let isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -30,6 +32,15 @@ export default function Footer() {
     setEmail("");
   };
 
+  useEffect(() => {
+    async function fetchFooter() {
+      try {
+        let response = await getFooter();
+        setFooter(response.data.data);
+      } catch (error) {}
+    }
+    fetchFooter();
+  }, []);
   return (
     <>
       <footer
@@ -124,10 +135,17 @@ export default function Footer() {
                   <br />
                   NEPAL <br />
                   <br />
-                  <strong>Phone:</strong> +977 1 5121230
+                  <strong>Address: </strong> {footer.address}/
+                  {footer.addressNepali}
                   <br />
-                  <strong>Email:</strong> info@koshishnepal.org
+                  <strong>Phone:</strong> {footer.phone}/{footer.phoneNepali}
                   <br />
+                  <strong>Email:</strong> {footer.email}
+                  <br />
+                  <strong>Toll Free Phone:</strong> {footer.tollFreePhone}/
+                  {footer.tollFreePhoneNepali}
+                  <br />
+                  <strong>Feed Back Email: </strong> {footer.feedBackEmail}.
                 </p>
               </div>
 

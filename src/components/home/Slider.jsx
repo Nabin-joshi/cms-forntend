@@ -4,6 +4,8 @@ import {
   getNepaliSliderContent,
 } from "../../services/api";
 
+import sectionLogo from "../../assets/img/hero-bg.jpg";
+
 export default function Slider() {
   const [englishData, setEnglishData] = useState(null);
   const [nepaliData, setNepaliData] = useState(null);
@@ -30,6 +32,13 @@ export default function Slider() {
       <section
         id="hero"
         className="d-flex justify-content-center align-items-center"
+        style={{
+          background: ` url(${
+            englishData && englishData.image && englishData.image !== ""
+              ? englishData.image
+              : sectionLogo
+          })`,
+        }}
       >
         <div
           id="heroCarousel"
@@ -48,10 +57,10 @@ export default function Slider() {
                   : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamusrepellendus deleniti vel. Minus et tempore modi architecto."}
               </p>
               <a
-                href="/"
+                href="/learnMore"
                 className="btn-get-started animate__animated animate__fadeInUp"
               >
-                Read More
+                Learn More
               </a>
             </div>
           </div>
@@ -67,10 +76,10 @@ export default function Slider() {
                   : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut etest quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto."}
               </p>
               <a
-                href="/"
+                href="/learnMore"
                 className="btn-get-started animate__animated animate__fadeInUp"
               >
-                Read More
+                Learn More
               </a>
             </div>
           </div>
@@ -87,10 +96,10 @@ export default function Slider() {
                 repellendus deleniti vel. Minus et tempore modi architecto.
               </p>
               <a
-                href="/"
+                href="/learnMore"
                 className="btn-get-started animate__animated animate__fadeInUp"
               >
-                Read More
+                Learn More
               </a>
             </div>
           </div>
@@ -118,6 +127,40 @@ export default function Slider() {
               aria-hidden="true"
             ></span>
           </a>
+        </div>
+      </section>
+      <br />
+      <br />
+      <br />
+      <section id="homeServces" className="services">
+        <div className="container">
+          <div className="section-title">
+            <h2>Watch Slider Video</h2>
+            <div className="container">
+              {/* <video height="500" controls>
+                <source
+                  src={
+                    englishData && englishData.video && englishData.video !== ""
+                      ? englishData.video
+                      : ""
+                  }
+                  type="video/mp4"
+                />
+              </video> */}
+              <iframe
+                height="500"
+                width="800"
+                controls
+                allowFullScreen
+                allow="autoplay"
+                src={
+                  englishData && englishData.video && englishData.video !== ""
+                    ? englishData.video
+                    : "https://www.youtube.com/watch?v=05DqIGS_koU"
+                }
+              ></iframe>
+            </div>
+          </div>
         </div>
       </section>
     </>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import urls from "../urls/urls";
+import URLS from "../urls/urls";
 
 const storyApi = axios.create({
   baseURL: urls.BASE_URL,
@@ -10,9 +11,21 @@ const storyApi = axios.create({
 });
 
 export const addStoryHeading = async (data) => {
+  for (const [key, value] of data.entries()) {
+    console.log(key, value);
+  }
   let response = await storyApi.post("/api/stories/heading", data, {
     headers: {
       "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
+
+export const addStory = async (data) => {
+  let response = await storyApi.post("/api/stories", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
     },
   });
   return response;

@@ -41,6 +41,34 @@ export const saveNepaliServiceTextEditorContent = async (data) => {
   }
 };
 
+export const saveSliderImage = async (data) => {
+  try {
+    await api.put("/api/slider/sliderImage", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveSliderVideo = async (data) => {
+  try {
+    await api.put("/api/slider/sliderVideo", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 export const saveEnglishSliderContent = async (data) => {
   try {
     await api.put("/api/slider/updateSlider/eng", data);
@@ -84,9 +112,7 @@ export const getEnglishSliderContent = async () => {
 export const getNepaliServiceTextEditorContent = async () => {
   let response;
   try {
-    response = await api.get(
-      "/api/service/getService/nep"
-    );
+    response = await api.get("/api/service/getService/nep");
   } catch (error) {
     console.log(error);
   }
@@ -96,9 +122,7 @@ export const getNepaliServiceTextEditorContent = async () => {
 export const getEnglishServiceTextEditorContent = async () => {
   let response;
   try {
-    response = await api.get(
-      "/api/service/getService/eng"
-    );
+    response = await api.get("/api/service/getService/eng");
   } catch (error) {
     console.log(error);
   }

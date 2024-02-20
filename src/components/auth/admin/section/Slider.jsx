@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import { SketchPicker } from "react-color";
 import {
   getEnglishSliderContent,
   getNepaliSliderContent,
   saveEnglishSliderContent,
   saveNepaliSliderContent,
+  saveSliderImage,
+  saveSliderVideo,
 } from "../../../../services/api";
 import { toastError, toastSuccess } from "../../../../services/ToastService";
 import { ToastContainer } from "react-toastify";
+import {
+  englishConfig,
+  nepaliConfig,
+} from "../../../../services/joditConfigService";
+import JoditEditor from "jodit-react";
 
 function Slider() {
-  // const [color, setColor] = useState("#aabbcc");
+  const editor = useRef(null);
   const [englishFormContent, setEnglishFormContent] = useState({
     title: "Bringing Smile Back and Transforming Lives ",
     content:
@@ -22,11 +29,14 @@ function Slider() {
     title: "मुस्कान फिर्ता ल्याउँदै र जीवन परिवर्तन गर्दै",
     content:
       "हामी सुनिश्चित गर्छौं कि मानसिक स्वास्थ्य अवस्था र मनोसामाजिक अपाङ्गता भएका व्यक्तिहरूलाई समुदायमा समावेश गरिएको छ र उनीहरूलाई यसबाट अलग वा अलग गरिएको छैन।",
-    lernMore: "",
+    learnMore: "",
   });
 
-  const [sliderImage, setSliderImage] = useState("");
-  const [sliderVideo, setSliderVideo] = useState("");
+  const sliderImageRef = useRef();
+  const sliderVideoRef = useRef();
+
+  let sliderImage = "";
+  let sliderVideo = "";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,15 +46,19 @@ function Slider() {
         const nepaliResponse = await getNepaliSliderContent();
 
         if (englishResponse) {
+          sliderImage = englishResponse.data.slider.image;
+          sliderVideo = englishResponse.data.slider.video;
           setEnglishFormContent({
             title: englishResponse.data.slider.title,
             content: englishResponse.data.slider.content,
+            learnMore: englishResponse.data.slider.learnMore,
           });
         }
         if (nepaliResponse) {
           setNepaliFormContent({
             title: nepaliResponse.data.slider.title,
             content: nepaliResponse.data.slider.content,
+            learnMore: nepaliResponse.data.slider.learnMore,
           });
         }
       } catch (error) {}
@@ -63,8 +77,6 @@ function Slider() {
   const onSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log(sliderImage);
-    console.log(sliderVideo);
 
     if (englishFormContent) {
       data.title = englishFormContent.title;
@@ -87,7 +99,7 @@ function Slider() {
     if (nepaliFormContent) {
       data.title = nepaliFormContent.title;
       data.content = nepaliFormContent.content;
-      data.learnMore = nepaliFormContent.lernMore;
+      data.learnMore = nepaliFormContent.learnMore;
 
       let response;
 
@@ -101,6 +113,19 @@ function Slider() {
       } catch (error) {
         console.log(error);
       }
+    }
+
+    if (sliderImageRef) {
+      const formData = new FormData();
+      formData.append("image", sliderImageRef.current.files[0]);
+      console.log("image", formData);
+      await saveSliderImage(formData);
+    }
+    if (sliderVideoRef) {
+      const formData = new FormData();
+      formData.append("video", sliderVideoRef.current.files[0]);
+      console.log("image", formData);
+      await saveSliderVideo(formData);
     }
   };
 
@@ -209,19 +234,17 @@ function Slider() {
                         </label>
                         <input
                           className="form-control"
-                          onChange={(event) =>
-                            setSliderImage((previsousValue) => ({
-                              ...previsousValue,
-                              sliderImage: event.target.files[0],
-                            }))
-                          }
+                          ref={sliderImageRef}
                           type="file"
                           id="formFile"
                           accept=".jpg,.jpeg,.png,.gif"
                         />
                       </div>
                       <div className="image">
-                        <img src="" alt="" />
+                        <img
+                          src={sliderImage ? sliderImage : ""}
+                          alt="No Image"
+                        />
                       </div>
                     </div>
                   </div>
@@ -236,19 +259,56 @@ function Slider() {
                           className="form-control"
                           type="file"
                           id="formFile"
-                          onChange={(event) =>
-                            setSliderVideo((previsousValue) => ({
-                              ...previsousValue,
-                              sliderVideo: event.target.files[0],
-                            }))
-                          }
+                          ref={sliderVideoRef}
                           accept=".mp4,.mkv,.3gp"
                         />
                       </div>
-                      <div className="image">
-                        <img src="" alt="" />
+                      <div className="video">
+                        <video src={sliderVideo ? sliderVideo : ""}> </video>
                       </div>
                     </div>
+                  </div>
+
+                  <h5 className="card-title text-center">
+                    English Learn More Editor
+                  </h5>
+                  <hr className="border-2" />
+
+                  <div>
+                    <JoditEditor
+                      ref={editor}
+                      value={englishFormContent.learnMore}
+                      tabIndex={1}
+                      config={englishConfig}
+                      onBlur={(newContent) =>
+                        setEnglishFormContent((prevState) => ({
+                          ...prevState,
+                          learnMore: newContent,
+                        }))
+                      }
+                    />
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+
+                  <h5 className="card-title text-center">
+                    Nepali Learn More Editor
+                  </h5>
+                  <hr className="border-2" />
+                  <div>
+                    <JoditEditor
+                      ref={editor}
+                      value={nepaliFormContent.learnMore}
+                      tabIndex={1}
+                      config={nepaliConfig}
+                      onBlur={(newContent) =>
+                        setNepaliFormContent((prevState) => ({
+                          ...prevState,
+                          learnMore: newContent,
+                        }))
+                      }
+                    />
                   </div>
 
                   <div

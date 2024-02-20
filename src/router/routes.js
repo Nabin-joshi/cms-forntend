@@ -10,9 +10,34 @@ import Features from "../components/auth/admin/section/Features.jsx";
 import NewsLetterGroupList from "../components/auth/admin/section/NewLetter/newslettergroup/NewsLetterGroupList.jsx";
 import Slider from "../components/auth/admin/section/Slider.jsx";
 import Stories from "../components/auth/admin/section/Stories.jsx";
+import FooterAdmin from "../components/auth/admin/section/Footer.jsx";
+
+import OurValues from "../components/auth/admin/section/OurValues.jsx";
+import OurImpact from "../components/auth/admin/section/OurImpact.jsx";
+import TheJourney from "../components/auth/admin/section/TheJourney.jsx";
+import OurPartner from "../components/auth/admin/section/OurPartners.jsx";
+import Footer from "../components/home/Footer.jsx";
+import LandingPageLayout from "../components/home/LandingPageLayout.jsx";
+import LearnMore from "../components/home/homePageRoutingSection/LearnMore.jsx";
 
 export const mainRoutes = [
-  { path: "/", name: "Home Page", element: Home },
+  {
+    path: "/",
+    name: "Home Page",
+    element: Home,
+    children: [
+      {
+        path: "",
+        name: "Landing page",
+        element: LandingPageLayout,
+      },
+      {
+        path: "/learnMore",
+        name: "Learn More page",
+        element: LearnMore,
+      },
+    ],
+  },
   { path: "/login", name: "Login Page", exact: true, element: Login },
 
   {
@@ -44,6 +69,36 @@ export const mainRoutes = [
         name: "Admin Stories",
         exact: true,
         element: Stories,
+      },
+      {
+        path: "/admin/ourValues",
+        name: "Admin Our Values",
+        exact: true,
+        element: OurValues,
+      },
+      {
+        path: "/admin/ourImpact",
+        name: "Admin Our Impact",
+        exact: true,
+        element: OurImpact,
+      },
+      {
+        path: "/admin/theJourney",
+        name: "Admin The Journey",
+        exact: true,
+        element: TheJourney,
+      },
+      {
+        path: "/admin/ourPartners",
+        name: "Admin Our Partners",
+        exact: true,
+        element: OurPartner,
+      },
+      {
+        path: "/admin/footer",
+        name: "Admin Footer",
+        exact: true,
+        element: FooterAdmin,
       },
       {
         path: "/admin/nwusersgroupmap",

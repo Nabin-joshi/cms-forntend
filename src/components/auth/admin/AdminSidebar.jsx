@@ -47,9 +47,39 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/ourValues">
+                  <i className="bi bi-circle"></i>
+                  <span>Our Values</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/ourImpact">
+                  <i className="bi bi-circle"></i>
+                  <span>Our Impact</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/theJourney">
+                  <i className="bi bi-circle"></i>
+                  <span>The Journey</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/ourPartners">
+                  <i className="bi bi-circle"></i>
+                  <span>Our Partners</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/features">
                   <i className="bi bi-circle"></i>
                   <span>Feature</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/footer">
+                  <i className="bi bi-circle"></i>
+                  <span>Footer</span>
                 </NavLink>
               </li>
             </ul>
