@@ -17,14 +17,22 @@ const OurValues = () => {
     <>
       <hr />
       <div className="row">
-        <span>{ourValues.heading}</span>
+        <p className="text-center">
+          <span>{ourValues.heading}</span>
+        </p>
         {ourValues.contents &&
           ourValues.contents.map((data, index) => {
             return (
-              <div>
+              <div className="col-md-3">
                 <div>
                   <p>{data.title}</p>
                   <p>{data.titleNepali}</p>
+                  <video
+                    src={data.icon}
+                    style={{ height: "200px", width: "200px" }}
+                    controls
+                    controlsList="nodownload"
+                  ></video>
                 </div>
               </div>
             );
