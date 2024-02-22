@@ -111,14 +111,14 @@ const Stories = () => {
     <>
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1>Services</h1>
+          <h1>Stories</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="index.html">Auth</a>
               </li>
               <li className="breadcrumb-item">Components</li>
-              <li className="breadcrumb-item active">services</li>
+              <li className="breadcrumb-item active">Stories</li>
             </ol>
           </nav>
         </div>

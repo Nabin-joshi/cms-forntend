@@ -16,11 +16,15 @@ const OurImpacts = () => {
   return (
     <>
       <div className="row">
-        <span>{ourImpacts.heading}</span>
+        <p className="text-center">
+          {" "}
+          <span>{ourImpacts.heading}</span>
+        </p>
+
         {ourImpacts.contents &&
           ourImpacts.contents.map((data, index) => {
             return (
-              <div>
+              <div className="col-md-3">
                 <div>
                   <p>{data.count}</p>
                   <p>{data.countNepali}</p>

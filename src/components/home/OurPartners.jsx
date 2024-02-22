@@ -17,7 +17,7 @@ const OurPartners = () => {
     <>
       <hr />
       <div className="row">
-        <p>
+        <p className="text-center">
           {" "}
           <span>
             {ourPartners && ourPartners.heading}/
@@ -29,7 +29,7 @@ const OurPartners = () => {
           ourPartners.contents &&
           ourPartners.contents.map((data, index) => {
             return (
-              <div>
+              <div className="col-md-3">
                 <div>
                   <img
                     style={{ minWidth: "100px", maxWidth: "130px" }}

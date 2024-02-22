@@ -17,30 +17,26 @@ const TheJourney = () => {
     <>
       <hr />
       <div className="row">
-        <p>
+        <p className="text-center">
           {" "}
           <span>
             {theJourney && theJourney.heading}/
             {theJourney && theJourney.headingNepali}
           </span>
         </p>
-        <p>
+        <p className="text-center">
           {" "}
           <span>
             {theJourney && theJourney.subHeading}/
             {theJourney && theJourney.subHeadingNepali}
           </span>
         </p>
-        <span>{theJourney && theJourney.heading}</span>
-        <p>
-          {theJourney && theJourney.subHeading} /{" "}
-          {theJourney && theJourney.subHeadingNepali}
-        </p>
+
         {theJourney &&
           theJourney.contents &&
           theJourney.contents.map((data, index) => {
             return (
-              <div>
+              <div className="col-md-3">
                 <div>
                   <p>
                     {data.date}/{data.dateNepali}

@@ -61,7 +61,6 @@ const OurValues = () => {
     formData.append("icon", iconRef.current.files[0]);
     formData.append("title", titleRef.current.value);
     formData.append("titleNepali", titleNepaliRef.current.value);
-
     try {
       const response = await addOurValues(formData);
       toast.success("Values added Successfully!", {
