@@ -11,6 +11,7 @@ import {
   getEnglishServiceTextEditorContent,
   getNepaliServiceTextEditorContent,
 } from "../../services/api";
+import GeographicalCoverage from "./GeographicalCoverage";
 
 export default function LandingPageLayout() {
   const [data, setData] = useState(null);
@@ -101,6 +102,7 @@ export default function LandingPageLayout() {
       </main>
       <Stories />
       <Services />
+      <GeographicalCoverage />
       <OurImpacts />
       <OurValues />
       <TheJourney />
