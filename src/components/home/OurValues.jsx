@@ -27,12 +27,17 @@ const OurValues = () => {
                 <div>
                   <p>{data.title}</p>
                   <p>{data.titleNepali}</p>
-                  <video
+                  <img
+                    src={data.icon}
+                    alt="not available"
+                    style={{ height: "200px", width: "200px" }}
+                  />
+                  {/* <video
                     src={data.icon}
                     style={{ height: "200px", width: "200px" }}
                     controls
                     controlsList="nodownload"
-                  ></video>
+                  ></video> */}
                 </div>
               </div>
             );

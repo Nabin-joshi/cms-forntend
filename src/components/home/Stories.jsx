@@ -52,10 +52,12 @@ const Stories = () => {
 
                   <div className="card-body">
                     <h5 className="card-title"></h5>
-                    <p className="card-text">{item.desc}</p>
+                    <p className="card-text">
+                      {item.desc}/{item.descNepali}
+                    </p>
                     <p className="card-text">
                       <b className={`text-muted ${styles.personName}`}>
-                        {item.person}
+                        {item.person}/{item.personNepali}
                       </b>
                     </p>
                   </div>
