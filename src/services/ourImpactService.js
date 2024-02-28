@@ -37,8 +37,8 @@ export const getAllOurImpacts = async () => {
   return response;
 };
 
-export const updateOurImpact = async (id, data) => {
-  const response = await ourImpactApi.put(`/api/ourImpacts/${id}`, data, {
+export const updateOurImpact = async (data) => {
+  const response = await ourImpactApi.put(`/api/ourImpacts`, data, {
     headers: {
       "Content-Type": "application/json",
     },

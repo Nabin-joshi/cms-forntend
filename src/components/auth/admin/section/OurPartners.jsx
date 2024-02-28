@@ -6,11 +6,14 @@ import {
   addOurPartnerHeading,
   getAllOurPartnerData,
 } from "../../../../services/ourPartnerService";
+import { Box, Button, Modal } from "@mui/material";
+import OurPartnersList from "./OurPartnersList";
 
 const OurPartner = () => {
   const headingRef = useRef();
   const headingNepaliRef = useRef();
   const iconRef = useRef();
+  const [open, setOpen] = useState(false);
 
   const [partnerData, setPartnerData] = useState({
     heading: "",
@@ -101,6 +104,14 @@ const OurPartner = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
+                  <Button
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  >
+                    {" "}
+                    Our Partner's list
+                  </Button>
                   <h5 className="card-title">Add Heading</h5>
                   <hr className="border-2" />
                   <form onSubmit={submitHeading}>
@@ -163,8 +174,32 @@ const OurPartner = () => {
         </section>
       </main>
       <ToastContainer />
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        // aria-labelledby="modal-modal-title"
+        // aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <OurPartnersList />
+        </Box>
+      </Modal>
     </>
   );
 };
 
 export default OurPartner;
+
+const style = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "fit-content",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};

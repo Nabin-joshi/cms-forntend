@@ -33,12 +33,12 @@ export const getTheJourneyHeading = async () => {
 };
 
 export const getTheJourney = async () => {
-  const response = await theJourneyApi.get("/api/thejourney");
+  const response = await theJourneyApi.get("/api/thejourney/all");
   return response;
 };
 
-export const updateTheJourney = async (id, data) => {
-  const response = await theJourneyApi.put(`/api/thejourney/${id}`, data, {
+export const updateTheJourney = async (data) => {
+  const response = await theJourneyApi.put(`/api/thejourney`, data, {
     headers: {
       "Content-Type": "application/json",
     },

@@ -6,6 +6,8 @@ import {
   addOurImpactHeading,
   getOurImpactHeading,
 } from "../../../../services/ourImpactService";
+import { Box, Button, Modal } from "@mui/material";
+import OurImpactList from "./OurImpactList";
 
 const OurImpact = () => {
   const headingRef = useRef();
@@ -16,6 +18,7 @@ const OurImpact = () => {
   const descRef = useRef();
   const descNepaliRef = useRef();
   const [color, setColor] = useState("#aabbcc");
+  const [open, setOpen] = useState(false);
 
   const [impact, setImpact] = useState({
     heading: "",
@@ -127,6 +130,13 @@ const OurImpact = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
+                  <Button
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  >
+                    Our impact's list
+                  </Button>
                   <h5 className="card-title">Add Impact</h5>
                   <hr className="border-2" />
                   <div className="row">
@@ -234,9 +244,32 @@ const OurImpact = () => {
           </div>
         </section>
       </main>
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <OurImpactList />
+        </Box>
+      </Modal>
       <ToastContainer />
     </>
   );
 };
 
 export default OurImpact;
+const style = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "fit-content",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};

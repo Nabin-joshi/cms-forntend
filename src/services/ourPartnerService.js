@@ -41,8 +41,9 @@ export const getAllOurPartnerData = async () => {
   return response;
 };
 
-export const updateOurPartner = async (id, data) => {
-  const response = await ourPartnersApi.put(`/api/ourPartners/${id}`, data, {
+export const updateOurPartner = async (data) => {
+  alert(JSON.stringify(data));
+  const response = await ourPartnersApi.put(`/api/ourPartners`, data, {
     headers: {
       "Content-Type": "application/json",
     },
