@@ -15,32 +15,36 @@ const OurPartners = () => {
   }, []);
   return (
     <>
-      <hr />
-      <div className="row">
-        <p className="text-center">
-          {" "}
-          <span>
+      <section class="pt-5 bg-white">
+        <div class="container position-relative ">
+          <h2 class="heading text-center text-blue">
             {ourPartners && ourPartners.heading}/
             {ourPartners && ourPartners.headingNepali}
-          </span>
-        </p>
-
-        {ourPartners &&
-          ourPartners.contents &&
-          ourPartners.contents.map((data, index) => {
-            return (
-              <div className="col-md-3">
-                <div>
-                  <img
-                    style={{ minWidth: "100px", maxWidth: "130px" }}
-                    src={data.icon}
-                    alt=""
-                  />
-                </div>
+          </h2>
+          <div class="partners-slider">
+            <div class="swiper-container2">
+              <div class="swiper-wrapper">
+                {ourPartners &&
+                  ourPartners.contents &&
+                  ourPartners.contents.map((data, index) => {
+                    return (
+                      <div class="swiper-slide">
+                        <img
+                          src={data.icon}
+                          alt="Partner 1"
+                          class="img-fluid"
+                        />
+                      </div>
+                    );
+                  })}
               </div>
-            );
-          })}
-      </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

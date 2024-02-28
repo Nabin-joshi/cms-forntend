@@ -15,34 +15,24 @@ const OurValues = () => {
   }, []);
   return (
     <>
-      <hr />
-      <div className="row">
-        <p className="text-center">
-          <span>{ourValues.heading}</span>
-        </p>
-        {ourValues.contents &&
-          ourValues.contents.map((data, index) => {
-            return (
-              <div className="col-md-3">
-                <div>
-                  <p>{data.title}</p>
-                  <p>{data.titleNepali}</p>
-                  <img
-                    src={data.icon}
-                    alt="not available"
-                    style={{ height: "200px", width: "200px" }}
-                  />
-                  {/* <video
-                    src={data.icon}
-                    style={{ height: "200px", width: "200px" }}
-                    controls
-                    controlsList="nodownload"
-                  ></video> */}
-                </div>
-              </div>
-            );
-          })}
-      </div>
+      <section class="thematic-areas-section position-relative mt-5">
+        <div class="border thematic-areas-content">
+          <h2 class="heading text-center">{ourValues.heading}</h2>
+          <div class="row">
+            {ourValues.contents &&
+              ourValues.contents.map((data, index) => {
+                return (
+                  <div class="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+                    <i class="fas fa-bullhorn our-impact-icon"></i>
+                    <h4 class="mt-3">
+                      {data.title}/{data.titleNepali}
+                    </h4>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </section>
     </>
   );
 };

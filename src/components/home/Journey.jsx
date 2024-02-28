@@ -15,40 +15,30 @@ const TheJourney = () => {
   }, []);
   return (
     <>
-      <hr />
-      <div className="row">
-        <p className="text-center">
+      <section class="mt-5 position-relative">
+        <h2 class="heading text-center text-blue">
+          {theJourney && theJourney.heading}/
+          {theJourney && theJourney.headingNepali}
+        </h2>
+        <p class="text-center">
           {" "}
-          <span>
-            {theJourney && theJourney.heading}/
-            {theJourney && theJourney.headingNepali}
-          </span>
+          {theJourney && theJourney.subHeading}/
+          {theJourney && theJourney.subHeadingNepali}
         </p>
-        <p className="text-center">
-          {" "}
-          <span>
-            {theJourney && theJourney.subHeading}/
-            {theJourney && theJourney.subHeadingNepali}
-          </span>
-        </p>
-
+        {/* class="scroll-button left" style="z-index: 500;" */}
+        <button class="scroll-button left">&lt;</button>
         {theJourney &&
           theJourney.contents &&
           theJourney.contents.map((data, index) => {
             return (
-              <div className="col-md-3">
-                <div>
-                  <p>
-                    {data.date}/{data.dateNepali}
-                  </p>
-                  <p>
-                    {data.desc}/{data.descNepali}
-                  </p>
-                </div>
+              <div class="journey-container" id="journey-container">
+                <div class="road" id="road"></div>
+                <div class="location-markers"></div>
               </div>
             );
           })}
-      </div>
+        <button class="scroll-button right">&gt;</button>
+      </section>
     </>
   );
 };
