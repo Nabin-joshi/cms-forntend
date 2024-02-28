@@ -19,6 +19,7 @@ import OurPartner from "../components/auth/admin/section/OurPartners.jsx";
 import Footer from "../components/home/Footer.jsx";
 import LandingPageLayout from "../components/home/LandingPageLayout.jsx";
 import LearnMore from "../components/home/homePageRoutingSection/LearnMore.jsx";
+import GeographicalCoverage from "../components/auth/admin/section/GeographicalCoverage.jsx";
 
 export const mainRoutes = [
   {
@@ -117,6 +118,12 @@ export const mainRoutes = [
         name: "News Letter Work page",
         exact: true,
         element: NewsLetterGroupList,
+      },
+
+      {
+        path: "/admin/geoCoverage",
+        name: "Geographical Coverage Page",
+        element: GeographicalCoverage,
       },
     ],
   },

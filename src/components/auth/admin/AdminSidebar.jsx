@@ -41,6 +41,12 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/geoCoverage">
+                  <i className="bi bi-circle"></i>
+                  <span>Geographical Coverage</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/stories">
                   <i className="bi bi-circle"></i>
                   <span>Stories</span>

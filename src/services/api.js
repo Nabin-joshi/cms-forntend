@@ -201,3 +201,53 @@ export const addNewsLetterUserGroupMap = async (userGroupMap) => {
   }
   return response;
 };
+
+export const saveNepaliGeographicalCoverage = async (data) => {
+  try {
+    await api.put(
+      "/api/geographicalCoverage/updateGeographicalCoverage/nep",
+      data
+    );
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishGeographicalCoverage = async (data) => {
+  try {
+    await api.put(
+      "/api/geographicalCoverage/updateGeographicalCoverage/eng",
+      data
+    );
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getNepaliGeographicalCoverage = async () => {
+  let response;
+  try {
+    response = await api.get(
+      "/api/geographicalCoverage/getGeographicalCoverage/nep"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getEnglishGeographicalCoverage = async () => {
+  let response;
+  try {
+    response = await api.get(
+      "/api/geographicalCoverage/getGeographicalCoverage/eng"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
