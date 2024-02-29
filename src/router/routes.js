@@ -20,6 +20,8 @@ import Footer from "../components/home/Footer.jsx";
 import LandingPageLayout from "../components/home/LandingPageLayout.jsx";
 import LearnMore from "../components/home/homePageRoutingSection/LearnMore.jsx";
 import GeographicalCoverage from "../components/auth/admin/section/GeographicalCoverage.jsx";
+import OurWork from "../components/auth/admin/section/OurWork.jsx";
+import YourSupport from "../components/auth/admin/section/YourSupport.jsx";
 
 export const mainRoutes = [
   {
@@ -124,6 +126,16 @@ export const mainRoutes = [
         path: "/admin/geoCoverage",
         name: "Geographical Coverage Page",
         element: GeographicalCoverage,
+      },
+      {
+        path: "/admin/ourWork",
+        name: "Our Work Page",
+        element: OurWork,
+      },
+      {
+        path: "/admin/yourSupport",
+        name: "Your Support Page",
+        element: YourSupport,
       },
     ],
   },
