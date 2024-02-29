@@ -31,6 +31,14 @@ export const addStory = async (data) => {
   return response;
 };
 
+export const updateStory = async (data) => {
+  let response = await storyApi.put("/api/stories", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
 export const getStoryHeading = async () => {
   let response = await storyApi.get("/api/stories/heading");
   return response;

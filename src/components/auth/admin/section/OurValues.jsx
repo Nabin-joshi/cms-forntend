@@ -6,7 +6,21 @@ import {
   addOurValuesHeading,
   getOurValuesHeading,
 } from "../../../../services/ourValuesService";
+import CustomModal from "./NewLetter/popup/CustomModal";
+import OurValuesList from "./OurValuesList";
+import { Box, Button, Modal } from "@mui/material";
 
+const style = {
+  position: "absolute",
+  top: "40%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "fit-content",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const OurValues = () => {
   const headingRef = useRef();
   const headingNepaliRef = useRef();
@@ -14,7 +28,11 @@ const OurValues = () => {
   const titleRef = useRef();
   const titleNepaliRef = useRef();
   const [color, setColor] = useState("#aabbcc");
+  const [isModalOpen, setModalOpen] = useState(false);
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [values, setValues] = useState({
     heading: "",
     headingNepali: "",
@@ -123,6 +141,8 @@ const OurValues = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
+                  <Button onClick={handleOpen}> Show And Edit Values</Button>
+
                   <h5 className="card-title">Add Values</h5>
                   <hr className="border-2" />
                   <div className="row">
@@ -214,6 +234,17 @@ const OurValues = () => {
           </div>
         </section>
       </main>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <OurValuesList />
+        </Box>
+      </Modal>
       <ToastContainer />
     </>
   );

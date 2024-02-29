@@ -33,12 +33,12 @@ export const getOurValuesHeading = async () => {
 };
 
 export const getOurValues = async () => {
-  const response = await ourValuesApi.get("/api/ourvalues");
+  const response = await ourValuesApi.get("/api/ourvalues/all");
   return response;
 };
 
-export const updateOurValues = async (id, data) => {
-  const response = await ourValuesApi.put(`/api/ourvalues/${id}`, data, {
+export const updateOurValues = async (data) => {
+  const response = await ourValuesApi.put(`/api/ourvalues/`, data, {
     headers: {
       "Content-Type": "application/json",
     },

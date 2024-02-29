@@ -15,26 +15,32 @@ const OurImpacts = () => {
   }, []);
   return (
     <>
-      <div className="row">
-        <p className="text-center">
-          {" "}
-          <span>{ourImpacts.heading}</span>
-        </p>
-
-        {ourImpacts.contents &&
-          ourImpacts.contents.map((data, index) => {
-            return (
-              <div className="col-md-3">
-                <div>
-                  <p>{data.count}</p>
-                  <p>{data.countNepali}</p>
-                  <p>{data.count}</p>
-                  <p>{data.descNepali}</p>
-                </div>
-              </div>
-            );
-          })}
-      </div>
+      <section class="our-impact-section position-relative mt-4">
+        <div class="border our-impact-content">
+          <div class="">
+            <h2 class="heading">{ourImpacts.heading}</h2>
+          </div>
+          <div class="d-flex align-items-center justify-content-center flex-wrap flex-lg-nowrap">
+            {ourImpacts.contents &&
+              ourImpacts.contents.map((data, index) => {
+                return (
+                  <>
+                    <div class="slash"></div>
+                    <div class="our-impact-fields d-flex flex-column">
+                      <i class="fas fa-users-gear our-impact-icon"></i>
+                      <h3 class="our-impact-number">
+                        {data.count}/{data.countNepali}
+                      </h3>
+                      <p>
+                        {data.desc}/{data.descNepali}
+                      </p>
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+        </div>
+      </section>
     </>
   );
 };

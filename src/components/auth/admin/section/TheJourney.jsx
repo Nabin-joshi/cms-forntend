@@ -8,6 +8,20 @@ import {
   getTheJourneyHeading,
 } from "../../../../services/theJourneyService";
 import { SketchPicker } from "react-color";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import TheJourneyList from "./TheJourneyList";
+
+const style = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "fit-content",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const TheJourney = () => {
   const headingRef = useRef();
@@ -20,6 +34,10 @@ const TheJourney = () => {
   const descNepaliRef = useRef();
   const colorRef = useRef();
   const [color, setColor] = useState("#aabbcc");
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [journey, setJourney] = useState({
     heading: "",
@@ -151,6 +169,7 @@ const TheJourney = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
+                  <Button onClick={handleOpen}>The Journey's list</Button>
                   <h5 className="card-title">Add Journey</h5>
                   <hr className="border-2" />
                   <div className="row">
@@ -305,6 +324,16 @@ const TheJourney = () => {
           </div>
         </section>
       </main>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <TheJourneyList />
+        </Box>
+      </Modal>
       <ToastContainer />
     </>
   );

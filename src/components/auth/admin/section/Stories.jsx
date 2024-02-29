@@ -7,6 +7,9 @@ import {
   getStoryHeading,
 } from "../../../../services/storiesService";
 import Footer from "./Footer";
+import CustomModal from "./NewLetter/popup/CustomModal";
+import StoriesList from "./StoriesList";
+import { Button } from "@mui/material";
 
 const Stories = () => {
   const headingRef = useRef();
@@ -22,6 +25,7 @@ const Stories = () => {
     headingNepali: "",
     readMoreBtnColor: "",
   });
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const submitStoryHeading = async (e) => {
     e.preventDefault();
@@ -96,6 +100,20 @@ const Stories = () => {
       });
     }
   };
+
+  const storyUpdatedMsg = (id) => {
+    toast.success(`story has been updated successfully `, {
+      position: "top-center",
+      autoClose: 700,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "colored",
+    });
+    setModalOpen(false);
+  };
   useEffect(() => {
     async function fetchStoryHeading() {
       const response = await getStoryHeading();
@@ -128,6 +146,11 @@ const Stories = () => {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Services Rich Text Editor</h5>
+                  <Button onClick={() => setModalOpen(true)}>
+                    {" "}
+                    Show And Edit Stories
+                  </Button>
+
                   <hr className="border-2" />
                   <div className="row">
                     {/* a qukc brown fox jumps over the lazy dog. a qukc brown fox
@@ -266,6 +289,14 @@ const Stories = () => {
           </div>
         </section>
       </main>
+      <div className="hero">
+        <CustomModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          contentComponent={<StoriesList storyUpdate={storyUpdatedMsg} />}
+        ></CustomModal>
+      </div>
+
       <ToastContainer />
       <hr />
     </>

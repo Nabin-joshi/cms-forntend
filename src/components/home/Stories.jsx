@@ -9,9 +9,7 @@ const Stories = () => {
   async function fetchStories() {
     try {
       const response = await getStories();
-      console.log(response);
       setStory(response.data.data);
-      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching stories:", error);
     }
@@ -23,79 +21,42 @@ const Stories = () => {
 
   return (
     <>
-      <div className={`row ${styles["storyHeading"]}`}>
-        <b>{story && story.heading}</b>
-      </div>
-      <div className="container">
-        <div className="row pl-3">
-          {story &&
-            story.contents.map((item, index) => (
-              <div className="col-md-4">
-                <div
-                  class="card "
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginTop: "15px",
-                    alignItems: "center ",
-                    paddingTop: "10px",
-                    textAlign: "center",
-                    height: "361px",
-                    border: "0px",
-                  }}
-                >
-                  <img
-                    className={`card-img-top ${styles["story-person-image"]} `}
-                    src={`${item.image}`}
-                    alt="Card image cap"
-                  />
-
-                  <div className="card-body">
-                    <h5 className="card-title"></h5>
-                    <p className="card-text">
-                      {item.desc}/{item.descNepali}
-                    </p>
-                    <p className="card-text">
-                      <b className={`text-muted ${styles.personName}`}>
-                        {item.person}/{item.personNepali}
-                      </b>
-                    </p>
-                  </div>
+      <section class="testimonials">
+        <div class="testimonials-topbar text-center">
+          <div class="container">
+            <span class="text-white">Want to experience a change?</span>
+            <span class="text-yellow topbar-underline">
+              Read impact stories at{" "}
+              <a href="#" class="font-weight-bold text-yellow">
+                Transforming Lives
+              </a>
+            </span>{" "}
+            <span>{story && story.heading}</span>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row mt-5">
+            {story &&
+              story.contents.map((item, index) => (
+                <div class="col-12 col-lg-3 d-flex flex-column align-items-center">
+                  <img src={`${item.image}`} alt="" class="testimonials-img" />
+                  <p class="text-center mt-2">
+                    {" "}
+                    {item.desc}/{item.descNepali}
+                  </p>
+                  <h4 class="font-weight-bold text-blue">
+                    {item.person}/{item.personNepali}
+                  </h4>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
+          <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-blue-inverted mt-3">
+              Read More <i class="fas fa-circle-arrow-right ml-2"></i>
+            </a>
+          </div>
         </div>
-        {/* <div className={`row ${styles["center-text"]}`}>
-          <button>{story && story.heading}</button>
-        </div> */}
-        <div
-          className={`row   ${styles["center-text"]}`}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: "5px",
-          }}
-        >
-          <button
-            className={`${styles["readMoreBtn"]}`}
-            // style={{
-            //   width: "20%",
-            //   padding: "10px 20px", // Adjust padding as needed
-            //   border: "2px solid blue",
-            //   borderRadius: "20px", // Adjust border radius to your preference
-            //   backgroundColor: "white",
-            //   color: "blue",
-            //   fontSize: "16px", // Adjust font size as needed
-            //   cursor: "pointer",
-            //   transition:
-            //     "background-color 0.3s, color 0.3s, border-color 0.3s", // Add transition for smooth hover effect
-            // }}
-          >
-            Read More <FaArrowCircleRight />
-          </button>
-        </div>
-      </div>
+      </section>
     </>
   );
 };
