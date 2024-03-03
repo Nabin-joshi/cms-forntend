@@ -29,12 +29,6 @@ function AdminSidebar() {
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <NavLink to="/admin/services">
-                  <i className="bi bi-circle"></i>
-                  <span>Services</span>
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="/admin/slider">
                   <i className="bi bi-circle"></i>
                   <span>Slider</span>

@@ -6,7 +6,7 @@ function AdminHeader() {
     <>
       <header
         id="ikhataHeader"
-        className="ikhataHeader fixed-top d-flex align-items-center"
+        className="ikhataHeader adminHeader fixed-top d-flex align-items-center"
       >
         <div className="d-flex align-items-center justify-content-between">
           <NavLink className="logoIkhata d-flex align-items-center">

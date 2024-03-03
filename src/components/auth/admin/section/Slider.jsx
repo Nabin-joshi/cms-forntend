@@ -133,14 +133,14 @@ function Slider() {
     <>
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1>Services</h1>
+          <h1>Slider</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="index.html">Auth</a>
               </li>
               <li className="breadcrumb-item">Components</li>
-              <li className="breadcrumb-item active">services</li>
+              <li className="breadcrumb-item active">slider</li>
             </ol>
           </nav>
         </div>
@@ -149,7 +149,7 @@ function Slider() {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Services Rich Text Editor</h5>
+                  <h5 className="card-title">Slider Information</h5>
                   <hr className="border-2" />
 
                   <div className="d-flex justify-content-between">

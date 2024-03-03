@@ -28,8 +28,14 @@ export default function LearnMore() {
   return (
     <>
       <section>
-        <main className="container">
-          <div className="d-flex justify-content-between ">
+        <div className="d-flex align-items-center justify-content-center flex-wrap flex-lg-nowrap ">
+          <div className="">
+            <div
+              dangerouslySetInnerHTML={{ __html: englishContent.learnMore }}
+            />
+          </div>
+        </div>
+        {/* <div className="d-flex justify-content-between ">
             <div style={{ margin: "10px" }} className="col-6">
               <h3>Nepali Content</h3>
               <div
@@ -43,8 +49,7 @@ export default function LearnMore() {
                 dangerouslySetInnerHTML={{ __html: englishContent.learnMore }}
               />
             </div>
-          </div>
-        </main>
+          </div> */}
       </section>
     </>
   );

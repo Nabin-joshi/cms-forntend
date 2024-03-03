@@ -4,6 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { createNewsLetterUser } from "../../services/NewsLetterUserService";
 import { getFooter } from "../../services/footerService";
 
+import footerImage from "../../assets/img/logo-inverted.png";
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [footer, setFooter] = useState({});
@@ -43,164 +45,113 @@ export default function Footer() {
   }, []);
   return (
     <>
-      <footer
-        id="footer"
-        data-aos="fade-up"
-        data-aos-easing="ease-in-out"
-        data-aos-duration="500"
-      >
-        <div className="footer-newsletter">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6">
-                <h4>Our Newsletter</h4>
-                <p>
-                  Tamen quem nulla quae legam multos aute sint culpa legam
-                  noster magna
-                </p>
-              </div>
-              <div className="col-lg-6">
-                <form action="" onSubmit={subscribe} method="post">
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                  <input type="submit" value="Subscribe" />
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-top">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-3 col-md-6 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                  <li>
-                    <i className="bx bx-chevron-right"></i> <a href="/">Home</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">About us</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Services</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Terms of service</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Privacy policy</a>
-                  </li>
-                </ul>
+      <footer className="footer-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-lg-4">
+              <div className="footer-logo">
+                <img
+                  src={footerImage}
+                  alt="Koshish Logo"
+                  className="img-fluid"
+                />
               </div>
 
-              <div className="col-lg-3 col-md-6 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Empowerment Approach</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">UNCRPD</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Constitution of Nepal</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">Disability Rights Act-Nepali</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right"></i>{" "}
-                    <a href="/">National Health Policy</a>
-                  </li>
-                </ul>
+              <div className="footer-address text-white">
+                <div className="d-flex align-items-center">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <span className="ml-3">Kusunti, Lalitpur-14, Nepal</span>
+                </div>
+                <div className="d-flex align-items-center">
+                  <i className="fas fa-phone-alt"></i>
+                  <span className="ml-3">Phone: (977) 5454545</span>
+                </div>
+                <div className="d-flex align-items-center">
+                  <i className="fas fa-envelope"></i>
+                  <span className="ml-3">info@koshishnepal.org</span>
+                </div>
               </div>
-
-              <div className="col-lg-3 col-md-6 footer-contact">
-                <h4>Contact Us</h4>
-                <p>
-                  Lalitpur Metropolitan <br />
-                  City-14 Kusunti,Lalitpur
-                  <br />
-                  NEPAL <br />
-                  <br />
-                  <strong>Address: </strong> {footer.address}/
-                  {footer.addressNepali}
-                  <br />
-                  <strong>Phone:</strong> {footer.phone}/{footer.phoneNepali}
-                  <br />
-                  <strong>Email:</strong> {footer.email}
-                  <br />
-                  <strong>Toll Free Phone:</strong> {footer.tollFreePhone}/
-                  {footer.tollFreePhoneNepali}
-                  <br />
-                  <strong>Feed Back Email: </strong> {footer.feedBackEmail}.
-                </p>
-              </div>
-
-              <div className="col-lg-3 col-md-6 footer-info">
-                <h3>About Koshish Nepal</h3>
-                <p>
-                  Established in 2008, KOSHISH, a National Mental Health
-                  Organization is working in the promotion of mental health and
-                  psychosocial well-being in Nepal. KOSHISH promotes
-                  self-advocacy in the spirit of “NOTHING ABOUT US WITHOUT US.”
-                  KOSHISH aims to create model recovery oriented person centered
-                  mental health services, which includes mental health and
-                  psychosocial support (MHPSS) in health as well as beyond the
-                  health system (i.e. social protection, employment, etc.) that
-                  is replicable by the government and other stakeholders.
-                </p>
-                <div className="social-links mt-3">
-                  <a href="/" className="twitter">
-                    <i className="bx bxl-twitter"></i>
-                  </a>
-                  <a href="/" className="facebook">
-                    <i className="bx bxl-facebook"></i>
-                  </a>
-                  <a href="/" className="instagram">
-                    <i className="bx bxl-instagram"></i>
-                  </a>
-                  <a href="/" className="linkedin">
-                    <i className="bx bxl-linkedin"></i>
-                  </a>
+              <div className="footer-address mt-4 mb-4">
+                <div className="font-weight-bold">
+                  For any concerns, suggestions or feedback:
+                </div>
+                <div className="d-flex align-items-center">
+                  <i className="fas fa-phone"></i>
+                  <span className="ml-3">Toll Free (+977) 969.6642.456</span>
+                </div>
+                <div className="d-flex align-items-center">
+                  <i className="fas fa-envelope"></i>
+                  <span className="ml-3">feedback@koshish.org.np</span>
                 </div>
               </div>
             </div>
+            <div className="col-12 col-lg-4 mb-4 d-flex justify-content-start justify-content-lg-center">
+              <div>
+                <h4 className="text-white font-weight-bold">Quick Links</h4>
+                <ul className="footer-quick-links text-white">
+                  <li>
+                    <a href="#">About Us</a>
+                  </li>
+                  <li>
+                    <a href="#">Our Work</a>
+                  </li>
+                  <li>
+                    <a href="#">Resources</a>
+                  </li>
+                  <li>
+                    <a href="#">Get Involved</a>
+                  </li>
+                  <li>
+                    <a href="#">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-12 col-lg-4">
+              <div className="footer-social-icons">
+                <h4 className="text-white font-weight-bold">Follow us</h4>
+                <div className="d-flex">
+                  <a href="#">
+                    <i className="fab fa-facebook-f pr-3"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fab fa-instagram pr-3"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fab fa-x-twitter pr-3"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fab fa-linkedin pr-3"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fab fa-youtube"></i>
+                  </a>
+                </div>
+              </div>
+              <div className="make-a-difference mt-4">
+                <h4 className="text-white font-weight-bold">
+                  Make a difference
+                </h4>
+                <button className="btn btn-blue border mt-2">
+                  <i className="fas fa-hand-holding-heart mr-2"></i>Donate Now{" "}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="container">
-          <div className="copyright">
-            &copy; Copyright{" "}
-            <strong>
-              <span>Koshish Nepal</span>
-            </strong>
-            . All Rights Reserved
-          </div>
-          <div className="credits">
-            Designed by <NavLink>Volcosoft pvt ltd</NavLink>
+          <div className="mt-5 topbar-underline text-center">
+            <a href="#" className="font-weight-bold">
+              <i className="fas fa-users mr-2"></i>Need Help? Call 1166{" "}
+            </a>{" "}
+            |<a href="#"> Take a mental health test </a> |
+            <a href="#"> Terms of Service </a> |<a href="#"> Privacy Policy </a>{" "}
+            |<a href="#"> FAQ </a>
+            <div className="border-bottom mt-2 mb-2"></div>
+            <p className="text-center text-white">
+              © 2024 Koshish Nepal. All Rights Reserved.
+            </p>
           </div>
         </div>
       </footer>
-      <a
-        href="/"
-        className="back-to-top d-flex align-items-center justify-content-center"
-      >
-        <i className="bi bi-arrow-up-short"></i>
-      </a>
-      <ToastContainer />
     </>
   );
 }

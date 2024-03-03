@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../auth/admin/section/NewLetter/popup/CustomModal";
 import DonateModal from "../auth/admin/section/NewLetter/popup/DonateModal";
+import logo from "../../assets/img/logo.png";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -51,101 +52,160 @@ export default function Header() {
 
   return (
     <>
-      <header
-        id="header"
-        className="fixed-top d-flex align-items-center header-transparent header-scrolled"
-      >
-        <div className="container d-flex justify-content-between align-items-center">
-          <div className="logo">
-            <h1 className="text-light">
-              <a href="index.html">
-                <span>Koshish Nepal</span>
+      <header className="header-main" id="header">
+        <div className="">
+          <div className="topbar container-fluid py-1 d-flex align-items-center flex-wrap">
+            <div className="topbar-item topbar-underline px-3">
+              <a href="#">
+                <i className="fas fa-phone-alt"></i> Need Help?{" "}
+                <span className="font-weight-bold">Call: +91 1234567890</span>
               </a>
-            </h1>
+            </div>
+            <div className="d-flex align-items-center">
+              <div className="topbar-item topbar-underline px-3">
+                <a href="#"> Take a mental health test</a>
+              </div>
+              <div className="topbar-item topbar-underline px-3">
+                <a href="#">Blog</a>
+              </div>
+            </div>
+            <div className="flex-fill"></div>
+            <div className="d-flex align-items-center">
+              <div className="topbar-item px-3">
+                <div
+                  className="search-btn d-flex align-items-center justify-content-center"
+                  id="search-btn"
+                >
+                  <i className="fas fa-search"></i>
+                </div>
+                <div id="search-box" className="search-box">
+                  <input
+                    type="text"
+                    className="w-full"
+                    placeholder="Search..."
+                  />
+                  <div className="ml-2 search-btn-big  px-3 d-flex align-items-center justify-content-center">
+                    <i className="fas fa-search mr-1"></i> Search
+                  </div>
+                </div>
+              </div>
+              <div className="topbar-item px-3">
+                <div id="language-btn">
+                  EN <i className="fas fa-angle-down"></i>
+                </div>
+                <div id="language-dropdown">
+                  <div>
+                    <a href="#">EN</a>
+                  </div>
+                  <div>
+                    <a href="#">NP</a>
+                  </div>
+                </div>
+              </div>
+              <div className="social-icons px-3">
+                <i className="fab fa-facebook-f pr-2"></i>
+                <i className="fab fa-x-twitter pr-2"></i>
+                <i className="fab fa-instagram pr-2"></i>
+                <i className="fab fa-youtube"></i>
+              </div>
+            </div>
           </div>
-
-          <nav id="navbar" className="navbar">
-            <ul>
-              <li>
-                <a className="active " href="/">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="about.html">About</a>
-              </li>
-              <li>
-                <a href="services.html">Services</a>
-              </li>
-              <li>
-                <a href="portfolio.html">Portfolio</a>
-              </li>
-              <li>
-                <a href="team.html">Team</a>
-              </li>
-              <li>
-                <a href="blog.html">Blog</a>
-              </li>
-              <li className="dropdown">
-                <a href="/">
-                  <span>Drop Down</span> <i className="bi bi-chevron-down"></i>
-                </a>
-                <ul>
-                  <li>
-                    <a href="/">Drop Down 1</a>
-                  </li>
-                  <li className="dropdown">
-                    <a href="/">
-                      <span>Deep Drop Down</span>{" "}
-                      <i className="bi bi-chevron-right"></i>
-                    </a>
-                    <ul>
-                      <li>
-                        <a href="/">Deep Drop Down 1</a>
-                      </li>
-                      <li>
-                        <a href="/">Deep Drop Down 2</a>
-                      </li>
-                      <li>
-                        <a href="/">Deep Drop Down 3</a>
-                      </li>
-                      <li>
-                        <a href="/">Deep Drop Down 4</a>
-                      </li>
-                      <li>
-                        <a href="/">Deep Drop Down 5</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="/">Drop Down 2</a>
-                  </li>
-                  <li>
-                    <a href="/">Drop Down 3</a>
-                  </li>
-                  <li>
-                    <a href="/">Drop Down 4</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="contact.html">Contact Us</a>
-              </li>
-              <li>
-                <button className="ml-2" onClick={() => setModalOpen(true)}>
-                  Donate Us
-                </button>
-              </li>
-            </ul>
-            <i className="bi bi-list mobile-nav-toggle"></i>
-          </nav>
         </div>
-        <CustomModal
-          isOpen={isModalOpen}
-          onRequestClose={() => setModalOpen(false)}
-          contentComponent={<DonateModal enteredDonationAmount={enterAmount} />}
-        ></CustomModal>
-        <ToastContainer />
+        <div className="container-fluid d-flex align-items-center justify-content-between position-relative">
+          <div className="strip d-flex justify-content-between py-1 bg-light">
+            <img
+              src={logo}
+              alt="logo"
+              className=""
+              style={{ height: "90px", width: "237px" }}
+            />
+          </div>
+          <div className="right-section-header py-2">
+            <div className="d-flex align-items-center">
+              <a href="#" className="donate-btn d-none d-sm-flex">
+                <i className="fas fa-hand-holding-heart text-red"></i>
+                <div className="ml-3 d-flex flex-column">
+                  <span className="font-weight-bold">Donate</span>
+                  <span className="make-a-difference mt-n3">
+                    Make a difference
+                  </span>
+                </div>
+              </a>
+              <div className="hamburger-menu ml-3" id="hamburger-menu">
+                <i className="fas fa-bars"></i>
+              </div>
+            </div>
+
+            <nav className="navbar-main mt-2" id="main-menu">
+              <ul className="navbar-main-menu d-flex justify-content-center">
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    <i className="fas fa-home"></i>
+                  </a>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    About Us <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    Our Work <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    Resources{" "}
+                    <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    Get Involved{" "}
+                    <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </header>
     </>
   );

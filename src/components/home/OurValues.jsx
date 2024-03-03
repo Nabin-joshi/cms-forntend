@@ -15,21 +15,34 @@ const OurValues = () => {
   }, []);
   return (
     <>
-      <section class="thematic-areas-section position-relative mt-5">
-        <div class="border thematic-areas-content">
-          <h2 class="heading text-center">{ourValues.heading}</h2>
-          <div class="row">
-            {ourValues.contents &&
-              ourValues.contents.map((data, index) => {
-                return (
-                  <div class="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
-                    <i class="fas fa-bullhorn our-impact-icon"></i>
-                    <h4 class="mt-3">
-                      {data.title}/{data.titleNepali}
-                    </h4>
-                  </div>
-                );
-              })}
+      <section className="thematic-areas-section position-relative mt-5">
+        <div className="border thematic-areas-content">
+          <h2 className="heading text-center">Our Values/Thematic Areas</h2>
+          <div className="row">
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-bullhorn our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-hands-holding our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-users-gear our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-graduation-cap our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-handshake our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
+            <div className="col-12 col-md-4 d-flex flex-column justify-content-center mb-5">
+              <i className="fas fa-book our-impact-icon"></i>
+              <h4 className="mt-3">Empowerment</h4>
+            </div>
           </div>
         </div>
       </section>

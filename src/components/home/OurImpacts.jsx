@@ -15,29 +15,38 @@ const OurImpacts = () => {
   }, []);
   return (
     <>
-      <section class="our-impact-section position-relative mt-4">
-        <div class="border our-impact-content">
-          <div class="">
-            <h2 class="heading">{ourImpacts.heading}</h2>
+      <section className="our-impact-section position-relative mt-4">
+        <div className="border our-impact-content">
+          <div className="">
+            <h2 className="heading">Our Impact</h2>
           </div>
-          <div class="d-flex align-items-center justify-content-center flex-wrap flex-lg-nowrap">
-            {ourImpacts.contents &&
-              ourImpacts.contents.map((data, index) => {
-                return (
-                  <>
-                    <div class="slash"></div>
-                    <div class="our-impact-fields d-flex flex-column">
-                      <i class="fas fa-users-gear our-impact-icon"></i>
-                      <h3 class="our-impact-number">
-                        {data.count}/{data.countNepali}
-                      </h3>
-                      <p>
-                        {data.desc}/{data.descNepali}
-                      </p>
-                    </div>
-                  </>
-                );
-              })}
+          <div className="d-flex align-items-center justify-content-center flex-wrap flex-lg-nowrap">
+            <div className="our-impact-fields d-flex flex-column">
+              <i className="fas fa-bullhorn our-impact-icon"></i>
+              <h3 className="our-impact-number">650,230</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quos.
+              </p>
+            </div>
+            <div className="slash"></div>
+            <div className="our-impact-fields d-flex flex-column">
+              <i className="fas fa-hands-holding our-impact-icon"></i>
+              <h3 className="our-impact-number">650,230</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quos.
+              </p>
+            </div>
+            <div className="slash"></div>
+            <div className="our-impact-fields d-flex flex-column">
+              <i className="fas fa-users-gear our-impact-icon"></i>
+              <h3 className="our-impact-number">650,230</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quos.
+              </p>
+            </div>
           </div>
         </div>
       </section>

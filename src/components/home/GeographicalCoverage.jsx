@@ -4,6 +4,8 @@ import {
   getNepaliGeographicalCoverage,
 } from "../../services/api";
 
+import map from "../../assets/img/Vector Map.svg";
+
 function GeographicalCoverage() {
   const [englishGeographicalCoverage, setEnglishGeographicalCoverage] =
     useState({
@@ -43,54 +45,66 @@ function GeographicalCoverage() {
     fetchData();
   }, []);
   return (
-    <section>
-      <div
-        style={{
-          backgroundColor: "#fff",
-          padding: "20px",
-        }}
-        className="container"
-      >
-        <h2 style={{ color: "#343a40", textAlign: "center" }}>
-          Geopgraphical Coverage
-        </h2>
-        <div
-          style={{
-            display: "flex",
-
-            alignItems: "center",
-            marginTop: "20px",
-
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ flex: 1, padding: "10px" }}>
-            <h3 style={{ margin: "10px 0", color: "#343a40" }}>Drstricts</h3>
-            <p style={{ fontSize: "14px" }}>
-              English: {englishGeographicalCoverage.districts} Nepali:{" "}
-              {nepaliGeographicalCoverage.districts}
-            </p>
+    <section className="mt-5 geo-coverage-section">
+      <div className="container py-5">
+        <h2 className="heading text-center text-blue">Geographical Coverage</h2>
+        <div className="d-flex justify-content-between flex-wrap mt-5">
+          <div className="geo-coverage-subtitle">
+            <h3 className="">
+              Working Areas of <br />{" "}
+              <span className="font-weight-bold">Koshish Nepal</span>{" "}
+            </h3>
           </div>
-          <div style={{ flex: 1, padding: "10px" }}>
-            <h3 style={{ margin: "10px 0", color: "#343a40" }}>RMs</h3>
-            <p style={{ fontSize: "14px" }}>
-              English: {englishGeographicalCoverage.RMs} Nepali:{" "}
-              {nepaliGeographicalCoverage.RMs}
-            </p>
+          <div className="d-flex align-items-center">
+            <div className="d-flex flex-column align-items-center p-2 border-right">
+              <h1 className="text-blue"> 3 </h1>
+              <h4>Districts</h4>
+            </div>
+            <div className="d-flex flex-column align-items-center p-2 border-right">
+              <h1 className="text-blue"> 3 </h1>
+              <h4>RMs</h4>
+            </div>
+            <div className="d-flex flex-column align-items-center p-2 border-right">
+              <h1 className="text-blue"> 3 </h1>
+              <h4>PNGOs</h4>
+            </div>
+            <div className="d-flex flex-column align-items-center p-2">
+              <h1 className="text-blue"> 3 </h1>
+              <h4>Schools</h4>
+            </div>
           </div>
-          <div style={{ flex: 1, padding: "10px" }}>
-            <h3 style={{ margin: "10px 0", color: "#343a40" }}>PNGOs</h3>
-            <p style={{ fontSize: "14px" }}>
-              English: {englishGeographicalCoverage.PNGOs} Nepali:{" "}
-              {nepaliGeographicalCoverage.PNGOs}
-            </p>
+        </div>
+      </div>
+      <div className="geo-blue-bg">
+        <img src={map} alt="Nepal Map" className="nepal-map" />
+        <div className="geo-legend">
+          <div className="legend-item">
+            <div
+              className="legend-color"
+              style={{ backgroundColor: "red" }}
+            ></div>
+            <div className="legend-text">Districts</div>
           </div>
-          <div style={{ flex: 1, padding: "10px" }}>
-            <h3 style={{ margin: "10px 0", color: "#343a40" }}>Schools</h3>
-            <p style={{ fontSize: "14px" }}>
-              English: {englishGeographicalCoverage.schools} Nepali:{" "}
-              {nepaliGeographicalCoverage.schools}
-            </p>
+          <div className="legend-item">
+            <div
+              className="legend-color"
+              style={{ backgroundColor: "green" }}
+            ></div>
+            <div className="legend-text">RMs</div>
+          </div>
+          <div className="legend-item">
+            <div
+              className="legend-color"
+              style={{ backgroundColor: "yellow" }}
+            ></div>
+            <div className="legend-text">PNGOs</div>
+          </div>
+          <div className="legend-item">
+            <div
+              className="legend-color"
+              style={{ backgroundColor: "pink" }}
+            ></div>
+            <div className="legend-text">Schools</div>
           </div>
         </div>
       </div>

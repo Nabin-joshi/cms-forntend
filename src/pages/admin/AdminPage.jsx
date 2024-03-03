@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import AdminHeader from "../../components/auth/admin/AdminHeader";
 import AdminSidebar from "../../components/auth/admin/AdminSidebar";
 import AdminFooter from "../../components/auth/admin/AdminFooter";
+import "../../assets/css/styles.css";
 
 function AdminPage() {
   return (

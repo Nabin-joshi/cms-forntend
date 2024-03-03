@@ -4,7 +4,8 @@ import {
   getNepaliSliderContent,
 } from "../../services/api";
 
-import sectionLogo from "../../assets/img/hero-bg.jpg";
+import slider1 from "../../assets/img/slider-1.png";
+import Swiper from "swiper";
 
 export default function Slider() {
   const [englishData, setEnglishData] = useState(null);
@@ -21,6 +22,24 @@ export default function Slider() {
         if (nepaliResponse) {
           setNepaliData(nepaliResponse.data.slider);
         }
+
+        // Initialize Swiper after fetching data
+        const swiper = new Swiper(".swiper-container", {
+          speed: 400,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            type: "bullets",
+            clickable: true,
+          },
+        });
+
+        return () => {
+          swiper.destroy(true, true); // Cleanup Swiper instance
+        };
       } catch (error) {}
     };
 
@@ -29,139 +48,99 @@ export default function Slider() {
 
   return (
     <>
-      <section
-        id="hero"
-        className="d-flex justify-content-center align-items-center"
-        style={{
-          background: ` url(${
-            englishData && englishData.image && englishData.image !== ""
-              ? englishData.image
-              : sectionLogo
-          })`,
-        }}
-      >
-        <div
-          id="heroCarousel"
-          className="container carousel carousel-fade"
-          data-bs-ride="carousel"
-          data-bs-interval="5000"
-        >
-          <div className="carousel-item active">
-            <div className="carousel-container">
-              <h2 className="animate__animated animate__fadeInDown">
-                {englishData ? englishData.title : "Welcome to Koshish Nepal"}
-              </h2>
-              <p className="animate__animated animate__fadeInUp">
-                {englishData
-                  ? englishData.content
-                  : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamusrepellendus deleniti vel. Minus et tempore modi architecto."}
-              </p>
-              <a
-                href="/learnMore"
-                className="btn-get-started animate__animated animate__fadeInUp"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-
-          <div className="carousel-item">
-            <div className="carousel-container">
-              <h2 className="animate__animated animate__fadeInDown">
-                {nepaliData ? nepaliData.title : "Lorem Ipsum Dolor"}
-              </h2>
-              <p className="animate__animated animate__fadeInUp">
-                {nepaliData
-                  ? nepaliData.content
-                  : "Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut etest quaerat sequi nihil ut aliquam. Occaecati alias doloremmollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto."}
-              </p>
-              <a
-                href="/learnMore"
-                className="btn-get-started animate__animated animate__fadeInUp"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-
-          <div className="carousel-item">
-            <div className="carousel-container">
-              <h2 className="animate__animated animate__fadeInDown">
-                Sequi ea ut et est quaerat
-              </h2>
-              <p className="animate__animated animate__fadeInUp">
-                Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et
-                est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus
-                repellendus deleniti vel. Minus et tempore modi architecto.
-              </p>
-              <a
-                href="/learnMore"
-                className="btn-get-started animate__animated animate__fadeInUp"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-
-          <a
-            className="carousel-control-prev"
-            href="#heroCarousel"
-            role="button"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon bx bx-chevron-left"
-              aria-hidden="true"
-            ></span>
-          </a>
-
-          <a
-            className="carousel-control-next"
-            href="#heroCarousel"
-            role="button"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon bx bx-chevron-right"
-              aria-hidden="true"
-            ></span>
-          </a>
-        </div>
-      </section>
-      <br />
-      <br />
-      <br />
-      <section id="homeServces" className="services">
-        <div className="container">
-          <div className="section-title">
-            <h2>Watch Slider Video</h2>
-            <div className="container">
-              {/* <video height="500" controls>
-                <source
-                  src={
-                    englishData && englishData.video && englishData.video !== ""
-                      ? englishData.video
-                      : ""
-                  }
-                  type="video/mp4"
-                />
-              </video> */}
-              <iframe
-                height="500"
-                width="800"
-                controls
-                allowFullScreen
-                allow="autoplay"
+      <section className="hero-section">
+        <div className="swiper-container">
+          <div className="swiper-wrapper">
+            <div className="swiper-slide position-relative">
+              <div className="slide-hero-text d-flex flex-column align-items-start">
+                <h1>
+                  {englishData
+                    ? englishData.title
+                    : "Championing Possibilities, Building Brighter Horizons"}{" "}
+                </h1>
+                <p>
+                  {englishData
+                    ? englishData.content
+                    : "Helping children and youth to thrive. This text could be " +
+                      "significanlty longer Lorem ipsum dolor sit amet consectetur" +
+                      "adipisicing elit. Dolor optio ab distinctio porro accusamus" +
+                      "nisi aperiam, dolores quo, quae possimus laudantium? Debitis" +
+                      "aperiam animi est iusto quis cupiditate! Aspernatur, maxime."}
+                </p>
+                <a href="/learnMore" className="btn btn-blue">
+                  Learn More <i className="fas fa-circle-arrow-right ml-3"></i>
+                </a>
+              </div>
+              <div className="gradient-black"></div>
+              <img
                 src={
-                  englishData && englishData.video && englishData.video !== ""
-                    ? englishData.video
-                    : "https://www.youtube.com/watch?v=05DqIGS_koU"
+                  englishData && englishData.image && englishData.image !== ""
+                    ? englishData.image
+                    : slider1
                 }
-              ></iframe>
+                alt="Slide 1"
+                className="img-fluid"
+              />
+            </div>
+            <div className="swiper-slide position-relative">
+              <div className="slide-hero-text d-flex flex-column align-items-start">
+                <h1>Championing Possibilities, Building Brighter Horizons </h1>
+                <p>
+                  Helping children and youth to thrive. This text could be
+                  significanlty longer Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Dolor optio ab distinctio porro accusamus
+                  nisi aperiam, dolores quo, quae possimus laudantium? Debitis
+                  aperiam animi est iusto quis cupiditate! Aspernatur, maxime.
+                </p>
+                <a href="about.html" className="btn btn-blue">
+                  Learn More
+                </a>
+              </div>
+              <div className="gradient-black"></div>
+              <img src={slider1} alt="Slide 1" className="img-fluid" />
+            </div>
+            <div className="swiper-slide position-relative">
+              <div className="slide-hero-text d-flex flex-column align-items-start">
+                <h1>Championing Possibilities, Building Brighter Horizons </h1>
+                <p>
+                  Helping children and youth to thrive. This text could be
+                  significanlty longer Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Dolor optio ab distinctio porro accusamus
+                  nisi aperiam, dolores quo, quae possimus laudantium? Debitis
+                  aperiam animi est iusto quis cupiditate! Aspernatur, maxime.
+                </p>
+                <a href="about.html" className="btn btn-blue">
+                  Learn More
+                </a>
+              </div>
+              <div className="gradient-black"></div>
+              <img src={slider1} alt="Slide 1" className="img-fluid" />
+            </div>
+            <div className="swiper-slide position-relative">
+              <div className="slide-hero-text d-flex flex-column align-items-start">
+                <h1>Championing Possibilities, Building Brighter Horizons </h1>
+                <p>
+                  Helping children and youth to thrive. This text could be
+                  significanlty longer Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Dolor optio ab distinctio porro accusamus
+                  nisi aperiam, dolores quo, quae possimus laudantium? Debitis
+                  aperiam animi est iusto quis cupiditate! Aspernatur, maxime.
+                </p>
+                <a href="/learnMore" className="btn btn-blue">
+                  Learn More
+                </a>
+              </div>
+              <div className="gradient-black"></div>
+              <img src={slider1} alt="Slide 1" className="img-fluid" />
             </div>
           </div>
+          <div className="swiper-pagination"></div>
         </div>
+        <a href="#">
+          <div className="go-up-btn">
+            <i className="fas fa-arrow-up"></i>
+          </div>
+        </a>
       </section>
     </>
   );

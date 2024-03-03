@@ -14,16 +14,6 @@
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: "Open Sans", sans-serif;
-  color: #444444;
-}
-
-a {
-  color: #4fa6d5;
-  text-decoration: none;
-}
-
 a:hover {
   color: #45beff;
   text-decoration: none;
@@ -575,24 +565,17 @@ h6,
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header {
-  height: 80px;
-  transition: all 0.5s;
-  z-index: 997;
-  transition: all 0.5s;
-  background: #1e4356;
-}
 
-#header.header-transparent {
+.adminHeader.header-transparent {
   background: none;
 }
 
-#header.header-scrolled {
+.adminHeader.header-scrolled {
   background: rgba(30, 67, 86, 0.8) !important;
   height: 60px;
 }
 
-#header .logo h1 {
+.adminHeader .logo h1 {
   font-size: 28px;
   margin: 0;
   padding: 4px 0;
@@ -602,8 +585,8 @@ h6,
   text-transform: uppercase;
 }
 
-#header .logo h1 a,
-#header .logo h1 a:hover {
+.adminHeader .logo h1 a,
+.adminHeader .logo h1 a:hover {
   color: #fff;
   text-decoration: none;
 }
@@ -1085,9 +1068,6 @@ h6,
 .section {
   padding: 0px;
 }
-section {
-  padding: 60px 0;
-}
 
 .section-bg {
   background-color: #f3f8fa;
@@ -1533,9 +1513,6 @@ section {
 /*--------------------------------------------------------------
 # Tetstimonials
 --------------------------------------------------------------*/
-.testimonials {
-  padding: 60px 0;
-}
 
 .testimonials .section-header {
   margin-bottom: 40px;
