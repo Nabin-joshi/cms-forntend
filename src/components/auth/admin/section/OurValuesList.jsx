@@ -49,6 +49,7 @@ const OurValuesList = () => {
     const valueToUpdate = ourValuesList[index];
     try {
       const response = await updateOurValues([valueToUpdate]);
+      setOurValuesList(response.data.data.contents);
       toast.success(`Value has been updated successfully`, {
         position: "top-center",
         autoClose: 700,

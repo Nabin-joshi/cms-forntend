@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { SketchPicker } from "react-color";
 import {
   getEnglishSliderContent,
   getNepaliSliderContent,
@@ -17,12 +16,24 @@ import {
 import JoditEditor from "jodit-react";
 
 function Slider() {
-  const editor = useRef(null);
+  const englishEditor = useRef(null);
+  const nepaliEditor = useRef(null);
+  const sliderImageRef = useRef(null);
+  const sliderVideoRef = useRef(null);
+  const showImageRef = useRef(true);
+
+  const [imageURL, setImageURL] = useState("");
+  const [videoURL, setVideoURL] = useState("");
+
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
+
   const [englishFormContent, setEnglishFormContent] = useState({
-    title: "Bringing Smile Back and Transforming Lives ",
+    title: "Bringing Smile Back and Transforming Lives",
     content:
       "We ensure that persons with mental health conditions and psychosocial disabilities are included in the community and that they are not isolated or segregated from it.",
     learnMore: "",
+    showImage: true,
   });
 
   const [nepaliFormContent, setNepaliFormContent] = useState({
@@ -30,102 +41,88 @@ function Slider() {
     content:
       "हामी सुनिश्चित गर्छौं कि मानसिक स्वास्थ्य अवस्था र मनोसामाजिक अपाङ्गता भएका व्यक्तिहरूलाई समुदायमा समावेश गरिएको छ र उनीहरूलाई यसबाट अलग वा अलग गरिएको छैन।",
     learnMore: "",
+    showImage: true,
   });
-
-  const sliderImageRef = useRef();
-  const sliderVideoRef = useRef();
-
-  let sliderImage = "";
-  let sliderVideo = "";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const englishResponse = await getEnglishSliderContent();
-
         const nepaliResponse = await getNepaliSliderContent();
 
-        if (englishResponse) {
-          sliderImage = englishResponse.data.slider.image;
-          sliderVideo = englishResponse.data.slider.video;
-          setEnglishFormContent({
-            title: englishResponse.data.slider.title,
-            content: englishResponse.data.slider.content,
-            learnMore: englishResponse.data.slider.learnMore,
-          });
+        if (englishResponse && englishResponse.data.slider) {
+          const { title, content, learnMore } = englishResponse.data.slider;
+          setEnglishFormContent({ title, content, learnMore });
+          setImageURL(englishResponse.data.slider.image);
+          setVideoURL(englishResponse.data.slider.video);
         }
-        if (nepaliResponse) {
-          setNepaliFormContent({
-            title: nepaliResponse.data.slider.title,
-            content: nepaliResponse.data.slider.content,
-            learnMore: nepaliResponse.data.slider.learnMore,
-          });
-        }
-      } catch (error) {}
-    };
 
+        if (nepaliResponse && nepaliResponse.data.slider) {
+          const { title, content, learnMore } = nepaliResponse.data.slider;
+          setNepaliFormContent({ title, content, learnMore });
+        }
+      } catch (error) {
+        console.error("Error fetching slider content:", error);
+        toastError();
+      }
+    };
     fetchData();
+
+    const handleResize = () => setIsCollapsed(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  let data = {
-    title: "",
-    content: "",
-    author: "6599a99853629133eee6477d",
-    learnMore: "",
-  };
-
   const onSubmit = async (e) => {
-    e.stopPropagation();
     e.preventDefault();
 
-    if (englishFormContent) {
-      data.title = englishFormContent.title;
-      data.content = englishFormContent.content;
-      data.learnMore = englishFormContent.learnMore;
-
-      let response;
-
-      try {
-        response = await saveEnglishSliderContent(data);
-        if (response) {
-          toastSuccess();
-        } else {
-          toastError();
-        }
-      } catch (error) {
-        console.log(error);
+    const shouldUploadFile = (fileRef, fileType) => {
+      if (!fileRef.current || fileRef.current.files.length === 0) {
+        return false;
       }
-    }
-    if (nepaliFormContent) {
-      data.title = nepaliFormContent.title;
-      data.content = nepaliFormContent.content;
-      data.learnMore = nepaliFormContent.learnMore;
+      const file = fileRef.current.files[0];
+      return file && file.type.startsWith(fileType + "/");
+    };
 
-      let response;
+    englishFormContent.showImage = showImageRef.current.checked;
+    nepaliFormContent.showImage = showImageRef.current.checked;
 
-      try {
-        response = await saveNepaliSliderContent(data);
-        if (response) {
-          toastSuccess();
-        } else {
-          toastError();
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      await saveContent(englishFormContent, saveEnglishSliderContent);
+      await saveContent(nepaliFormContent, saveNepaliSliderContent);
+
+      // Check and save image if valid
+      if (shouldUploadFile(sliderImageRef, "image")) {
+        await saveFile(sliderImageRef, saveSliderImage, "image");
       }
-    }
 
-    if (sliderImageRef) {
-      const formData = new FormData();
-      formData.append("image", sliderImageRef.current.files[0]);
-      console.log("image", formData);
-      await saveSliderImage(formData);
+      // Check and save video if valid
+      if (shouldUploadFile(sliderVideoRef, "video")) {
+        await saveFile(sliderVideoRef, saveSliderVideo, "video");
+      }
+
+      toastSuccess();
+    } catch (error) {
+      console.error("Error saving slider content:", error);
+      toastError();
     }
-    if (sliderVideoRef) {
+  };
+
+  const saveContent = async (content, saveFunction) => {
+    try {
+      await saveFunction(content);
+    } catch (error) {
+      console.error("Error saving slider content:", error);
+      throw error;
+    }
+  };
+
+  const saveFile = async (fileRef, saveFunction, key) => {
+    if (fileRef.current && fileRef.current.files[0]) {
       const formData = new FormData();
-      formData.append("video", sliderVideoRef.current.files[0]);
-      console.log("image", formData);
-      await saveSliderVideo(formData);
+      formData.append(key, fileRef.current.files[0]);
+      await saveFunction(formData);
     }
   };
 
@@ -152,176 +149,228 @@ function Slider() {
                   <h5 className="card-title">Slider Information</h5>
                   <hr className="border-2" />
 
-                  <div className="d-flex justify-content-between">
-                    <div className="col-5">
-                      <form>
-                        <div className="mb-3">
-                          <label className="form-label"> English Title</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="English Title"
-                            value={englishFormContent.title}
-                            onChange={(event) =>
-                              setEnglishFormContent((prevState) => ({
-                                ...prevState,
-                                title: event.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label className="form-label">English Content</label>
-                          <textarea
-                            className="form-control"
-                            value={englishFormContent.content}
-                            onChange={(event) =>
-                              setEnglishFormContent((prevState) => ({
-                                ...prevState,
-                                content: event.target.value,
-                              }))
-                            }
-                            rows="3"
-                          ></textarea>
-                        </div>
-                      </form>
+                  <div className="parameters-container">
+                    <div className="parameters-header" onClick={toggleCollapse}>
+                      <span className="parameters-title">Parameters</span>
+                      <button
+                        className="parameters-toggle-btn"
+                        id="toggleButton"
+                      >
+                        {isCollapsed ? "\u25BC" : "\u25B2"}{" "}
+                      </button>
                     </div>
-
-                    <div className="col-5">
-                      <form>
-                        <div className="mb-3">
-                          <label className="form-label"> Nepali Title</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Nepali Title"
-                            value={nepaliFormContent.title}
-                            onChange={(event) =>
-                              setNepaliFormContent((prevState) => ({
-                                ...prevState,
-                                title: event.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label className="form-label">Nepali Content</label>
-                          <textarea
-                            className="form-control"
-                            value={nepaliFormContent.content}
-                            onChange={(event) =>
-                              setNepaliFormContent((prevState) => ({
-                                ...prevState,
-                                content: event.target.value,
-                              }))
-                            }
-                            rows="3"
-                          ></textarea>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  {/* <div>
-                    <label className="form-label">Read More Button Color</label>
-                    <SketchPicker color={color} onChange={setColor} />
-                  </div> */}
-
-                  <div className=" row">
-                    <div className="col-12">
-                      <div className="mb-3">
-                        <label htmlFor="formFile" className="form-label">
-                          Upload Image
-                        </label>
-                        <input
-                          className="form-control"
-                          ref={sliderImageRef}
-                          type="file"
-                          id="formFile"
-                          accept=".jpg,.jpeg,.png,.gif"
-                        />
-                      </div>
-                      <div className="image">
-                        <img
-                          src={sliderImage ? sliderImage : ""}
-                          alt="No Image"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className=" row">
-                    <div className="col-12">
-                      <div className="mb-3">
-                        <label htmlFor="formFile" className="form-label">
-                          Upload Video
-                        </label>
-                        <input
-                          className="form-control"
-                          type="file"
-                          id="formFile"
-                          ref={sliderVideoRef}
-                          accept=".mp4,.mkv,.3gp"
-                        />
-                      </div>
-                      <div className="video">
-                        <video src={sliderVideo ? sliderVideo : ""}> </video>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h5 className="card-title text-center">
-                    English Learn More Editor
-                  </h5>
-                  <hr className="border-2" />
-
-                  <div>
-                    <JoditEditor
-                      ref={editor}
-                      value={englishFormContent.learnMore}
-                      tabIndex={1}
-                      config={englishConfig}
-                      onBlur={(newContent) =>
-                        setEnglishFormContent((prevState) => ({
-                          ...prevState,
-                          learnMore: newContent,
-                        }))
-                      }
-                    />
-                  </div>
-                  <br />
-                  <br />
-                  <br />
-
-                  <h5 className="card-title text-center">
-                    Nepali Learn More Editor
-                  </h5>
-                  <hr className="border-2" />
-                  <div>
-                    <JoditEditor
-                      ref={editor}
-                      value={nepaliFormContent.learnMore}
-                      tabIndex={1}
-                      config={nepaliConfig}
-                      onBlur={(newContent) =>
-                        setNepaliFormContent((prevState) => ({
-                          ...prevState,
-                          learnMore: newContent,
-                        }))
-                      }
-                    />
-                  </div>
-
-                  <div
-                    style={{ marginTop: "10px" }}
-                    className="d-flex justify-content-center"
-                  >
-                    <button
-                      onClick={(e) => onSubmit(e)}
-                      type="button"
-                      className="btn btn-primary "
+                    <div
+                      className="parameters-body"
+                      id="parametersBody"
+                      style={{ display: isCollapsed ? "none" : "block" }}
                     >
-                      Save
-                    </button>
+                      <div className="d-flex justify-content-between">
+                        <div className="col-5">
+                          <form>
+                            <div className="mb-3">
+                              <label className="form-label">
+                                {" "}
+                                English Title
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="English Title"
+                                value={englishFormContent.title}
+                                onChange={(event) =>
+                                  setEnglishFormContent((prevState) => ({
+                                    ...prevState,
+                                    title: event.target.value,
+                                  }))
+                                }
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <label className="form-label">
+                                English Content
+                              </label>
+                              <textarea
+                                className="form-control"
+                                value={englishFormContent.content}
+                                onChange={(event) =>
+                                  setEnglishFormContent((prevState) => ({
+                                    ...prevState,
+                                    content: event.target.value,
+                                  }))
+                                }
+                                rows="3"
+                              ></textarea>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div className="col-5">
+                          <form>
+                            <div className="mb-3">
+                              <label className="form-label">
+                                {" "}
+                                Nepali Title
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Nepali Title"
+                                value={nepaliFormContent.title}
+                                onChange={(event) =>
+                                  setNepaliFormContent((prevState) => ({
+                                    ...prevState,
+                                    title: event.target.value,
+                                  }))
+                                }
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <label className="form-label">
+                                Nepali Content
+                              </label>
+                              <textarea
+                                className="form-control"
+                                value={nepaliFormContent.content}
+                                onChange={(event) =>
+                                  setNepaliFormContent((prevState) => ({
+                                    ...prevState,
+                                    content: event.target.value,
+                                  }))
+                                }
+                                rows="3"
+                              ></textarea>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <div className="container m-2">
+                        <div className=" form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                            checked={englishFormContent.showImage}
+                            ref={showImageRef}
+                          />
+                          <label
+                            className="form-check-label"
+                            for="flexCheckDefault"
+                          >
+                            <h5>Show Only Image</h5>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-6 sliderImage">
+                          <img
+                            src={imageURL}
+                            alt="No Image"
+                            style={{ maxWidth: "100%", height: "auto" }}
+                          />
+                        </div>
+                      </div>
+                      <div className=" row">
+                        <div className="col-12">
+                          <div className=" col-6 mb-3">
+                            <label
+                              htmlFor="formFileImage"
+                              className="form-label"
+                            >
+                              Upload Image
+                            </label>
+                            <input
+                              className="form-control"
+                              ref={sliderImageRef}
+                              type="file"
+                              id="formFileImage"
+                              accept=".jpg,.jpeg,.png,.gif"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-6 videoContainer">
+                          <video src={videoURL} controls />
+                        </div>
+                      </div>
+                      <div className=" row">
+                        <div className="col-12">
+                          <div className="mb-3">
+                            <label
+                              htmlFor="formFileVideo"
+                              className="form-label"
+                            >
+                              Upload Video
+                            </label>
+                            <input
+                              className="form-control"
+                              type="file"
+                              id="formFileVideo"
+                              ref={sliderVideoRef}
+                              accept=".mp4,.mkv,.3gp"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <h5 className="card-title text-center">
+                        English Learn More Editor
+                      </h5>
+                      <hr className="border-2" />
+                      <div>
+                        <JoditEditor
+                          ref={englishEditor}
+                          value={englishFormContent.learnMore}
+                          tabIndex={1}
+                          config={englishConfig}
+                          onBlur={(newContent) =>
+                            setEnglishFormContent((prevState) => ({
+                              ...prevState,
+                              learnMore: newContent,
+                            }))
+                          }
+                        />
+                      </div>
+                      <br />
+                      <br />
+                      <br />
+
+                      <h5 className="card-title text-center">
+                        Nepali Learn More Editor
+                      </h5>
+                      <hr className="border-2" />
+                      <div>
+                        <JoditEditor
+                          ref={nepaliEditor}
+                          value={nepaliFormContent.learnMore}
+                          tabIndex={1}
+                          config={nepaliConfig}
+                          onBlur={(newContent) =>
+                            setNepaliFormContent((prevState) => ({
+                              ...prevState,
+                              learnMore: newContent,
+                            }))
+                          }
+                        />
+                      </div>
+
+                      <div
+                        style={{ marginTop: "50px" }}
+                        className="d-flex justify-content-center"
+                      >
+                        <button
+                          onClick={onSubmit}
+                          type="submit"
+                          className="btn btn-primary "
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

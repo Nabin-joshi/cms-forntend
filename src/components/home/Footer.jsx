@@ -9,6 +9,8 @@ import footerImage from "../../assets/img/logo-inverted.png";
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [footer, setFooter] = useState({});
+  const [locale, setLocale] = useState("eng");
+
   const subscribe = async (event) => {
     event.preventDefault();
     let isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -42,6 +44,11 @@ export default function Footer() {
       } catch (error) {}
     }
     fetchFooter();
+
+    let locale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale")
+      : "eng";
+    setLocale(locale);
   }, []);
   return (
     <>
@@ -60,28 +67,63 @@ export default function Footer() {
               <div className="footer-address text-white">
                 <div className="d-flex align-items-center">
                   <i className="fas fa-map-marker-alt"></i>
-                  <span className="ml-3">Kusunti, Lalitpur-14, Nepal</span>
+                  <span className="ml-3">
+                    {" "}
+                    {locale
+                      ? locale === "eng"
+                        ? footer.address
+                        : footer.addressNepali
+                      : "Kusunti, Lalitpur-14, Nepal"}{" "}
+                  </span>
                 </div>
                 <div className="d-flex align-items-center">
                   <i className="fas fa-phone-alt"></i>
-                  <span className="ml-3">Phone: (977) 5454545</span>
+                  <span className="ml-3">
+                    Phone:{" "}
+                    {locale
+                      ? locale === "eng"
+                        ? footer.phone
+                        : footer.phoneNepali
+                      : "(977) 5454545"}{" "}
+                  </span>
                 </div>
                 <div className="d-flex align-items-center">
                   <i className="fas fa-envelope"></i>
-                  <span className="ml-3">info@koshishnepal.org</span>
+                  <span className="ml-3">
+                    {" "}
+                    {footer && footer.email
+                      ? footer.email
+                      : "info@koshishnepal.org"}{" "}
+                  </span>
                 </div>
               </div>
               <div className="footer-address mt-4 mb-4">
                 <div className="font-weight-bold">
-                  For any concerns, suggestions or feedback:
+                  {locale
+                    ? locale === "eng"
+                      ? " For any concerns, suggestions or feedback:"
+                      : "समस्या, सुझाव वा प्रतिक्रिया को लागि:"
+                    : " For any concerns, suggestions or feedback:"}
                 </div>
                 <div className="d-flex align-items-center">
                   <i className="fas fa-phone"></i>
-                  <span className="ml-3">Toll Free (+977) 969.6642.456</span>
+                  <span className="ml-3">
+                    Toll Free{" "}
+                    {locale
+                      ? locale === "eng"
+                        ? footer.tollFreePhone
+                        : footer.tollFreePhoneNepali
+                      : "(+977) 969.6642.456"}{" "}
+                  </span>
                 </div>
                 <div className="d-flex align-items-center">
                   <i className="fas fa-envelope"></i>
-                  <span className="ml-3">feedback@koshish.org.np</span>
+                  <span className="ml-3">
+                    {" "}
+                    {footer && footer.email
+                      ? footer.feedBackEmail
+                      : "feedback@koshish.org.np"}
+                  </span>
                 </div>
               </div>
             </div>

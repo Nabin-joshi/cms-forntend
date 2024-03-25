@@ -9,6 +9,10 @@ const api = axios.create({
   },
 });
 
+let locale = localStorage.getItem("locale")
+  ? localStorage.getItem("locale")
+  : "eng";
+
 export const login = async (data) => {
   let response;
 
@@ -87,6 +91,16 @@ export const saveNepaliSliderContent = async (data) => {
     console.log(error);
     return false;
   }
+};
+
+export const getSliderData = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/slider/getSlider/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
 };
 
 export const getNepaliSliderContent = async () => {
@@ -245,6 +259,18 @@ export const getEnglishGeographicalCoverage = async () => {
   try {
     response = await api.get(
       "/api/geographicalCoverage/getGeographicalCoverage/eng"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getGeographicalCoverage = async () => {
+  let response;
+  try {
+    response = await api.get(
+      `/api/geographicalCoverage/getGeographicalCoverage/${locale}`
     );
   } catch (error) {
     console.log(error);

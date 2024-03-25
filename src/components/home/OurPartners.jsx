@@ -5,7 +5,14 @@ import partnersImage2 from "../../assets/img/partner-2.png";
 import partnersImage3 from "../../assets/img/partner-3.png";
 import partnersImage4 from "../../assets/img/partner-4.png";
 import partnersImage5 from "../../assets/img/partner-5.png";
-import Swiper from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Navigation, Pagination } from "swiper/modules";
 const OurPartners = () => {
   const [ourPartners, setourPartners] = useState({});
 
@@ -17,33 +24,6 @@ const OurPartners = () => {
   }
   useEffect(() => {
     fetchAllourPartners();
-
-    var swiper2 = new Swiper(".swiper-container2", {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-      },
-    });
   }, []);
   return (
     <>
@@ -53,54 +33,91 @@ const OurPartners = () => {
           <div className="partners-slider">
             <div className="swiper-container2">
               <div className="swiper-wrapper">
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage1}
-                    alt="Partner 1"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage2}
-                    alt="Partner 2"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage3}
-                    alt="Partner 3"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage4}
-                    alt="Partner 4"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage5}
-                    alt="Partner 5"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="swiper-slide">
-                  <img
-                    src={partnersImage5}
-                    alt="Partner 6"
-                    className="img-fluid"
-                  />
-                </div>
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={10}
+                  modules={[Navigation]}
+                  navigation={true}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    },
+
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 30,
+                    },
+
+                    1024: {
+                      slidesPerView: 4,
+                      spaceBetween: 40,
+                    },
+                  }}
+                >
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage1}
+                        alt="Partner 1"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage2}
+                        alt="Partner 2"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage3}
+                        alt="Partner 3"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage4}
+                        alt="Partner 4"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage5}
+                        alt="Partner 5"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <div className="swiper-slide">
+                      <img
+                        src={partnersImage5}
+                        alt="Partner 6"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
-            <div className="swiper-pagination"></div>
-
-            <div className="swiper-button-prev"></div>
-            <div className="swiper-button-next"></div>
           </div>
         </div>
       </section>

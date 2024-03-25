@@ -2,6 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function AdminHeader() {
+  const toggleSideBar = (event) => {
+    event.preventDefault();
+    const body = document.querySelector("body");
+    if (body) {
+      body.classList.toggle("toggle-sidebar");
+    }
+  };
+
   return (
     <>
       <header
@@ -16,7 +24,10 @@ function AdminHeader() {
             />
             <span className="d-none d-lg-block">Koshish Admin</span>
           </NavLink>
-          <i className="bi bi-list toggle-sidebar-btn"></i>
+          <i
+            onClick={toggleSideBar}
+            className="bi bi-list toggle-sidebar-btn"
+          ></i>
         </div>
 
         <div className="search-bar">

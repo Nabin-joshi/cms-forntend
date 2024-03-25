@@ -19,6 +19,10 @@ import LearnMore from "../components/home/homePageRoutingSection/LearnMore.jsx";
 import GeographicalCoverage from "../components/auth/admin/section/GeographicalCoverage.jsx";
 import OurWork from "../components/auth/admin/section/OurWork.jsx";
 import YourSupport from "../components/auth/admin/section/YourSupport.jsx";
+import OurWorkLearnMore from "../components/home/homePageRoutingSection/OurWorkLearnMore.jsx";
+import OurWorkViewAll from "../components/home/homePageRoutingSection/OurWorkViewAll.jsx";
+import LatestNewsViewAll from "../components/home/homePageRoutingSection/LatestNewsViewAll.jsx";
+import OurStoriesReadMore from "../components/home/homePageRoutingSection/OurStoriesReadMore.jsx";
 
 export const mainRoutes = [
   {
@@ -35,6 +39,26 @@ export const mainRoutes = [
         path: "/learnMore",
         name: "Learn More page",
         element: LearnMore,
+      },
+      {
+        path: "/ourWork/learnMore",
+        name: "Our Work Learn More page",
+        element: OurWorkLearnMore,
+      },
+      {
+        path: "/ourWork/viewAll",
+        name: "Our Work View All",
+        element: OurWorkViewAll,
+      },
+      {
+        path: "/latestNews/viewAll",
+        name: "Latest News View All",
+        element: LatestNewsViewAll,
+      },
+      {
+        path: "/stories/readmore",
+        name: "Our Stories Read More",
+        element: OurStoriesReadMore,
       },
     ],
   },

@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function YourSupport() {
+  const [locale, setLocale] = useState("eng");
+
+  useEffect(() => {
+    let locale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale")
+      : "eng";
+    setLocale(locale);
+  }, []);
+
   return (
     <>
       <section className="donate-section">
@@ -8,14 +17,18 @@ function YourSupport() {
           <div className="donate-padding">
             <div className="donate-statement">
               <h2 className="text-white font-weight-bold">
-                Your support can make a difference
+                {locale
+                  ? locale === "eng"
+                    ? " Your support can make a difference"
+                    : "तपाईंको समर्थनले अर्थ गर्दछ।"
+                  : " Your support can make a difference"}
               </h2>
               <p className="text-blue">
-                Our work has resulted in positive change. We have rehabilitated
-                about mental health conditions and reduced barriers to treatment
-                and services. Many persons with mental health conditions have
-                sought care and now enjoy fulfilling, productive lives in their
-                communities. Help us continue our mission towards our goal.
+                {locale
+                  ? locale === "eng"
+                    ? "Our work has resulted in positive change. We have rehabilitatedabout mental health conditions and reduced barriers to treatmentand services. Many persons with mental health conditions havesought care and now enjoy fulfilling, productive lives in their communities. Help us continue our mission towards our goal."
+                    : "हाम्रो कामले सकारात्मक परिवर्तन ल्याएको छ। हामीले आफ्नो लक्ष्यसम्मको मिशनमा सिधै बढी गएका छौं। हामीले मानसिक स्वास्थ्य सम्बन्धी अवस्थाहरूको पुनर्स्थापना गरेका छौं र उपचार र सेवामा बाधाहरू कम गरेका छौं। धेरै मानिसहरूले मानसिक स्वास्थ्य सम्बन्धी अवस्थाहरूको उपचार खोजेका छन् र अहिले आफ्नो समुदायमा खुशियाल, उत्तरदायी जीवन बिताउँछन्। हाम्रो लक्ष्यको प्रति हाम्रो मिशन जारी राख्नमा हामीलाई सहयोग गर्नुहोस्।"
+                  : "Our work has resulted in positive change. We have rehabilitatedabout mental health conditions and reduced barriers to treatmentand services. Many persons with mental health conditions havesought care and now enjoy fulfilling, productive lives in their communities. Help us continue our mission towards our goal."}
               </p>
               <button className="btn btn-blue-inverted">
                 Donate Now <i className="fas fa-circle-arrow-right ml-2"></i>
@@ -24,11 +37,20 @@ function YourSupport() {
 
             <div className="donate-quote mt-3">
               <div className="text-blue text-right quote-marks">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Reiciendis ducimus minima modi dolores, quam voluptatem nobis
-                cumque dicta qui amet beatae officiis distinctio nihil, at ad
-                dignissimos inventore magnam eius?
-                <h4 className="text-blue text-right">John Doe</h4>
+                {locale
+                  ? locale === "eng"
+                    ? "Every soul traverses a labyrinth of challenges, each step a testament to resilience. Yet, within these trials lies the essence of growth, propelling us towards our true potential, illuminating the path of enlightenment and fulfillment."
+                    : "प्रत्येक आत्मा चुनौतीहरूको एक अविरल मार्गमा यात्रा गर्दछ। तर यस चुनौतीहरूले हामीलाई अघि बढाउँछन्।"
+                  : "Every soul traverses a labyrinth of challenges, each step a testament to resilience. Yet, within these trials lies the essence of growth, propelling us towards our true potential, illuminating the path of enlightenment and fulfillment."}
+
+                <h4 className="text-blue text-right">
+                  {" "}
+                  {locale
+                    ? locale === "eng"
+                      ? " Gautama Buddha"
+                      : "गौतम बुद्ध"
+                    : " Gautama Buddha"}
+                </h4>
               </div>
             </div>
           </div>

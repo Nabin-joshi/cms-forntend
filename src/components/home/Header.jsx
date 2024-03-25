@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { donateUs } from "../../services/NewsLetterUserService";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CustomModal from "../auth/admin/section/NewLetter/popup/CustomModal";
 import DonateModal from "../auth/admin/section/NewLetter/popup/DonateModal";
 import logo from "../../assets/img/logo.png";
 
 export default function Header() {
+  const [locale, setlocale] = useState("EN");
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let locale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale") === "eng"
+        ? "EN"
+        : "NP"
+      : "EN";
+    setlocale(locale);
+  }, []);
 
   const payViaKhalti = async (amountInfo) => {
     const formData = {
@@ -50,23 +61,84 @@ export default function Header() {
     payViaKhalti(amount);
   };
 
+  const onLanguageOptionClicked = (event) => {
+    event.preventDefault();
+    const isClickInside = document
+      .getElementById("language-btn")
+      .contains(event.target);
+    const isClickOutside = document
+      .getElementById("language-dropdown")
+      .contains(event.target);
+    if (isClickInside) {
+      const x = document.getElementById("language-dropdown");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+    if (isClickOutside) {
+      const x = document.getElementById("language-dropdown");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+  };
+
+  const changeLocale = (event) => {
+    event.preventDefault();
+    const x = document.getElementById("language-dropdown");
+    x.style.display = "none";
+    if (event.target.id === "nep") {
+      setlocale("NP");
+    } else {
+      setlocale("EN");
+    }
+    localStorage.locale = event.target.id;
+    window.location.reload();
+  };
+
+  const handleToggle = (event) => {
+    event.preventDefault();
+    const isClickInside = document
+      .getElementById("hamburger-menu")
+      .contains(event.target);
+    if (isClickInside) {
+      const x = document.getElementById("main-menu");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+  };
+
   return (
     <>
       <header className="header-main" id="header">
         <div className="">
           <div className="topbar container-fluid py-1 d-flex align-items-center flex-wrap">
             <div className="topbar-item topbar-underline px-3">
-              <a href="#">
-                <i className="fas fa-phone-alt"></i> Need Help?{" "}
-                <span className="font-weight-bold">Call: +91 1234567890</span>
+              <a href="/">
+                <i className="fas fa-phone-alt"></i>{" "}
+                {locale === "EN" ? "Need Help" : "मदद चाहिए"}?{" "}
+                <span className="font-weight-bold">
+                  {locale === "EN" ? "Call" : "कल"}: +91 1234567890
+                </span>
               </a>
             </div>
             <div className="d-flex align-items-center">
               <div className="topbar-item topbar-underline px-3">
-                <a href="#"> Take a mental health test</a>
+                <a href="/">
+                  {locale === "EN"
+                    ? "Take a mental health test"
+                    : "मानसिक स्वास्थ्य परीक्षण गर्नुहोस्।"}{" "}
+                </a>
               </div>
               <div className="topbar-item topbar-underline px-3">
-                <a href="#">Blog</a>
+                <a href="/">{locale === "EN" ? "Blog" : "ब्लग"}</a>
               </div>
             </div>
             <div className="flex-fill"></div>
@@ -90,15 +162,19 @@ export default function Header() {
                 </div>
               </div>
               <div className="topbar-item px-3">
-                <div id="language-btn">
-                  EN <i className="fas fa-angle-down"></i>
+                <div onClick={onLanguageOptionClicked} id="language-btn">
+                  <span>{locale} </span> <i className="fas fa-angle-down"></i>
                 </div>
                 <div id="language-dropdown">
                   <div>
-                    <a href="#">EN</a>
+                    <NavLink name="english" id="eng" onClick={changeLocale}>
+                      EN
+                    </NavLink>
                   </div>
                   <div>
-                    <a href="#">NP</a>
+                    <NavLink name="nepali" id="nep" onClick={changeLocale}>
+                      NP
+                    </NavLink>
                   </div>
                 </div>
               </div>
@@ -122,16 +198,22 @@ export default function Header() {
           </div>
           <div className="right-section-header py-2">
             <div className="d-flex align-items-center">
-              <a href="#" className="donate-btn d-none d-sm-flex">
+              <a href="/" className="donate-btn d-none d-sm-flex">
                 <i className="fas fa-hand-holding-heart text-red"></i>
                 <div className="ml-3 d-flex flex-column">
-                  <span className="font-weight-bold">Donate</span>
+                  <span className="font-weight-bold">
+                    {locale === "EN" ? "Donate" : "दान गर्नुहोस्"}
+                  </span>
                   <span className="make-a-difference mt-n3">
-                    Make a difference
+                    {locale === "EN" ? "Make a difference" : "फरक पर्नुहोस्"}
                   </span>
                 </div>
               </a>
-              <div className="hamburger-menu ml-3" id="hamburger-menu">
+              <div
+                onClick={handleToggle}
+                className="hamburger-menu ml-3"
+                id="hamburger-menu"
+              >
                 <i className="fas fa-bars"></i>
               </div>
             </div>
@@ -139,39 +221,13 @@ export default function Header() {
             <nav className="navbar-main mt-2" id="main-menu">
               <ul className="navbar-main-menu d-flex justify-content-center">
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <a href="/" className="navbar-main-link">
                     <i className="fas fa-home"></i>
                   </a>
                 </li>
                 <li className="navbar-main-item">
                   <a href="#" className="navbar-main-link">
-                    About Us <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
-                  <ul className="submenu">
-                    <li>
-                      <a href="#"> Submenu 1-1</a>
-                    </li>
-                    <li>
-                      <a href="#"> Submenu 1-2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
-                    Our Work <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
-                  <ul className="submenu">
-                    <li>
-                      <a href="#"> Submenu 1-1</a>
-                    </li>
-                    <li>
-                      <a href="#"> Submenu 1-2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
-                    Resources{" "}
+                    {locale === "EN" ? "About Us" : "हाम्रो बारेमा"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
                   </a>
                   <ul className="submenu">
@@ -185,7 +241,7 @@ export default function Header() {
                 </li>
                 <li className="navbar-main-item">
                   <a href="#" className="navbar-main-link">
-                    Get Involved{" "}
+                    {locale === "EN" ? "Our Work" : "हाम्रो काम"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
                   </a>
                   <ul className="submenu">
@@ -199,7 +255,35 @@ export default function Header() {
                 </li>
                 <li className="navbar-main-item">
                   <a href="#" className="navbar-main-link">
-                    Contact Us
+                    {locale === "EN" ? "Resources" : "स्रोतहरू"}{" "}
+                    <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    {locale === "EN" ? "Get Involved" : "सहभागी हुनुहोस्"}{" "}
+                    <i className="fa fa-angle-down text-blue-grey"></i>
+                  </a>
+                  <ul className="submenu">
+                    <li>
+                      <a href="#"> Submenu 1-1</a>
+                    </li>
+                    <li>
+                      <a href="#"> Submenu 1-2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-main-item">
+                  <a href="#" className="navbar-main-link">
+                    {locale === "EN" ? "Get Involved" : "सम्पर्क गर्नुहोस्"}
                   </a>
                 </li>
               </ul>

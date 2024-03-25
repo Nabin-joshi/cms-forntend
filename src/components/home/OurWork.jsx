@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ourWorkImage1 from "../../assets/img/work-1.png";
 import ourWorkImage2 from "../../assets/img/work-2.png";
 import ourWorkImage3 from "../../assets/img/work-3.png";
 
 function OurWork() {
+  const [locale, setLocale] = useState("eng");
+
+  useEffect(() => {
+    let locale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale")
+      : "eng";
+    setLocale(locale);
+  }, []);
+
   return (
     <>
       <section className="mt-5">
         <div className="container">
-          <h2 className="heading text-center text-blue">Our Work</h2>
+          <h2 className="heading text-center text-blue">
+            {" "}
+            {locale
+              ? locale === "eng"
+                ? "Our work"
+                : "हाम्रो काम"
+              : "Our work"}
+          </h2>
           <p className="text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis placeat pariatur iusto tempore? Nostrum, earum tempora
-            officia vel dolorem, veniam consequatur a reprehenderit ut nam
-            eveniet ipsum, totam delectus natus!
+            {locale
+              ? locale === "eng"
+                ? "Our non-profit organization provides vital support for physically and mentally impaired individuals. Through tailored programs and compassionate assistance, we empower them to overcome challenges and embrace independence. With dedicated professionals and volunteers, we create a supportive community where everyone can thrive."
+                : "हाम्रो नाफामुनि संस्था शारीरिक र मानसिक अशक्तता भएका व्यक्तिहरूको लागि महत्त्वपूर्ण समर्थन प्रदान गर्दछ। निष्कर्षित कार्यक्रम र दयालु सहयोगद्वारा हामी उनीहरूलाई चुनौतीहरूलाई परास्त गर्न र स्वतन्त्रता अवलम्बन गर्न आजिवनी सफल बनाउन उनीहरूलाई शक्ति दिन्छ। समर्पित पेशेवरहरू र स्वयंसेवकहरूको साथमा हामी एक समर्थन योग्य समुदाय बनाउँदै छौं जहाँ प्रत्येकले सम्मानित, आदरित र सफल हुनको लागि शक्तिशाली अनुभव गर्न सक्छ।"
+              : "Our non-profit organization provides vital support for physically and mentally impaired individuals. Through tailored programs and compassionate assistance, we empower them to overcome challenges and embrace independence. With dedicated professionals and volunteers, we create a supportive community where everyone can thrive."}
           </p>
           <div className="row">
             <div className="col-12 col-lg-4 mb-4">
@@ -24,9 +41,21 @@ function OurWork() {
                   alt="Our Work 1"
                   className="img-fluid"
                 />
-                <h3 className="font-weight-bold text-blue">Education</h3>
-                <a href="#" className="text-blue-grey">
-                  Learn More <i className="fas fa-circle-arrow-right ml-2"></i>
+                <h3 className="font-weight-bold text-blue">
+                  {" "}
+                  {locale
+                    ? locale === "eng"
+                      ? "Education"
+                      : "शिक्षा"
+                    : "Education"}
+                </h3>
+                <a href="/ourWork/learnMore" className="text-blue-grey">
+                  {locale
+                    ? locale === "eng"
+                      ? " Learn More"
+                      : "थप जान्नुहोस्"
+                    : " Learn More"}{" "}
+                  <i className="fas fa-circle-arrow-right ml-2"></i>
                 </a>
               </div>
             </div>
@@ -37,9 +66,20 @@ function OurWork() {
                   alt="Our Work 1"
                   className="img-fluid"
                 />
-                <h3 className="font-weight-bold text-blue">Education</h3>
-                <a href="#" className="text-blue-grey">
-                  Learn More <i className="fas fa-circle-arrow-right ml-2"></i>
+                <h3 className="font-weight-bold text-blue">
+                  {locale
+                    ? locale === "eng"
+                      ? "Campaign"
+                      : "अभियान"
+                    : " Campaign"}
+                </h3>
+                <a href="/ourWork/learnMore" className="text-blue-grey">
+                  {locale
+                    ? locale === "eng"
+                      ? " Learn More"
+                      : "थप जान्नुहोस्"
+                    : " Learn More"}{" "}
+                  <i className="fas fa-circle-arrow-right ml-2"></i>
                 </a>
               </div>
             </div>
@@ -50,17 +90,29 @@ function OurWork() {
                   alt="Our Work 1"
                   className="img-fluid"
                 />
-                <h3 className="font-weight-bold text-blue">Education</h3>
-                <a href="#" className="text-blue-grey">
-                  Learn More <i className="fas fa-circle-arrow-right ml-2"></i>
+                <h3 className="font-weight-bold text-blue">
+                  {" "}
+                  {locale
+                    ? locale === "eng"
+                      ? " Guidence"
+                      : "मार्गदर्शन"
+                    : " Guidence"}
+                </h3>
+                <a href="/ourWork/learnMore" className="text-blue-grey">
+                  {locale
+                    ? locale === "eng"
+                      ? " Learn More"
+                      : "थप जान्नुहोस्"
+                    : " Learn More"}{" "}
+                  <i className="fas fa-circle-arrow-right ml-2"></i>
                 </a>
               </div>
             </div>
           </div>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-blue-inverted mt-3">
+            <a href="/ourWork/viewAll" className="btn btn-blue-inverted mt-3">
               View All <i className="fas fa-circle-arrow-right ml-2"></i>
-            </button>
+            </a>
           </div>
         </div>
       </section>
