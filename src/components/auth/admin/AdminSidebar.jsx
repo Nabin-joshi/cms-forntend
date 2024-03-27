@@ -90,6 +90,24 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/aboutUs">
+                  <i className="bi bi-circle"></i>
+                  <span>About Us</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/getInvolved">
+                  <i className="bi bi-circle"></i>
+                  <span>Get Involved</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/resources">
+                  <i className="bi bi-circle"></i>
+                  <span>Resources</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/footer">
                   <i className="bi bi-circle"></i>
                   <span>Footer</span>
