@@ -23,6 +23,12 @@ import OurWorkLearnMore from "../components/home/homePageRoutingSection/OurWorkL
 import OurWorkViewAll from "../components/home/homePageRoutingSection/OurWorkViewAll.jsx";
 import LatestNewsViewAll from "../components/home/homePageRoutingSection/LatestNewsViewAll.jsx";
 import OurStoriesReadMore from "../components/home/homePageRoutingSection/OurStoriesReadMore.jsx";
+import AboutUs from "../components/home/AboutUs.jsx";
+import AboutUsAdmin from "../components/auth/admin/section/AboutUs.jsx";
+import GetInvolved from "../components/auth/admin/section/GetInvolved.jsx";
+import Resources from "../components/auth/admin/section/Resources.jsx";
+import { ResourcesHome } from "../components/home/ResourcesHome.jsx";
+import { GetInvolvedHome } from "../components/home/GetInvolvedHome.jsx";
 
 export const mainRoutes = [
   {
@@ -59,6 +65,21 @@ export const mainRoutes = [
         path: "/stories/readmore",
         name: "Our Stories Read More",
         element: OurStoriesReadMore,
+      },
+      {
+        path: "/aboutUs",
+        name: "About Us",
+        element: AboutUs,
+      },
+      {
+        path: "/resources",
+        name: "Resources",
+        element: ResourcesHome,
+      },
+      {
+        path: "/getInvolved",
+        name: "Get Involved ",
+        element: GetInvolvedHome,
       },
     ],
   },
@@ -145,6 +166,22 @@ export const mainRoutes = [
         path: "/admin/yourSupport",
         name: "Your Support Page",
         element: YourSupport,
+      },
+      {
+        path: "/admin/aboutUs",
+        name: "Admin About Us",
+        exact: true,
+        element: AboutUsAdmin,
+      },
+      {
+        path: "getInvolved",
+        name: "Get Involved",
+        element: GetInvolved,
+      },
+      {
+        path: "resources",
+        name: "Get Involved",
+        element: Resources,
       },
     ],
   },
