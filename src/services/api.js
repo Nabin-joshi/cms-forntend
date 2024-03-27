@@ -277,3 +277,31 @@ export const getGeographicalCoverage = async () => {
   }
   return response;
 };
+
+export const saveNepaliOurWork = async (data) => {
+  try {
+    await api.put("/api/ourwork/updateOurwork/nep", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishOurWork = async (data) => {
+  try {
+    await api.put("/api/ourwork/updateOurwork/eng", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

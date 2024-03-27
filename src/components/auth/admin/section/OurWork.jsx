@@ -1,6 +1,7 @@
 import JoditEditor from "jodit-react";
 import React, { useEffect, useRef, useState } from "react";
 import { englishConfig } from "../../../../services/joditConfigService";
+import { saveEnglishOurWork } from "../../../../services/api";
 
 const OurWork = () => {
   const editorRef = useRef(null);
@@ -10,6 +11,7 @@ const OurWork = () => {
     description: "",
     ourWork: [
       {
+        _id: "",
         header: "",
         image: "",
         details: "",
@@ -21,6 +23,7 @@ const OurWork = () => {
     description: "",
     ourWork: [
       {
+        _id: "",
         header: "",
         image: "",
         details: "",
@@ -52,6 +55,7 @@ const OurWork = () => {
       ourWork: [
         ...formsFieldsEnglish.ourWork,
         {
+          _id: "",
           header: "",
           image: "",
           details: "",
@@ -64,6 +68,7 @@ const OurWork = () => {
       ourWork: [
         ...formsFieldsNepali.ourWork,
         {
+          _id: "",
           header: "",
           image: "",
           details: "",
@@ -90,12 +95,23 @@ const OurWork = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(imageRef.current.files[0]);
     console.log(formsFieldsEnglish);
   };
 
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
+
+    setformsFieldsEnglish((prevState) => {
+      const updatedOurWork = [...prevState.ourWork];
+      updatedOurWork[index].image = file;
+      return { ...prevState, ourWork: updatedOurWork };
+    });
+
+    setformsFieldsNepali((prevState) => {
+      const updatedOurWork = [...prevState.ourWork];
+      updatedOurWork[index].image = file;
+      return { ...prevState, ourWork: updatedOurWork };
+    });
   };
 
   useEffect(() => {
@@ -108,11 +124,19 @@ const OurWork = () => {
     );
   };
 
-  const handleSaveWork = (index) => {
-    console.log("Saving work at index:", index);
-    console.log(imageRef.current);
-    console.log("English Data:", formsFieldsEnglish.ourWork[index]);
-    console.log("Nepali Data:", formsFieldsNepali.ourWork[index]);
+  const handleSaveWork = async (index, e) => {
+    e.preventDefault();
+    if (formsFieldsEnglish) {
+      const formData = new FormData();
+      formData.append("header", formsFieldsEnglish.ourWork[index].header);
+      formData.append("image", formsFieldsEnglish.ourWork[index].image);
+      formData.append("details", formsFieldsEnglish.ourWork[index].details);
+      formData.append("id", formsFieldsEnglish.ourWork[index]._id);
+      await saveEnglishOurWork(formData);
+    }
+
+    if (formsFieldsNepali) {
+    }
   };
 
   return (
@@ -228,7 +252,7 @@ const OurWork = () => {
                             <hr className="border-2" />
                             <div className=" justify-content-end">
                               <button
-                                onClick={() => handleSaveWork(index)}
+                                onClick={(e) => handleSaveWork(index, e)}
                                 className="btn btn-primary"
                               >
                                 Save
