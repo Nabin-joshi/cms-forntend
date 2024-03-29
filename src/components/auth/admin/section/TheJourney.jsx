@@ -172,7 +172,7 @@ const TheJourney = () => {
                   <Button onClick={handleOpen}>The Journey's list</Button>
                   <h5 className="card-title">Add Journey</h5>
                   <hr className="border-2" />
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-md-6">
                       <div className="mb-3">
                         <label className="form-label">Heading</label>
@@ -207,8 +207,8 @@ const TheJourney = () => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="row">
+                  </div> */}
+                  {/* <div className="row">
                     <div className="col-md-6">
                       {" "}
                       <div className="mb-3">
@@ -264,7 +264,7 @@ const TheJourney = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <hr /> <h5>Add Contents</h5>
                   <div className="row">
                     <div className="col-md-6">

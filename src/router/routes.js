@@ -29,6 +29,8 @@ import GetInvolved from "../components/auth/admin/section/GetInvolved.jsx";
 import Resources from "../components/auth/admin/section/Resources.jsx";
 import { ResourcesHome } from "../components/home/ResourcesHome.jsx";
 import { GetInvolvedHome } from "../components/home/GetInvolvedHome.jsx";
+import LatestNews from "../components/auth/admin/section/LatestNews.jsx";
+import LatestNewsReadMore from "../components/home/homePageRoutingSection/LatestNewsReadMore.jsx";
 
 export const mainRoutes = [
   {
@@ -47,9 +49,14 @@ export const mainRoutes = [
         element: LearnMore,
       },
       {
-        path: "/ourWork/learnMore",
+        path: "/ourWork/learnMore/:id",
         name: "Our Work Learn More page",
         element: OurWorkLearnMore,
+      },
+      {
+        path: "/latestnews/readMore/:id",
+        name: "Latest News Read More page",
+        element: LatestNewsReadMore,
       },
       {
         path: "/ourWork/viewAll",
@@ -182,6 +189,11 @@ export const mainRoutes = [
         path: "resources",
         name: "Get Involved",
         element: Resources,
+      },
+      {
+        path: "latestnews",
+        name: "Latest News",
+        element: LatestNews,
       },
     ],
   },

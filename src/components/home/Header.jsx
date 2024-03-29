@@ -41,7 +41,7 @@ export default function Header() {
       progress: 0,
       theme: "colored",
     });
-    window.location.href = `${data.responseData.payment_url}`;
+    window.location.to = `${data.responseData.payment_url}`;
   };
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -121,24 +121,24 @@ export default function Header() {
         <div className="">
           <div className="topbar container-fluid py-1 d-flex align-items-center flex-wrap">
             <div className="topbar-item topbar-underline px-3">
-              <a href="/">
+              <NavLink to="/">
                 <i className="fas fa-phone-alt"></i>{" "}
                 {locale === "EN" ? "Need Help" : "मदद चाहिए"}?{" "}
                 <span className="font-weight-bold">
                   {locale === "EN" ? "Call" : "कल"}: +91 1234567890
                 </span>
-              </a>
+              </NavLink>
             </div>
             <div className="d-flex align-items-center">
               <div className="topbar-item topbar-underline px-3">
-                <a href="/">
+                <NavLink to="/">
                   {locale === "EN"
                     ? "Take a mental health test"
                     : "मानसिक स्वास्थ्य परीक्षण गर्नुहोस्।"}{" "}
-                </a>
+                </NavLink>
               </div>
               <div className="topbar-item topbar-underline px-3">
-                <a href="/">{locale === "EN" ? "Blog" : "ब्लग"}</a>
+                <NavLink to="/">{locale === "EN" ? "Blog" : "ब्लग"}</NavLink>
               </div>
             </div>
             <div className="flex-fill"></div>
@@ -198,7 +198,7 @@ export default function Header() {
           </div>
           <div className="right-section-header py-2">
             <div className="d-flex align-items-center">
-              <a href="/" className="donate-btn d-none d-sm-flex">
+              <NavLink to="/" className="donate-btn d-none d-sm-flex">
                 <i className="fas fa-hand-holding-heart text-red"></i>
                 <div className="ml-3 d-flex flex-column">
                   <span className="font-weight-bold">
@@ -208,7 +208,7 @@ export default function Header() {
                     {locale === "EN" ? "Make a difference" : "फरक पर्नुहोस्"}
                   </span>
                 </div>
-              </a>
+              </NavLink>
               <div
                 onClick={handleToggle}
                 className="hamburger-menu ml-3"
@@ -221,70 +221,109 @@ export default function Header() {
             <nav className="navbar-main mt-2" id="main-menu">
               <ul className="navbar-main-menu d-flex justify-content-center">
                 <li className="navbar-main-item">
-                  <a href="/" className="navbar-main-link">
+                  <NavLink to="/" className="navbar-main-link">
                     <i className="fas fa-home"></i>
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     {locale === "EN" ? "About Us" : "हाम्रो बारेमा"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <ul className="submenu">
                     <li>
-                      <a href="#"> Submenu 1-1</a>
+                      <NavLink to="/aboutUs"> History</NavLink>
                     </li>
                     <li>
-                      <a href="#"> Submenu 1-2</a>
+                      <NavLink to="/aboutUs"> Introduction</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/aboutUs"> Our Vision</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/aboutUs"> Our Mission</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/aboutUs"> Our Goal</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/aboutUs"> Our Approach</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/aboutUs"> Our Thematic Areas</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/aboutUs"> Our Team</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/aboutUs"> Staff</NavLink>
                     </li>
                   </ul>
                 </li>
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     {locale === "EN" ? "Our Work" : "हाम्रो काम"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
-                  <ul className="submenu">
+                  </NavLink>
+                  {/* <ul className="submenu">
                     <li>
-                      <a href="#"> Submenu 1-1</a>
+                      <NavLink to="#"> Submenu 1-1</NavLink>
                     </li>
                     <li>
-                      <a href="#"> Submenu 1-2</a>
+                      <NavLink to="#"> Submenu 1-2</NavLink>
                     </li>
-                  </ul>
+                  </ul> */}
                 </li>
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     {locale === "EN" ? "Resources" : "स्रोतहरू"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <ul className="submenu">
                     <li>
-                      <a href="#"> Submenu 1-1</a>
+                      <NavLink to="/resources"> Vacancy</NavLink>
                     </li>
                     <li>
-                      <a href="#"> Submenu 1-2</a>
+                      <NavLink to="/resources"> Procurement</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/resources"> Volunteer</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/resources"> Digital Library</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/resources"> Transforming Lives</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/resources"> Blog</NavLink>
                     </li>
                   </ul>
                 </li>
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     {locale === "EN" ? "Get Involved" : "सहभागी हुनुहोस्"}{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <ul className="submenu">
                     <li>
-                      <a href="#"> Submenu 1-1</a>
+                      <NavLink to="/getInvolved"> Vacancy</NavLink>
                     </li>
                     <li>
-                      <a href="#"> Submenu 1-2</a>
+                      <NavLink to="/getInvolved"> Procurement</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/getInvolved"> Volunteer</NavLink>
+                    </li>{" "}
+                    <li>
+                      <NavLink to="/getInvolved">Donate</NavLink>
                     </li>
                   </ul>
                 </li>
                 <li className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="/getInvolved" className="navbar-main-link">
                     {locale === "EN" ? "Get Involved" : "सम्पर्क गर्नुहोस्"}
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </nav>

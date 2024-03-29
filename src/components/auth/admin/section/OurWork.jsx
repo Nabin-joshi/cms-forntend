@@ -1,7 +1,17 @@
 import JoditEditor from "jodit-react";
 import React, { useEffect, useRef, useState } from "react";
 import { englishConfig } from "../../../../services/joditConfigService";
-import { saveEnglishOurWork } from "../../../../services/api";
+import {
+  deleteEnglishWork,
+  deleteNepaliWork,
+  getAllOurwork,
+  saveEnglishOurWork,
+  saveEnglishOurWorkDescription,
+  saveNepaliOurWork,
+  saveNepaliOurWorkDescription,
+} from "../../../../services/api";
+import { toastError, toastSuccess } from "../../../../services/ToastService";
+import { ToastContainer } from "react-toastify";
 
 const OurWork = () => {
   const editorRef = useRef(null);
@@ -30,6 +40,31 @@ const OurWork = () => {
       },
     ],
   });
+
+  const getAllwork = async () => {
+    try {
+      let res = await getAllOurwork();
+      if (res.data) {
+        res.data.forEach((item) => {
+          if (item.locale === "eng") {
+            setformsFieldsEnglish((prevState) => ({
+              ...prevState,
+              description: item.description,
+              ourWork: item.work,
+            }));
+          } else if (item.locale === "nep") {
+            setformsFieldsNepali((prevState) => ({
+              ...prevState,
+              description: item.description,
+              ourWork: item.work,
+            }));
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleEnglishInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -77,7 +112,23 @@ const OurWork = () => {
     });
   };
 
-  const handleRemoveOurWork = (index) => {
+  const handleRemoveOurWork = async (index, nepaliWork, enslishWork) => {
+    if (
+      nepaliWork._id &&
+      nepaliWork._id !== "" &&
+      enslishWork._id &&
+      enslishWork._id !== ""
+    ) {
+      await deleteNepaliWork(nepaliWork._id);
+      await deleteEnglishWork(enslishWork._id);
+
+      removeWork(index);
+    } else {
+      removeWork(index);
+    }
+  };
+
+  const removeWork = (index) => {
     const updatedEnglishOurWork = [...formsFieldsEnglish.ourWork];
     updatedEnglishOurWork.splice(index, 1);
     setformsFieldsEnglish({
@@ -93,9 +144,27 @@ const OurWork = () => {
     });
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(formsFieldsEnglish);
+    try {
+      if (formsFieldsEnglish) {
+        let data = {
+          description: formsFieldsEnglish.description,
+        };
+        await saveEnglishOurWorkDescription(data);
+      }
+
+      if (formsFieldsNepali) {
+        let data = {
+          description: formsFieldsNepali.description,
+        };
+        await saveNepaliOurWorkDescription(data);
+      }
+      toastSuccess();
+    } catch (e) {
+      toastError();
+      console.log(e);
+    }
   };
 
   const handleImageChange = (index, event) => {
@@ -118,6 +187,10 @@ const OurWork = () => {
     setIsCollapsed(new Array(formsFieldsEnglish.ourWork.length).fill(true));
   }, [formsFieldsEnglish.ourWork.length]);
 
+  useEffect(() => {
+    getAllwork(); // Call getAllOurwork function when the component mounts
+  }, []);
+
   const toggleCollapse = (index) => {
     setIsCollapsed((prevState) =>
       prevState.map((state, i) => (i === index ? !state : state))
@@ -126,16 +199,28 @@ const OurWork = () => {
 
   const handleSaveWork = async (index, e) => {
     e.preventDefault();
-    if (formsFieldsEnglish) {
-      const formData = new FormData();
-      formData.append("header", formsFieldsEnglish.ourWork[index].header);
-      formData.append("image", formsFieldsEnglish.ourWork[index].image);
-      formData.append("details", formsFieldsEnglish.ourWork[index].details);
-      formData.append("id", formsFieldsEnglish.ourWork[index]._id);
-      await saveEnglishOurWork(formData);
-    }
+    try {
+      if (formsFieldsEnglish) {
+        const formData = new FormData();
+        formData.append("header", formsFieldsEnglish.ourWork[index].header);
+        formData.append("image", formsFieldsEnglish.ourWork[index].image);
+        formData.append("details", formsFieldsEnglish.ourWork[index].details);
+        formData.append("id", formsFieldsEnglish.ourWork[index]._id);
+        await saveEnglishOurWork(formData);
+      }
 
-    if (formsFieldsNepali) {
+      if (formsFieldsNepali) {
+        const formData = new FormData();
+        formData.append("header", formsFieldsNepali.ourWork[index].header);
+        formData.append("image", formsFieldsNepali.ourWork[index].image);
+        formData.append("details", formsFieldsNepali.ourWork[index].details);
+        formData.append("id", formsFieldsNepali.ourWork[index]._id);
+        await saveNepaliOurWork(formData);
+      }
+      toastSuccess();
+    } catch (error) {
+      console.log(error);
+      toastError();
     }
   };
 
@@ -225,7 +310,13 @@ const OurWork = () => {
                           </button>
                           <button className="parameters-toggle-btn">
                             <i
-                              onClick={() => handleRemoveOurWork(index)}
+                              onClick={() =>
+                                handleRemoveOurWork(
+                                  index,
+                                  formsFieldsNepali.ourWork[index],
+                                  work
+                                )
+                              }
                               class="bi bi-trash3"
                             ></i>
                           </button>
@@ -275,7 +366,7 @@ const OurWork = () => {
                                   width: "300px",
                                   objectFit: "contain",
                                 }}
-                                src="http://localhost:5000/public/images/1709872939105-Wallpaper.jpg"
+                                src={work.image}
                                 alt="uploaded image"
                               />
                             </div>
@@ -299,7 +390,7 @@ const OurWork = () => {
                                 <JoditEditor
                                   ref={editorRef}
                                   tabIndex={1}
-                                  value={formsFieldsEnglish.details}
+                                  value={work.details}
                                   config={englishConfig}
                                   onChange={(content) =>
                                     handleEnglishInputChange(index, {
@@ -358,7 +449,13 @@ const OurWork = () => {
 
                           <div className="m-3 d-flex justify-content-end  ">
                             <button
-                              onClick={() => handleRemoveOurWork(index)}
+                              onClick={() =>
+                                handleRemoveOurWork(
+                                  index,
+                                  formsFieldsNepali.ourWork[index],
+                                  work
+                                )
+                              }
                               className="btn btn-primary"
                             >
                               Remove Work
@@ -385,6 +482,7 @@ const OurWork = () => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </main>
   );
 };

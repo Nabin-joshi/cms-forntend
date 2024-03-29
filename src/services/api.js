@@ -305,3 +305,175 @@ export const saveEnglishOurWork = async (data) => {
     return false;
   }
 };
+
+export const saveNepaliOurWorkDescription = async (data) => {
+  try {
+    await api.put("/api/ourwork/update/ourWork/description/nep", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishOurWorkDescription = async (data) => {
+  try {
+    await api.put("/api/ourwork/update/ourWork/description/eng", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getAllOurwork = async () => {
+  let response;
+  try {
+    response = await api.get("/api/ourWork/getAllWork");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getOurwork = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/ourWork/getOurwork/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getYourSupport = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/yoursupport/getYourSupport/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getNews = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/latestNews/getNews/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const deleteNepaliWork = async (id) => {
+  let response;
+  try {
+    response = await api.delete("/api/ourWork/delete/nep", { params: { id } });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const deleteEnglishWork = async (id) => {
+  let response;
+  try {
+    response = await api.delete("/api/ourWork/delete/eng", { params: { id } });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getAllSupportData = async () => {
+  let response;
+  try {
+    response = await api.get("/api/yoursupport/getall");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveNepaliYourSupportData = async (data) => {
+  try {
+    await api.put("/api/yoursupport/update/support/nep", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishYourSupportData = async (data) => {
+  try {
+    await api.put("/api/yoursupport/update/support/eng", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getAllLatestNews = async () => {
+  let response;
+  try {
+    response = await api.get("/api/latestNews/getAllNews");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveNepaliLatestNews = async (data) => {
+  try {
+    await api.put("/api/latestNews/updateLatestNews/nep", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishLatestNews = async (data) => {
+  try {
+    await api.put("/api/latestNews/updateLatestNews/eng", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const deleteNepaliNews = async (id) => {
+  let response;
+  try {
+    response = await api.delete("/api/latestNews/delete/nep", {
+      params: { id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const deleteEnglishNews = async (id) => {
+  let response;
+  try {
+    response = await api.delete("/api/latestNews/delete/eng", {
+      params: { id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};

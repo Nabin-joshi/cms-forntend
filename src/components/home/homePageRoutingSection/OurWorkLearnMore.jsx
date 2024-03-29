@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { getSliderData } from "../../../services/api";
+import { getOurwork, getSliderData } from "../../../services/api";
+import { useParams } from "react-router-dom";
 
 function OurWorkLearnMore() {
-  const [learnMore, setLearnMore] = useState("");
-  const [ourValues, setOurValues] = useState();
+  const [ourWork, setOurWork] = useState("");
   const [locale, setLocale] = useState("eng");
+  let { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getSliderData();
-        if (res) {
-          setLearnMore(res.data.slider);
-        }
+        const res = await getOurwork();
+        setTimeout(() => {
+          if (res.data) {
+            let individualWork = res.data.work.find(
+              (item) => item._id.toString() === id.toString()
+            );
+            if (individualWork) {
+              setOurWork(individualWork);
+            } else {
+              setOurWork(res.data.work[0]);
+            }
+          }
+        });
       } catch (error) {}
     };
 
@@ -31,7 +41,7 @@ function OurWorkLearnMore() {
         </h2>
         <div className="d-flex align-items-center justify-content-center flex-wrap flex-lg-nowrap ">
           <div className="">
-            <div dangerouslySetInnerHTML={{ __html: learnMore.learnMore }} />
+            <div dangerouslySetInnerHTML={{ __html: ourWork.details }} />
           </div>
         </div>
       </section>
