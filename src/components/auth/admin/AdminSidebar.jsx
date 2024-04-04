@@ -108,6 +108,12 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/getInTouch">
+                  <i className="bi bi-circle"></i>
+                  <span>Get In Touch</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/footer">
                   <i className="bi bi-circle"></i>
                   <span>Footer</span>

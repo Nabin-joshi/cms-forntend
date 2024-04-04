@@ -1,15 +1,17 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Input, Modal } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import {
   addBoardCommitteeMember,
   getAboutUs,
   updateAboutUsField,
+  updateAboutUsHeaderImage,
 } from "../../../../services/aboutUsService";
 import BoardCommitteeMembers from "./BoardCommitteeMembers";
 import { Close } from "@mui/icons-material";
 import ThematicAreas from "./ThematicAreas";
 import JoditEditor from "jodit-react";
+import { Textarea } from "@mui/joy";
 
 const AboutUs = () => {
   const historyRef = useRef();
@@ -26,7 +28,7 @@ const AboutUs = () => {
   const goalNepaliRef = useRef();
   const ourApproachRef = useRef();
   const ourApproachNepaliRef = useRef();
-
+  const aboutUsHeaderImageRef = useRef();
   const [open, setOpenBoardCommittee] = useState(false);
   const [openThematicValues, setOpenThematicValues] = useState(false);
   const [aboutUs, setAboutUs] = useState({});
@@ -115,30 +117,40 @@ const AboutUs = () => {
     }
   };
 
-  async function fetchAboutUs() {
-    const res = await getAboutUs();
-    const data = res.data.data;
-    setAboutUs(data);
-    historyRef.current.value = data.history;
-    historyNepaliRef.current.value = data.historyNepali;
-    whoWeAreRef.current.value = data.whoWeAre;
-    whoWeAreNepaliRef.current.value = data.whoWeAreNepali;
-    ourValuesRef.current.value = data.ourValues;
-    ourValuesNepaliRef.current.value = data.ourValuesNepali;
-    visionRef.current.value = data.vision;
-    visionNepaliRef.current.value = data.visionNepali;
-
-    missionRef.current.value = data.mission;
-    missionNepaliRef.current.value = data.missionNepali;
-
-    goalRef.current.value = data.goal;
-    goalNepaliRef.current.value = data.goalNepali;
-
-    ourApproachRef.value = data.ourApproach;
-    ourApproachNepaliRef.value = data.ourApproachNepali;
+  async function fetchAboutUs(field) {
+    try {
+      const res = await getAboutUs(field);
+      const data = res.data.data;
+      setAboutUs((prevData) => ({ ...prevData, [field]: data[field] }));
+    } catch (error) {
+      console.log(error);
+    }
   }
+  const allFields = [
+    "history",
+    "historyNepali",
+    "whoWeAre",
+    "whoWeAreNepali",
+    "ourValues",
+    "ourValuesNepali",
+    "vision",
+    "visionNepali",
+    "mission",
+    "missionNepali",
+    "goal",
+    "goalNepali",
+    "ourThematicAreas",
+    "boardCommittees",
+    "ourApproach",
+    "ourApproachNepali",
+    "headerImage",
+    "meetTheTeam",
+    "aboutUsHeaderImage",
+  ];
   useEffect(() => {
-    fetchAboutUs();
+    allFields.forEach((field) => {
+      fetchAboutUs(field);
+    });
   }, []);
 
   const [ourThematicAreasFD, setOurThematicAreasFD] = useState({
@@ -166,14 +178,48 @@ const AboutUs = () => {
     nameNepali: "",
     gender: "Male",
     position: "Board Member",
+    description: "",
+    descriptionNepali: "",
+    role: "Staff",
+    photo: "",
   });
 
   const onChangeBoardCommitteeFD = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
+    if (name === "photo") {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setBoardCommitteeFD((fd) => ({
+            ...fd,
+            [name]: reader.result,
+          }));
+        }
+      };
+    }
     setBoardCommitteeFD((fd) => ({
       ...fd,
       [name]: value,
     }));
+  };
+
+  const submitAboutUsHeaderImage = async (event) => {
+    try {
+      console.log(aboutUsHeaderImageRef.current.files[0]);
+      const reader = new FileReader();
+      let imageData = {};
+      reader.readAsDataURL(aboutUsHeaderImageRef.current.files[0]);
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          console.log(reader.result);
+          imageData["aboutUsHeaderImage"] = reader.result;
+
+          updateAboutUsHeaderImage(imageData);
+          toast.success("header image is updated successfully !!!");
+        }
+      };
+    } catch (error) {}
   };
 
   const submitBoardCommitteeForm = async (e) => {
@@ -198,8 +244,7 @@ const AboutUs = () => {
       //   position: "Board Member",
       // });
     } catch (error) {
-      alert(JSON.stringify(error));
-      toast.error(error.response.data.errorMessage, {
+      toast.error(error.response.data.errormessage, {
         position: "top-center",
         autoClose: 700,
         hideProgressBar: true,
@@ -211,6 +256,7 @@ const AboutUs = () => {
       });
     }
   };
+
   return (
     <>
       <main className="main">
@@ -223,6 +269,37 @@ const AboutUs = () => {
               <div className="card">
                 <div className="card-body">
                   <div className="row">
+                    <div
+                      className="col-md-12"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div className="mb-3">
+                        <label>Header Image: </label>
+                        <br />
+                        <img
+                          src={aboutUs.aboutUsHeaderImage}
+                          style={{
+                            height: "50px",
+                            width: "50px",
+                            cursor: "pointer",
+                            borderRadius: "50%",
+                          }}
+                          alt=""
+                        />
+                        <input
+                          type="file"
+                          name="aboutUsHeaderImage"
+                          ref={aboutUsHeaderImageRef}
+                          className="ml-3"
+                        ></input>
+                      </div>
+                      <Button onClick={submitAboutUsHeaderImage}>Update</Button>
+                    </div>
+                    <hr /> <hr />
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label" htmlFor="">
@@ -296,7 +373,7 @@ const AboutUs = () => {
                     </div>
                   </div>
                   <hr />
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label" htmlFor="">
@@ -331,9 +408,9 @@ const AboutUs = () => {
                         Update Our Values
                       </Button>
                     </div>
-                  </div>
+                  </div> */}
                   <hr />
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label" htmlFor="">
@@ -365,7 +442,6 @@ const AboutUs = () => {
                       </Button>
                     </div>
                     <hr></hr>
-                    {/* Similar JSX structure for mission and goal */}
                     <div className="col-md-12">
                       <div className="mb-3">
                         <label className="form-label" htmlFor="">
@@ -429,8 +505,8 @@ const AboutUs = () => {
                       </Button>
                     </div>
                   </div>
-                  <hr />
-                  <div className="row">
+                  <hr /> */}
+                  {/* <div className="row">
                     <div className="col-md-12">
                       <label htmlFor="">Our Approach</label>
                       <JoditEditor
@@ -453,9 +529,9 @@ const AboutUs = () => {
                         Update Our Approach
                       </Button>
                     </div>
-                  </div>
-                  <hr />
-                  <div className="row">
+                  </div> */}
+                  {/* <hr /> */}
+                  {/* <div className="row">
                     <div className="col-md-6">
                       <h5>Our Thematic Areas</h5>
                     </div>
@@ -508,7 +584,7 @@ const AboutUs = () => {
                       </div>
                       <Button type="submit">Add Thematic Area</Button>
                     </form>
-                  </div>
+                  </div> */}
 
                   <hr></hr>
                   <div className="row">
@@ -522,73 +598,128 @@ const AboutUs = () => {
                         </Button>
                       </span>
                     </div>
-                    <form onSubmit={submitBoardCommitteeForm} className="mt-3">
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="mb-3">
-                            <label className="form-label" htmlFor="">
-                              Name:
-                            </label>
-                            <input
-                              name="name"
-                              id="name"
-                              value={boardCommitteeFD.name}
-                              onChange={onChangeBoardCommitteeFD}
-                            ></input>
-                          </div>
-                        </div>
-                        <div className="col-md-12">
-                          <div className="mb-3">
-                            <label className="form-label" htmlFor="">
-                              Name (Nepali):
-                            </label>
-                            <input
-                              name="nameNepali"
-                              id="nameNepali"
-                              value={boardCommitteeFD.nameNepali}
-                              onChange={onChangeBoardCommitteeFD}
-                            ></input>
-                          </div>
+                  </div>
+
+                  <div className="row"></div>
+                  <form onSubmit={submitBoardCommitteeForm} className="mt-3">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="mb-3">
+                          <label className="form-label" htmlFor="">
+                            Name:
+                          </label>
+                          <input
+                            name="name"
+                            id="name"
+                            value={boardCommitteeFD.name}
+                            onChange={onChangeBoardCommitteeFD}
+                          ></input>
                         </div>
                       </div>
-                      <div>
+                      <div className="col-md-6">
                         <div className="mb-3">
                           <label className="form-label" htmlFor="">
-                            gender:
+                            Name (Nepali):
                           </label>
-                          <select
-                            name="gender"
-                            id="gender"
-                            value={boardCommitteeFD.name}
+                          <input
+                            style={{ display: "inline" }}
+                            name="nameNepali"
+                            id="nameNepali"
+                            value={boardCommitteeFD.nameNepali}
                             onChange={onChangeBoardCommitteeFD}
-                          >
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Others">Others</option>
-                          </select>
+                          ></input>
                         </div>
-                        <div className="mb-3">
+                      </div>
+                    </div>
+                    <div>
+                      <div className="mb-3">
+                        <label className="form-label" htmlFor="">
+                          gender:
+                        </label>
+                        <select
+                          name="gender"
+                          id="gender"
+                          value={boardCommitteeFD.name}
+                          onChange={onChangeBoardCommitteeFD}
+                        >
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Others">Others</option>
+                        </select>
+                      </div>
+                      <div className="mb-3">
+                        <label className="form-label" htmlFor="">
+                          position:
+                        </label>
+                        <select
+                          name="position"
+                          id="position"
+                          value={boardCommitteeFD.name}
+                          onChange={onChangeBoardCommitteeFD}
+                        >
+                          <option value="Chairperson">Chairperson</option>
+                          <option value="Treasurer">Treasurer</option>
+                          <option value="General Secretary">
+                            General Secretary
+                          </option>
+                          <option value="Board Member">Board Member</option>
+                        </select>
+                      </div>
+                      <div className="row">
+                        <div className="mb-3 col-md-6">
+                          <label htmlFor="">Description</label>
+                          <Textarea
+                            name="description"
+                            id=""
+                            minRows="5"
+                            value={boardCommitteeFD.description}
+                            onChange={onChangeBoardCommitteeFD}
+                          ></Textarea>
+                        </div>
+                        <div className="mb-3 col-md-6">
+                          <label htmlFor="">Description (Nepali)</label>
+                          <Textarea
+                            name="descriptionNepali"
+                            id=""
+                            minRows="5"
+                            value={boardCommitteeFD.descriptionNepali}
+                            onChange={onChangeBoardCommitteeFD}
+                          ></Textarea>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="mb-3 col-md-6">
                           <label className="form-label" htmlFor="">
-                            position:
+                            Role:
                           </label>
                           <select
-                            name="position"
-                            id="position"
-                            value={boardCommitteeFD.name}
+                            name="role"
+                            id="role"
+                            value={boardCommitteeFD.role}
                             onChange={onChangeBoardCommitteeFD}
                           >
-                            <option value="Chairperson">Chairperson</option>
-                            <option value="Treasurer">Treasurer</option>
-                            <option value="General Secretary">
-                              General Secretary
-                            </option>
+                            <option value="Staff">Staff</option>
                             <option value="Board Member">Board Member</option>
                           </select>
                         </div>
                       </div>
-                      <Button type="submit">Add Member</Button>
-                    </form>
-                  </div>
+                      <div className="row">
+                        <div className="mb-3 col-md-6">
+                          <label className="form-label" htmlFor="">
+                            Photo:
+                          </label>
+                          <input
+                            id="photo"
+                            name="photo"
+                            type="file"
+                            onChange={onChangeBoardCommitteeFD}
+                          ></input>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button type="submit">Add Member</Button>
+                  </form>
                 </div>
               </div>
             </div>

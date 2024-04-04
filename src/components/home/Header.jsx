@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { donateUs } from "../../services/NewsLetterUserService";
 import { ToastContainer, toast } from "react-toastify";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import CustomModal from "../auth/admin/section/NewLetter/popup/CustomModal";
 import DonateModal from "../auth/admin/section/NewLetter/popup/DonateModal";
 import logo from "../../assets/img/logo.png";
@@ -232,10 +232,13 @@ export default function Header() {
                   </a>
                   <ul className="submenu">
                     <li>
-                      <a href="#"> Submenu 1-1</a>
+                      <Link to="/aboutUs/history"> History</Link>
                     </li>
                     <li>
-                      <a href="#"> Submenu 1-2</a>
+                      <Link to="/aboutUs/whoWeAre"> Introduction</Link>
+                    </li>
+                    <li>
+                      <Link to="aboutUs/boardCommittees"> Our Teams </Link>
                     </li>
                   </ul>
                 </li>

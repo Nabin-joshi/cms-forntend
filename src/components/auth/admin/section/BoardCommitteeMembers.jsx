@@ -28,7 +28,7 @@ const BoardCommitteeMembers = () => {
     }
   };
   async function fetchData() {
-    const res = await getAboutUs();
+    const res = await getAboutUs("boardCommittees");
     const data = res.data.data;
     setMembers(data.boardCommittees);
   }
@@ -42,10 +42,12 @@ const BoardCommitteeMembers = () => {
         <thead>
           <tr>
             <th>S.N</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Name Nepali</th>
             <th>Gender</th>
             <th>Position</th>
+            <th>Role</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -55,10 +57,24 @@ const BoardCommitteeMembers = () => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
+                  <td>
+                    <img
+                      style={{
+                        borderRadius: "50%",
+                        width: "50px",
+                        height: "50px",
+                        overflow: "hidden",
+                      }}
+                      src={element.photo}
+                      alt=""
+                    />
+                  </td>
                   <td>{element.name}</td>
                   <td>{element.nameNepali}</td>
                   <td>{element.gender}</td>
                   <td>{element.position}</td>
+                  <td>{element.role}</td>
+
                   <td>
                     <Button
                       onClick={(e) => delteBoardCommitteeMem(element._id)}

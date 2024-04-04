@@ -29,6 +29,11 @@ import GetInvolved from "../components/auth/admin/section/GetInvolved.jsx";
 import Resources from "../components/auth/admin/section/Resources.jsx";
 import { ResourcesHome } from "../components/home/ResourcesHome.jsx";
 import { GetInvolvedHome } from "../components/home/GetInvolvedHome.jsx";
+import OurProgram from "../components/auth/admin/section/OurProgram.jsx";
+import OurProgramHome from "../components/home/OurProgramHome.jsx";
+import ContactUs from "../components/auth/admin/section/ContactUs.jsx";
+import ContactUsHome from "../components/home/ContactUsHome.jsx";
+import GetInTouches from "../components/auth/admin/GetInTouches.jsx";
 
 export const mainRoutes = [
   {
@@ -67,7 +72,7 @@ export const mainRoutes = [
         element: OurStoriesReadMore,
       },
       {
-        path: "/aboutUs",
+        path: "/aboutUs/:fieldName",
         name: "About Us",
         element: AboutUs,
       },
@@ -80,6 +85,16 @@ export const mainRoutes = [
         path: "/getInvolved",
         name: "Get Involved ",
         element: GetInvolvedHome,
+      },
+      {
+        path: "/ourProgram/:programType",
+        name: "Our Program  ",
+        element: OurProgramHome,
+      },
+      {
+        path: "/contactUs",
+        name: "Contact Us  ",
+        element: ContactUsHome,
       },
     ],
   },
@@ -182,6 +197,21 @@ export const mainRoutes = [
         path: "resources",
         name: "Get Involved",
         element: Resources,
+      },
+      {
+        path: "ourProgram",
+        name: "Get Involved",
+        element: OurProgram,
+      },
+      {
+        path: "contactUs",
+        name: "Get Involved",
+        element: ContactUs,
+      },
+      {
+        path: "getInTouch",
+        name: "Get In Touch  ",
+        element: GetInTouches,
       },
     ],
   },

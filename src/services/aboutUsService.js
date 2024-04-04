@@ -6,6 +6,16 @@ const aboutUsApi = axios.create({
   withCredentials: true,
 });
 
+export const updateAboutUsHeaderImage = async (data) => {
+  const response = await aboutUsApi.put(
+    "/api/aboutUs/updateAboutUsHeaderImage",
+    data,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+};
+
 export const updateAboutUsField = async (data) => {
   const response = await aboutUsApi.put("/api/aboutUs/broadCommittee", data, {
     headers: {
