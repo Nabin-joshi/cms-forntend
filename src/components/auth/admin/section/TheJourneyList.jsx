@@ -137,12 +137,18 @@ const TheJourneyList = () => {
 }
     `}
       </style>
-      <div className="row">
+      <div
+        style={{
+          marginTop: "100px",
+        }}
+        className="row"
+      >
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            marginTop: "100px",
           }}
         >
           <h2>Journey List</h2>

@@ -19,6 +19,7 @@ const OurPartners = () => {
   async function fetchAllourPartners() {
     try {
       const response = await getOurPartnerHeading();
+      console.log("partner", response.data.data);
       setourPartners(response.data.data);
     } catch (error) {}
   }
@@ -55,66 +56,83 @@ const OurPartners = () => {
                     },
                   }}
                 >
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage1}
-                        alt="Partner 1"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage2}
-                        alt="Partner 2"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage3}
-                        alt="Partner 3"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage4}
-                        alt="Partner 4"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage5}
-                        alt="Partner 5"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    {" "}
-                    <div className="swiper-slide">
-                      <img
-                        src={partnersImage5}
-                        alt="Partner 6"
-                        className="img-fluid"
-                      />
-                    </div>
-                  </SwiperSlide>
+                  {ourPartners && ourPartners.contents ? (
+                    ourPartners.contents.map((item, index) => (
+                      <SwiperSlide key={index}>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={item.icon ? item.icon : partnersImage1}
+                            alt="Partner 1"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))
+                  ) : (
+                    <>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage1}
+                            alt="Partner 1"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage2}
+                            alt="Partner 2"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage3}
+                            alt="Partner 3"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage4}
+                            alt="Partner 4"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage5}
+                            alt="Partner 5"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        {" "}
+                        <div className="swiper-slide">
+                          <img
+                            src={partnersImage5}
+                            alt="Partner 6"
+                            className="img-fluid"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    </>
+                  )}
                 </Swiper>
               </div>
             </div>

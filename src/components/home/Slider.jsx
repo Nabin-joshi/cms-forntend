@@ -31,100 +31,113 @@ export default function Slider() {
 
   return (
     <>
-      <section className="hero-section">
-        <div className="swiper-container">
-          <div className="swiper-wrapper">
-            <Swiper
-              speed={400}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-                type: "bullets",
-              }}
-              modules={[Autoplay, Pagination]}
-            >
-              <SwiperSlide>
-                {" "}
-                <div className="swiper-slide position-relative">
-                  <div className="slide-hero-text d-flex flex-column align-items-start">
-                    <h1>
-                      {sliderData
-                        ? sliderData.title
-                        : "Championing Possibilities, Building Brighter Horizons"}{" "}
-                    </h1>
-                    <p>
-                      {sliderData
-                        ? sliderData.content
-                        : "Helping children and youth to thrive. This text could be " +
-                          "significanlty longer Lorem ipsum dolor sit amet consectetur" +
-                          "adipisicing elit. Dolor optio ab distinctio porro accusamus" +
-                          "nisi aperiam, dolores quo, quae possimus laudantium? Debitis" +
-                          "aperiam animi est iusto quis cupiditate! Aspernatur, maxime."}
-                    </p>
-                    <a href="/learnMore" className="btn btn-blue">
-                      Learn More{" "}
-                      <i className="fas fa-circle-arrow-right ml-3"></i>
-                    </a>
+      {sliderData && sliderData.showImage && sliderData.showImage === "true" ? (
+        <section className="hero-section">
+          <div className="swiper-container">
+            <div className="swiper-wrapper">
+              <Swiper>
+                <SwiperSlide>
+                  {" "}
+                  <div className="swiper-slide position-relative">
+                    <div className="slide-hero-text d-flex flex-column align-items-start">
+                      <h1>
+                        {sliderData
+                          ? sliderData.title
+                          : "Championing Possibilities, Building Brighter Horizons"}{" "}
+                      </h1>
+                      <p>
+                        {sliderData
+                          ? sliderData.content
+                          : "Helping children and youth to thrive. This text could be " +
+                            "significanlty longer Lorem ipsum dolor sit amet consectetur" +
+                            "adipisicing elit. Dolor optio ab distinctio porro accusamus" +
+                            "nisi aperiam, dolores quo, quae possimus laudantium? Debitis" +
+                            "aperiam animi est iusto quis cupiditate! Aspernatur, maxime."}
+                      </p>
+                      <a href="/learnMore" className="btn btn-blue">
+                        Learn More{" "}
+                        <i className="fas fa-circle-arrow-right ml-3"></i>
+                      </a>
+                    </div>
+                    <div className="gradient-black"></div>
+                    <img
+                      src={
+                        sliderData &&
+                        sliderData.image &&
+                        sliderData.image !== ""
+                          ? sliderData.image
+                          : slider1
+                      }
+                      alt="Slide 1"
+                      className="img-fluid"
+                    />
                   </div>
-                  <div className="gradient-black"></div>
-                  <img
-                    src={
-                      sliderData && sliderData.image && sliderData.image !== ""
-                        ? sliderData.image
-                        : slider1
-                    }
-                    alt="Slide 1"
-                    className="img-fluid"
-                  />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <div className="swiper-slide position-relative">
-                  <div className="slide-hero-text d-flex flex-column align-items-start">
-                    <h1>
-                      {sliderData
-                        ? sliderData.title
-                        : "Championing Possibilities, Building Brighter Horizons"}{" "}
-                    </h1>
-                    <p>
-                      {sliderData
-                        ? sliderData.content
-                        : "Helping children and youth to thrive. This text could be " +
-                          "significanlty longer Lorem ipsum dolor sit amet consectetur" +
-                          "adipisicing elit. Dolor optio ab distinctio porro accusamus" +
-                          "nisi aperiam, dolores quo, quae possimus laudantium? Debitis" +
-                          "aperiam animi est iusto quis cupiditate! Aspernatur, maxime."}
-                    </p>
-                    <a href="/learnMore" className="btn btn-blue">
-                      Learn More{" "}
-                      <i className="fas fa-circle-arrow-right ml-3"></i>
-                    </a>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+            <div className="swiper-pagination"></div>
+          </div>
+          <a href="#">
+            <div className="go-up-btn">
+              <i className="fas fa-arrow-up"></i>
+            </div>
+          </a>
+        </section>
+      ) : (
+        <section className="hero-section">
+          <div className="swiper-container">
+            <div className="swiper-wrapper">
+              <Swiper
+                speed={400}
+                autoplay={{
+                  delay: 5000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                  type: "bullets",
+                }}
+                modules={[Autoplay, Pagination]}
+              >
+                <SwiperSlide>
+                  {" "}
+                  <div className="swiper-slide position-relative">
+                    <div className="slide-hero-text d-flex flex-column align-items-start">
+                      <h1>
+                        {sliderData
+                          ? sliderData.title
+                          : "Championing Possibilities, Building Brighter Horizons"}{" "}
+                      </h1>
+                      <p>
+                        {sliderData
+                          ? sliderData.content
+                          : "Helping children and youth to thrive. This text could be " +
+                            "significanlty longer Lorem ipsum dolor sit amet consectetur" +
+                            "adipisicing elit. Dolor optio ab distinctio porro accusamus" +
+                            "nisi aperiam, dolores quo, quae possimus laudantium? Debitis" +
+                            "aperiam animi est iusto quis cupiditate! Aspernatur, maxime."}
+                      </p>
+                      <a href="/learnMore" className="btn btn-blue">
+                        Learn More{" "}
+                        <i className="fas fa-circle-arrow-right ml-3"></i>
+                      </a>
+                    </div>
+                    <div className="gradient-black"></div>
+                    <video
+                      className="video-background"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      src={videoURL}
+                    ></video>
                   </div>
-                  <div className="gradient-black"></div>
-                  <video
-                    className="video-background"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    src={videoURL}
-                  ></video>
-                </div>
-              </SwiperSlide>
-            </Swiper>
+                </SwiperSlide>
+              </Swiper>
+            </div>
           </div>
-          <div className="swiper-pagination"></div>
-        </div>
-        <a href="#">
-          <div className="go-up-btn">
-            <i className="fas fa-arrow-up"></i>
-          </div>
-        </a>
-      </section>
+        </section>
+      )}
     </>
   );
 }

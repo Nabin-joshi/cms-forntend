@@ -154,7 +154,13 @@ position: relative;
 }
 `}
       </style>
-      <div className="row">
+      <div
+        style={{
+          marginTop: "300px",
+          alignContent: "center",
+        }}
+        className="row"
+      >
         <div
           style={{
             display: "flex",

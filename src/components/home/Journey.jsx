@@ -5,15 +5,20 @@ const TheJourney = () => {
   const [theJourney, setTheJourney] = useState({});
   const [locale, setLocale] = useState("eng");
 
-  async function fetchAllTheJourney() {
+  const fetchAllTheJourney = async () => {
     try {
       const response = await getTheJourneyHeading();
-      setTheJourney(response.data.data);
+      if (response.data.data) {
+        setTheJourney(response.data.data);
+      }
     } catch (error) {}
-  }
+  };
+
   useEffect(() => {
     fetchAllTheJourney();
+  }, []);
 
+  useEffect(() => {
     let locale = localStorage.getItem("locale")
       ? localStorage.getItem("locale")
       : "eng";
@@ -24,73 +29,22 @@ const TheJourney = () => {
     const locationMarkersContainer =
       document.querySelector(".location-markers");
 
-    // Sample data for location markers
-    const locations = [
-      {
-        date: "2024-01-01",
-        description:
-          "This is a short sentence that highlights the accomplishments of Koshish. It is presented in this manner here. It cannot be too long or else it might not fit. ",
-      },
-      {
-        date: "2024-02-01",
-        description:
-          "This is a short sentence that highlights the accomplishments of Koshish. It is presented in this manner here. It cannot be too long or else it might not fit. ",
-      },
-      { date: "2024-02-01", description: "Location 3" },
-      { date: "2024-02-01", description: "Location 4" },
-      { date: "2024-02-01", description: "Location 5" },
-      { date: "2024-02-01", description: "Location 6" },
-      { date: "2024-02-01", description: "Location 7" },
-      { date: "2024-02-01", description: "Location 8" },
-      { date: "2024-02-01", description: "Location 9" },
-      { date: "2024-02-01", description: "Location 10" },
-      { date: "2024-02-01", description: "Location 11" },
-      { date: "2024-02-01", description: "Location 12" },
-      { date: "2024-02-01", description: "Location 13" },
-      { date: "2024-02-01", description: "Location 14" },
-      { date: "2024-02-01", description: "Location 15" },
-      { date: "2024-02-01", description: "Location 16" },
-      { date: "2024-02-01", description: "Location 17" },
-      { date: "2024-02-01", description: "Location 18" },
-      // Add more locations as needed
-    ];
-
-    const Nepalilocations = [
-      {
-        date: "2024-01-01",
-        description:
-          "कोसिशको उपलब्धिहरूलाई हाइलाइट गर्दै यो एक छोटो वाक्य हो। यो यहाँ यस ढंगले प्रस्तुत गरिएको छ। यो धेरै लामो हुनु हुँदैन वा अन्यथा यसलाई समावेश गर्न सक्दैन।",
-      },
-      {
-        date: "2024-02-01",
-        description:
-          "कोसिशको उपलब्धिहरूलाई हाइलाइट गर्दै यो एक छोटो वाक्य हो। यो यहाँ यस ढंगले प्रस्तुत गरिएको छ। यो धेरै लामो हुनु हुँदैन वा अन्यथा यसलाई समावेश गर्न सक्दैन।",
-      },
-      { date: "2024-02-01", description: "स्थान 3" },
-      { date: "2024-02-01", description: "स्थान 4" },
-      { date: "2024-02-01", description: "स्थान 5" },
-      { date: "2024-02-01", description: "स्थान 6" },
-      { date: "2024-02-01", description: "स्थान 7" },
-      { date: "2024-02-01", description: "स्थान 8" },
-      { date: "2024-02-01", description: "स्थान 9" },
-      { date: "2024-02-01", description: "स्थान 10" },
-      { date: "2024-02-01", description: "स्थान 11" },
-      { date: "2024-02-01", description: "स्थान 12" },
-      { date: "2024-02-01", description: "स्थान 13" },
-      { date: "2024-02-01", description: "स्थान 14" },
-      { date: "2024-02-01", description: "स्थान 15" },
-      { date: "2024-02-01", description: "स्थान 16" },
-      { date: "2024-02-01", description: "स्थान 17" },
-      { date: "2024-02-01", description: "स्थान 18" },
-      // Add more locations as needed
-    ];
-
     //road width based on the number of elements
     const road = document.getElementById("road");
     const container = document.getElementById("journey-container");
     container.style.width = `100%`;
 
     if (locale === "nep") {
+      let Nepalilocations = [];
+      if (theJourney.contents) {
+        theJourney.contents.forEach((item) => {
+          Nepalilocations.push({
+            date: item.dateNepali,
+            description: item.descNepali,
+          });
+        });
+      }
+
       road.style.width = `${Nepalilocations.length * 250 + 250}px`;
 
       // Create location markers
@@ -114,6 +68,17 @@ const TheJourney = () => {
         locationMarkersContainer.appendChild(marker);
       });
     } else {
+      let locations = [];
+
+      if (theJourney.contents) {
+        theJourney.contents.forEach((item) => {
+          locations.push({
+            date: item.date,
+            description: item.desc,
+          });
+        });
+      }
+
       road.style.width = `${locations.length * 250 + 250}px`;
 
       // Create location markers
@@ -173,7 +138,7 @@ const TheJourney = () => {
       const walk = (x - startX) * 2; // Adjust scrolling sensitivity
       journeyContainer.scrollLeft = scrollLeft - walk;
     });
-  }, []);
+  }, [theJourney]);
   return (
     <>
       <section className="mt-5 position-relative">

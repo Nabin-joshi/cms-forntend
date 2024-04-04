@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getStories } from "../../services/storiesService";
-import styles from "./Stories.module.css";
-import { FaArrowCircleRight } from "react-icons/fa";
 import testimonialsImage1 from "../../assets/img/testimonials-1.png";
 import testimonialsImage2 from "../../assets/img/testimonials-2.png";
 import testimonialsImage3 from "../../assets/img/testimonials-3.png";

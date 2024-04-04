@@ -34,6 +34,8 @@ import OurProgramHome from "../components/home/OurProgramHome.jsx";
 import ContactUs from "../components/auth/admin/section/ContactUs.jsx";
 import ContactUsHome from "../components/home/ContactUsHome.jsx";
 import GetInTouches from "../components/auth/admin/GetInTouches.jsx";
+import LatestNews from "../components/auth/admin/section/LatestNews.jsx";
+import LatestNewsReadMore from "../components/home/homePageRoutingSection/LatestNewsReadMore.jsx";
 
 export const mainRoutes = [
   {
@@ -52,9 +54,14 @@ export const mainRoutes = [
         element: LearnMore,
       },
       {
-        path: "/ourWork/learnMore",
+        path: "/ourWork/learnMore/:id",
         name: "Our Work Learn More page",
         element: OurWorkLearnMore,
+      },
+      {
+        path: "/latestnews/readMore/:id",
+        name: "Latest News Read More page",
+        element: LatestNewsReadMore,
       },
       {
         path: "/ourWork/viewAll",
@@ -212,6 +219,11 @@ export const mainRoutes = [
         path: "getInTouch",
         name: "Get In Touch  ",
         element: GetInTouches,
+      },
+      {
+        path: "latestnews",
+        name: "Latest News",
+        element: LatestNews,
       },
     ],
   },
