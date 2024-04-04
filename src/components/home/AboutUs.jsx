@@ -99,8 +99,9 @@ const AboutUs = () => {
                     alignContent: "space-between",
                   }}
                 >
-                  {fieldName === "boardCommittees" &&
-                    fieldValue &&
+                  {fieldValue &&
+                    fieldName === "boardCommittees" &&
+                    Array.isArray(fieldValue) &&
                     fieldValue.map((item, index) => {
                       if (item.role === "Staff") {
                         return (
@@ -144,6 +145,7 @@ const AboutUs = () => {
                 >
                   {fieldName === "boardCommittees" &&
                     fieldValue &&
+                    Array.isArray(fieldValue) &&
                     fieldValue.map((item, index) => {
                       if (item.role === "Board Member") {
                         return (
