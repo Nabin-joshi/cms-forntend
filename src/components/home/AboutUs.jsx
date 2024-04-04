@@ -34,7 +34,6 @@ const AboutUs = () => {
         const resp = await getAboutUs(field + locale);
         const data = resp.data.data;
         setFieldValue(data[field + locale]);
-        alert(JSON.stringify(data));
       } catch (error) {}
     };
 
