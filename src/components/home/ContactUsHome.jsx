@@ -81,7 +81,11 @@ const ContactUsHome = () => {
           <div
             className="banner"
             style={{
-              backgroundImage: `url(${contactUsHeaderImage})`,
+              backgroundImage: `url(${
+                contactUs && contactUs.headerImage
+                  ? contactUs.headerImage
+                  : contactUsHeaderImage
+              })`,
             }}
           >
             <div className="banner-content">

@@ -223,85 +223,67 @@ export default function Header() {
             <nav className="navbar-main mt-2" id="main-menu">
               <div className="navbar-main-menu d-flex justify-content-center">
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="/" className="navbar-main-link">
                     <i className="fas fa-home"></i>
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
-                    About Us <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  <NavLink to="#" className="navbar-main-link">
+                    {locale === "EN" ? "About Us" : "हाम्रो बारेमा"}{" "}
+                    <i className="fa fa-angle-down text-blue-grey"></i>
+                  </NavLink>
                   <div className="submenu p-4">
                     <div className="container">
                       <div className="row">
                         <div className="col-6 col-md-3 nav-item">
-                          <a href="#" className="nav-link">
+                          <NavLink to="/aboutUs/history" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">History</span>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="/aboutUs/whoWeAre" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Introduction</span>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink
+                            to="aboutUs/boardCommittees"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
-                        </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
-                            <img
-                              src={coverImg}
-                              alt="menu img"
-                              className="nav-img"
-                            />
-                            <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
-                        </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
-                            <img
-                              src={coverImg}
-                              alt="menu img"
-                              className="nav-img"
-                            />
-                            <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Our Teams</span>
+                          </NavLink>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     Our Work <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <div className="submenu p-4">
                     <div className="container">
                       <div className="row">
                         <div className="col-6 col-md-3 nav-item">
-                          <a href="#" className="nav-link">
+                          <NavLink to="#" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
@@ -309,10 +291,10 @@ export default function Header() {
                             />
                             <div className="nav-overlay"></div>
                             <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="#" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
@@ -320,10 +302,10 @@ export default function Header() {
                             />
                             <div className="nav-overlay"></div>
                             <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="#" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
@@ -331,10 +313,10 @@ export default function Header() {
                             />
                             <div className="nav-overlay"></div>
                             <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="#" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
@@ -342,10 +324,10 @@ export default function Header() {
                             />
                             <div className="nav-overlay"></div>
                             <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="#" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
@@ -353,150 +335,182 @@ export default function Header() {
                             />
                             <div className="nav-overlay"></div>
                             <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                          </NavLink>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     Resources{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <div className="submenu p-4">
                     <div className="container">
                       <div className="row">
                         <div className="col-6 col-md-3 nav-item">
-                          <a href="#" className="nav-link">
+                          <NavLink
+                            to="/resources/procurement"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Procurement</span>
+                          </NavLink>
                         </div>
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="/resources/vacancy" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Vacancy</span>
+                          </NavLink>
                         </div>
+
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink
+                            to="/resources/volunteer"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Volunteer</span>
+                          </NavLink>
                         </div>
+
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink
+                            to="/resources/digitalLibrary"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">
+                              Digital Library
+                            </span>
+                          </NavLink>
                         </div>
+
                         <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+                          <NavLink to="/resources/lives" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">
+                              Transforming Lives
+                            </span>
+                          </NavLink>
+                        </div>
+
+                        <div className="col-6 col-md-3 nav-item position-relative">
+                          <NavLink to="/resources/blog" className="nav-link">
+                            <img
+                              src={coverImg}
+                              alt="menu img"
+                              className="nav-img"
+                            />
+                            <div className="nav-overlay"></div>
+                            <span className="submenu-text">Blog</span>
+                          </NavLink>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="#" className="navbar-main-link">
                     Get Involved{" "}
                     <i className="fa fa-angle-down text-blue-grey"></i>
-                  </a>
+                  </NavLink>
                   <div className="submenu p-4">
                     <div className="container">
                       <div className="row">
                         <div className="col-6 col-md-3 nav-item">
-                          <a href="#" className="nav-link">
+                          <NavLink
+                            to="/getInvolved/vacancy"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Vacancy</span>
+                          </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="/getInvolved/procurement"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Procurement</span>
+                          </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="/getInvolved/volunteer"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Volunteer</span>
+                          </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="/getInvolved/donate"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
-                        </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <a href="#" className="nav-link">
-                            <img
-                              src={coverImg}
-                              alt="menu img"
-                              className="nav-img"
-                            />
-                            <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
-                          </a>
+                            <span className="submenu-text">Donate</span>
+                          </NavLink>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="navbar-main-item">
-                  <a href="#" className="navbar-main-link">
+                  <NavLink to="/contactUs" className="navbar-main-link">
                     Contact Us
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </nav>
