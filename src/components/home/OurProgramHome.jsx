@@ -21,11 +21,19 @@ const OurProgramHome = () => {
     } else if (locale === "nep") {
       fetchFieldValue(programType + "Nepali");
     }
-  }, []);
+  }, [programType]);
 
   return (
     <>
-      Our Program Home <div dangerouslySetInnerHTML={{ __html: field }}></div>
+      <section class="about-us-section my-3">
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <div dangerouslySetInnerHTML={{ __html: field }}></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
