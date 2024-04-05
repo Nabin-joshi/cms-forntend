@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 
 function Accessibility() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const handleAccessibility = () => {
-    setSidebarOpen((prevState) => !prevState);
+  const handleAccessibility = (event) => {
+    event.preventDefault();
+    const isClickInside = document
+      .getElementById("accessibility-btn")
+      .contains(event.target);
+    if (isClickInside) {
+      const x = document.getElementById("accessibility-sidebar");
+      if (x.style.left != "0px") {
+        x.style.left = "0px";
+      } else {
+        x.style.left = "-188px";
+      }
+    }
   };
 
   const handleClick = (action) => {
@@ -61,14 +70,7 @@ function Accessibility() {
 
   return (
     <>
-      <section
-        className={`accessibility-sidebar ${
-          sidebarOpen
-            ? "accessibility-sidebar-open"
-            : "accessibility-sidebar-closed"
-        }`}
-        id="accessibility-sidebar"
-      >
+      <section className="accessibility-sidebar" id="accessibility-sidebar">
         <div
           onClick={(e) => handleClick(e.target.id)}
           className="accessibility-icons"

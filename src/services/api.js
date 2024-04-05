@@ -426,9 +426,49 @@ export const getAllLatestNews = async () => {
   return response;
 };
 
+export const getAllGeoMaps = async () => {
+  let response;
+  try {
+    response = await api.get("/api/geographicalCoverage/getAllGeoMap");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getGeoMapData = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/geographicalCoverage/getGeoMap/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveNepaliGeoMapData = async (data) => {
+  try {
+    await api.put("/api/geographicalCoverage/updateGeoMap/nep", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const saveEnglishGeoMapData = async (data) => {
+  try {
+    await api.put("/api/geographicalCoverage/updateGeoMap/eng", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 export const saveNepaliLatestNews = async (data) => {
   try {
-    await api.put("/api/latestNews/updateLatestNews/nep", data, {
+    await api.put("/api/latestNews/updateGeoMap/nep", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

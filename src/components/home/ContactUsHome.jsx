@@ -5,6 +5,8 @@ import {
   getContactUsData,
 } from "../../services/ContactUsService";
 import { toast } from "react-toastify";
+import Accessibility from "./Accessibility";
+import contactUsHeaderImage from "../../assets/img/cover.jpg";
 const ContactUsHome = () => {
   const [contactUs, setContactUs] = useState({
     header: "",
@@ -74,36 +76,12 @@ const ContactUsHome = () => {
   return (
     <>
       <main>
-        <section className="accessibility-sidebar" id="accessibility-sidebar">
-          <div className="accessibility-icons">
-            <div className="accessibility-icon" id="increase-font">
-              <i className="fas fa-font"></i> Increase-font
-            </div>
-            <div className="accessibility-icon" id="decrease-font">
-              <i className="fas fa-font"></i> Decrease-font
-            </div>
-            <div className="accessibility-icon" id="high-contrast">
-              <i className="fas fa-adjust"></i> High Contrast
-            </div>
-            <div className="accessibility-icon" id="negative-contrast">
-              <i className="fas fa-adjust"></i> Negative Contrast
-            </div>
-            <div className="accessibility-icon" id="underline-links">
-              <i className="fas fa-underline"></i> Underline Links
-            </div>
-            <div className="accessibility-icon" id="reset-accessibility">
-              <i className="fas fa-sync-alt"></i> Reset
-            </div>
-          </div>
-          <div className="accessibility-btn" id="accessibility-btn">
-            <i className="fas fa-universal-access"></i>
-          </div>
-        </section>
+        <Accessibility />
         <section className="about-us-section">
           <div
             className="banner"
             style={{
-              backgroundImage: `url(${contactUs.headerImage})`,
+              backgroundImage: `url(${contactUsHeaderImage})`,
             }}
           >
             <div className="banner-content">

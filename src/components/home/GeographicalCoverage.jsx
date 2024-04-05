@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getGeographicalCoverage } from "../../services/api";
+import {
+  getAllGeoMaps,
+  getGeoMapData,
+  getGeographicalCoverage,
+} from "../../services/api";
+import { ProvinceMap } from "react-nepal-map";
 
 import map from "../../assets/img/Vector Map.svg";
 
 function GeographicalCoverage() {
+  const [selectedProvinceData, setSelectedProvinceData] = useState(null);
+  const [geoMapData, setGeoMapData] = useState(null);
+
   const [geographicalCoverage, setGeographicalCoverage] = useState({
     districts: "",
     RMs: "",
@@ -20,6 +28,11 @@ function GeographicalCoverage() {
         if (res) {
           setGeographicalCoverage(res.data.geographicalCoverage);
         }
+
+        const response = await getGeoMapData();
+        if (response.data) {
+          setGeoMapData(response.data);
+        }
       } catch (error) {}
     };
 
@@ -30,6 +43,11 @@ function GeographicalCoverage() {
 
     fetchData();
   }, []);
+
+  const handleProvinceClick = (provinceData) => {
+    setSelectedProvinceData(provinceData);
+  };
+
   return (
     <section className="mt-5 geo-coverage-section">
       <div className="container py-5">
@@ -83,11 +101,24 @@ function GeographicalCoverage() {
         </div>
       </div>
       <div className="geo-blue-bg">
-        <img
-          src={map}
-          alt="Nepal Map"
-          className={locale === "nep" ? "nepal-map-nep" : "nepal-map-eng"}
-        />
+        <div className="nepal-map">
+          <ProvinceMap
+            hoverColor="darkGray"
+            value="Chauri"
+            stroke="#000"
+            provinceColor={[
+              "red",
+              "green",
+              "blue",
+              "yellow",
+              "orange",
+              "purple",
+              "cyan",
+            ]}
+            strokeWidth={1}
+            onMapClick={(val) => handleProvinceClick(val)}
+          />
+        </div>
         <div className="geo-legend">
           <div className="legend-item">
             <div

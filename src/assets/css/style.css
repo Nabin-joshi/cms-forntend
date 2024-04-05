@@ -20,7 +20,12 @@ body {
   background-color: var(--light-blue);
   color: white;
 }
-ul {
+header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+footer ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -115,7 +120,6 @@ a:hover {
   border: 1px solid var(--dark-yellow);
   border-radius: 30px;
   cursor: pointer;
-  width: 250px;
 }
 .make-a-difference {
   color: var(--blue);
@@ -136,31 +140,37 @@ a:hover {
 .topbar-underline a:hover {
   text-decoration: underline;
 }
-.navbar-main-item a {
+.navbar-main-link {
   color: var(--blue);
   font-size: 20px;
   font-weight: 500;
   padding: 0px 15px;
   cursor: pointer;
 }
+
 .navbar-main-item a:hover {
   color: black;
 }
 .navbar-main-menu .submenu {
-  display: none;
-}
-.navbar-main-menu li:hover .submenu {
-  display: block;
+  display: flex;
+  visibility: hidden;
   position: absolute;
   background-color: white;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  padding: 10px;
   z-index: 100;
   border-radius: 5px;
-  width: 200px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(50px);
 }
-.navbar-main-item {
-  position: relative;
+
+.navbar-main-menu div:hover .submenu {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+  transform: translateY(0px);
 }
 .hamburger-menu {
   display: none;
@@ -180,7 +190,7 @@ a:hover {
 }
 .sliderImage img {
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .videoContainer {
@@ -190,19 +200,10 @@ a:hover {
 
 .videoContainer video {
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   width: 100%;
   object-fit: contain;
   height: "auto";
-}
-
-/* media query for screen size smaller than 768px */
-@media (max-width: 768px) {
-  .topbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 /* media query for screen size smaller than 1050px */
@@ -227,7 +228,7 @@ a:hover {
   .navbar-main-menu {
     display: flex;
     position: absolute;
-    top: 100px;
+    top: 135px;
     left: 0;
     width: 100%;
     background-color: white;
@@ -243,8 +244,16 @@ a:hover {
     width: 100%;
   }
   .navbar-main-menu .submenu {
+    display: none;
     position: relative;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: white;
     box-shadow: none;
+    padding: 10px 0px;
+    z-index: 100;
+    border-radius: 5px;
   }
   .navbar-main-menu li:hover .submenu {
     box-shadow: none;
@@ -255,7 +264,6 @@ a:hover {
   }
   .navbar-main-menu li:hover .submenu {
     display: block;
-    position: relative;
     width: 100%;
     left: 0px;
     right: 0px;
@@ -268,6 +276,20 @@ a:hover {
     right: 0;
     top: 185px;
     padding: 10px 0px;
+  }
+}
+/* media query for screen size smaller than 768px */
+@media (max-width: 768px) {
+  .topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .submenu {
+    position: relative !important;
+  }
+  .navbar-main-menu {
+    top: 180px;
   }
 }
 
@@ -286,13 +308,75 @@ a:hover {
   position: absolute;
   background-color: white;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  color: #000000;
-  cursor: pointer;
   padding: 10px;
   z-index: 100;
   border-radius: 5px;
 }
 
+.nav-overlay {
+  position: absolute;
+  width: 100%;
+  height: 93%;
+  top: 7px;
+  z-index: 1;
+  opacity: 0.3;
+  transition: all 0.5s;
+}
+
+.submenu div:first-child .nav-overlay {
+  background: #17469e;
+}
+
+.submenu div:nth-child(2) .nav-overlay {
+  background: #f07f1c;
+}
+
+.submenu div:nth-child(3) .nav-overlay {
+  background: #0ca2b4;
+}
+
+.submenu div:nth-child(4) .nav-overlay {
+  background: #c4161c;
+}
+
+.submenu div:nth-child(5) .nav-overlay {
+  background: #f37b90;
+}
+
+.nav-img {
+  width: 114%;
+  height: 197px;
+  object-fit: cover;
+  padding: 0;
+  margin: 0;
+}
+
+.submenu-text {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  font-size: 18px !important;
+  text-align: center;
+  color: #fff !important;
+  z-index: 1;
+}
+.nav-item {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.nav-item:hover .nav-overlay {
+  opacity: 1;
+}
+.nav-link {
+  margin: 0px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
 /* BEGIN: Swiper CSS */
 .hero-section .swiper-container {
   width: 100%;
@@ -656,22 +740,14 @@ a:hover {
   color: white;
   position: relative;
 }
-.nepal-map-eng {
+.nepal-map {
   width: 56%;
   height: auto;
   position: absolute;
+  z-index: 1000;
   top: -120px;
   right: 202px;
 }
-
-.nepal-map-nep {
-  width: 56%;
-  height: auto;
-  position: absolute;
-  top: -65px;
-  right: 202px;
-}
-
 .geo-legend {
   position: relative;
   padding-top: 200px;
@@ -728,7 +804,6 @@ a:hover {
   align-items: center;
   overflow: hidden;
 }
-
 .partners-slider .swiper-wrapper {
   align-items: center;
 }
@@ -911,6 +986,7 @@ a:hover {
 .accessibility-sidebar {
   position: fixed;
   top: 50%;
+  left: -188px;
   /* right: -200px; */
   transform: translateY(-50%);
   background-color: var(--red);
@@ -918,14 +994,6 @@ a:hover {
   padding: 20px;
   z-index: 1000;
   transition: all 0.5s;
-}
-
-.accessibility-sidebar-open {
-  left: 0px;
-}
-
-.accessibility-sidebar-closed {
-  left: -188px;
 }
 .accessibility-btn {
   /* content: "\f29a"; */
@@ -985,4 +1053,107 @@ div {
 /* Exclude elements with position: fixed from negative contrast */
 .negative-contrast [style*="position: fixed"] {
   filter: none; /* Reset filter for elements with position: fixed */
+}
+
+.nepal-map {
+  width: 56%;
+  height: auto;
+  position: absolute;
+  top: -120px;
+  right: 202px;
+}
+
+/* =================================================== */
+/* =================== About us Page ================= */
+/* =================================================== */
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.team-table th {
+  background-color: var(--blue);
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+.team-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--light-blue-grey);
+}
+.team-table tr:hover {
+  background-color: var(--lighter-grey);
+}
+
+/*===================================================== */
+/*================= Media Page ==================== */
+/*===================================================== */
+
+.media {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.media-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* About us page Banner */
+.banner {
+  background-image: url("../img/cover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  position: relative;
+  height: 300px;
+}
+.banner-content {
+  padding-top: 200px;
+}
+/* media query for screen sizes less than 480px */
+@media (max-width: 480px) {
+  .banner-content {
+    padding-top: 100px;
+  }
+  .banner {
+    height: 200px;
+  }
+}
+
+/*===================================================== */
+
+.thematic-icons {
+  width: 70px;
+  height: auto;
+}
+
+.about-us-fixed-height {
+  height: 100%;
+}
+
+/* ====================================================== */
+/* =================== Contact Us Page ================= */
+/* ====================================================== */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+.address-icon {
+  background-color: var(--blue);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

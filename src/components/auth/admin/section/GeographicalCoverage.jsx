@@ -1,13 +1,40 @@
 import React, { useEffect, useState } from "react";
 import {
+  getAllGeoMaps,
   getEnglishGeographicalCoverage,
   getNepaliGeographicalCoverage,
+  saveEnglishGeoMapData,
   saveEnglishGeographicalCoverage,
+  saveNepaliGeoMapData,
   saveNepaliGeographicalCoverage,
 } from "../../../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 
 function GeographicalCoverage() {
+  const [englishGeoMapData, setEnglishGeoMapData] = useState({
+    map: [
+      { provinceName: "Province 1", office: "" },
+      { provinceName: "Province 2", office: "" },
+      { provinceName: "Province 3", office: "" },
+      { provinceName: "Province 4", office: "" },
+      { provinceName: "Province 5", office: "" },
+      { provinceName: "Province 6", office: "" },
+      { provinceName: "Province 7", office: "" },
+    ],
+  });
+
+  const [nepaliGeoMapData, setNepaliGeoMapData] = useState({
+    map: [
+      { provinceName: "Province 1", office: "" },
+      { provinceName: "Province 2", office: "" },
+      { provinceName: "Province 3", office: "" },
+      { provinceName: "Province 4", office: "" },
+      { provinceName: "Province 5", office: "" },
+      { provinceName: "Province 6", office: "" },
+      { provinceName: "Province 7", office: "" },
+    ],
+  });
+
   const [englishGeographicalCoverage, setEnglishGeographicalCoverage] =
     useState({
       districts: "",
@@ -40,11 +67,46 @@ function GeographicalCoverage() {
             nepaliResponse.data.geographicalCoverage
           );
         }
+
+        const res = await getAllGeoMaps();
+        if (res.data) {
+          res.data.forEach((item) => {
+            if (item.locale === "eng") {
+              setEnglishGeoMapData((prevState) => ({
+                ...prevState,
+                map: item.map,
+              }));
+            } else if (item.locale === "nep") {
+              setNepaliGeoMapData((prevState) => ({
+                ...prevState,
+                map: item.map,
+              }));
+            }
+          });
+        }
       } catch (error) {}
     };
 
     fetchData();
   }, []);
+
+  const handleEnglishGeoMapChange = (index, value) => {
+    const updatedMap = [...englishGeoMapData.map];
+    updatedMap[index].office = value;
+    setEnglishGeoMapData((prevState) => ({
+      ...prevState,
+      map: updatedMap,
+    }));
+  };
+
+  const handleNepaliGeoMapChange = (index, value) => {
+    const updatedMap = [...nepaliGeoMapData.map];
+    updatedMap[index].office = value;
+    setNepaliGeoMapData((prevState) => ({
+      ...prevState,
+      map: updatedMap,
+    }));
+  };
 
   const onSubmit = async (e) => {
     e.stopPropagation();
@@ -52,6 +114,8 @@ function GeographicalCoverage() {
     try {
       await saveEnglishGeographicalCoverage(englishGeographicalCoverage);
       await saveNepaliGeographicalCoverage(nepaliGeographicalCoverage);
+      await saveEnglishGeoMapData(englishGeoMapData);
+      await saveNepaliGeoMapData(nepaliGeoMapData);
       toast.success("Content Saved Successfully!", {
         position: "top-center",
         autoClose: 700,
@@ -226,6 +290,53 @@ function GeographicalCoverage() {
                         />
                       </div>
                     </div>
+                    <div className="m-4">
+                      <h4 className="card-title">Geo Map Data </h4>
+                      <hr />
+                    </div>
+                    {englishGeoMapData.map.map((item, index) => (
+                      <>
+                        <div key={index} className="row  col-md-12">
+                          <div className="col-md-6">
+                            <div className="mb-3 ">
+                              <label className="form-label">
+                                {item.provinceName}
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={item.office}
+                                onChange={(e) =>
+                                  handleEnglishGeoMapChange(
+                                    index,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                            <div className="mb-3 ">
+                              <label className="form-label">
+                                {item.provinceName}
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={nepaliGeoMapData.map[index].office}
+                                onChange={(e) =>
+                                  handleNepaliGeoMapChange(
+                                    index,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ))}
                   </div>
 
                   <div
