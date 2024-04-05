@@ -9,7 +9,8 @@ import {
 import Footer from "./Footer";
 import CustomModal from "./NewLetter/popup/CustomModal";
 import StoriesList from "./StoriesList";
-import { Button } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const Stories = () => {
   const headingRef = useRef();
@@ -26,6 +27,7 @@ const Stories = () => {
     readMoreBtnColor: "",
   });
   const [isModalOpen, setModalOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const submitStoryHeading = async (e) => {
     e.preventDefault();
@@ -146,12 +148,143 @@ const Stories = () => {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Services Rich Text Editor</h5>
-                  <Button onClick={() => setModalOpen(true)}>
+                  <Button onClick={() => setOpen(true)}>
                     {" "}
                     Show And Edit Stories
                   </Button>
 
                   <hr className="border-2" />
+                  <div className="row">
+                    {/* a qukc brown fox jumps over the lazy dog. a qukc brown fox
+                    jumps over the lazy dog.{" "} */}
+                    <div className="d-flex justify-content-between">
+                      <div className="col-md-5">
+                        <div className="mb-3">
+                          <label className="form-label"> Heading</label>
+                          <input
+                            type="text"
+                            value={storyHeading.heading}
+                            name="heading"
+                            ref={headingRef}
+                            className="form-control"
+                            onChange={(e) =>
+                              setStoryHeading({
+                                ...storyHeading,
+                                heading: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-md-5">
+                        <div className="mb-3">
+                          <label className="form-label"> Heading Nepali</label>
+                          <input
+                            value={storyHeading.headingNepali}
+                            name="headingNepali"
+                            type="text"
+                            className="form-control"
+                            onChange={(e) =>
+                              setStoryHeading({
+                                ...storyHeading,
+                                headingNepali: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="form-label">
+                        Read More Button Color
+                      </label>
+                      <SketchPicker color={color} onChange={setColor} />
+                    </div>
+
+                    <div
+                      style={{ marginTop: "10px" }}
+                      className="d-flex justify-content-center"
+                    >
+                      <button
+                        type="submit"
+                        onClick={(e) => submitStoryHeading(e)}
+                        className="btn btn-primary "
+                      >
+                        Create Story's Heading
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <h5>Add Story</h5>
+                  <div className="row">
+                    <div className="d-flex justify-content-between">
+                      <div className="col-5">
+                        <form>
+                          <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <textarea
+                              ref={descRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">Person Name</label>
+                            <textarea
+                              ref={personRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">Person Image</label>
+                            <input
+                              type="file"
+                              ref={imageRef}
+                              className="form-control"
+                              multiple
+                              rows="3"
+                            ></input>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div className="col-5">
+                        <form>
+                          <div className="mb-3">
+                            <label className="form-label">
+                              Description Nepali
+                            </label>
+                            <textarea
+                              ref={descNepaliRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div className="mb-3">
+                            <label className="form-label">
+                              Person's Name Nepali
+                            </label>
+                            <textarea
+                              ref={personNepaliRef}
+                              className="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      onClick={(e) => submitStory(e)}
+                      className="btn btn-primary "
+                    >
+                      Create Story
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -159,11 +292,22 @@ const Stories = () => {
         </section>
       </main>
       <div className="hero">
-        <CustomModal
-          isOpen={isModalOpen}
-          onRequestClose={() => setModalOpen(false)}
-          contentComponent={<StoriesList storyUpdate={storyUpdatedMsg} />}
-        ></CustomModal>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <>
+            <Box sx={style}>
+              <Close
+                onClick={() => setOpen(false)}
+                style={{ float: "right", cursor: "pointer" }}
+              ></Close>{" "}
+              <StoriesList />
+            </Box>
+          </>
+        </Modal>
       </div>
 
       <ToastContainer />
@@ -173,3 +317,14 @@ const Stories = () => {
 };
 
 export default Stories;
+const style = {
+  position: "absolute",
+  top: "40%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "fit-content",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};

@@ -8,6 +8,7 @@ import {
 } from "../../../../services/ourImpactService";
 import { Box, Button, Modal } from "@mui/material";
 import OurImpactList from "./OurImpactList";
+import { Close } from "@mui/icons-material";
 
 const OurImpact = () => {
   const headingRef = useRef();
@@ -135,8 +136,109 @@ const OurImpact = () => {
                       setOpen(true);
                     }}
                   >
-                    <h5>Our impact's list</h5>
+                    Our impact's list
                   </Button>
+                  <h5 className="card-title">Add Impact</h5>
+                  <hr className="border-2" />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Heading</label>
+                        <input
+                          type="text"
+                          value={impact.heading}
+                          ref={headingRef}
+                          className="form-control"
+                          onChange={(e) =>
+                            setImpact({
+                              ...impact,
+                              heading: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Heading Nepali</label>
+                        <input
+                          type="text"
+                          value={impact.headingNepali}
+                          ref={headingNepaliRef}
+                          className="form-control"
+                          onChange={(e) =>
+                            setImpact({
+                              ...impact,
+                              headingNepali: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <button
+                        type="submit"
+                        onClick={submitImpactHeading}
+                        className="btn btn-primary"
+                      >
+                        Save Impact's Heading
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <h5>Add Impact Contents</h5>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <div className="mb-3">
+                        <label className="form-label">Icon</label>
+                        <input
+                          type="file"
+                          ref={iconRef}
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label className="form-label">Count</label>
+                        <input
+                          type="number"
+                          ref={countRef}
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label className="form-label">Count Nepali</label>
+                        <input
+                          type="number"
+                          ref={countNepaliRef}
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label className="form-label">Description</label>
+                        <textarea
+                          ref={descRef}
+                          className="form-control"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                      <div className="mb-3">
+                        <label className="form-label">Description Nepali</label>
+                        <textarea
+                          ref={descNepaliRef}
+                          className="form-control"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <button
+                        className="btn btn-primary"
+                        onClick={submitImpact}
+                      >
+                        Add Impact
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -152,9 +254,14 @@ const OurImpact = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Close
+            onClick={() => setOpen(false)}
+            style={{ float: "right", cursor: "pointer" }}
+          ></Close>{" "}
           <OurImpactList />
         </Box>
       </Modal>
+
       <ToastContainer />
     </>
   );
