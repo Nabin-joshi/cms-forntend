@@ -306,11 +306,16 @@ a:hover {
 #language-dropdown {
   display: none;
   position: absolute;
-  background-color: white;
+  background-color: var(--lighter-grey);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   padding: 10px;
   z-index: 100;
   border-radius: 5px;
+  color: #000000;
+}
+
+#language-btn {
+  cursor: pointer;
 }
 
 .nav-overlay {
@@ -1083,6 +1088,10 @@ div {
 }
 .team-table tr:hover {
   background-color: var(--lighter-grey);
+}
+
+.about-us-container {
+  width: 100%;
 }
 
 /*===================================================== */

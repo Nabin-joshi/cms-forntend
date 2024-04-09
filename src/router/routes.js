@@ -36,6 +36,7 @@ import ContactUsHome from "../components/home/ContactUsHome.jsx";
 import GetInTouches from "../components/auth/admin/GetInTouches.jsx";
 import LatestNews from "../components/auth/admin/section/LatestNews.jsx";
 import LatestNewsReadMore from "../components/home/homePageRoutingSection/LatestNewsReadMore.jsx";
+import NavbarImages from "../components/auth/admin/section/NavbarImages.jsx";
 
 export const mainRoutes = [
   {
@@ -224,6 +225,11 @@ export const mainRoutes = [
         path: "latestnews",
         name: "Latest News",
         element: LatestNews,
+      },
+      {
+        path: "navImages",
+        name: "Navbar Images",
+        element: NavbarImages,
       },
     ],
   },

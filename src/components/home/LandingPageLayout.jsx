@@ -15,10 +15,13 @@ import YourSupport from "./YourSupport";
 import LatestNews from "./LatestNews";
 import NewsLetter from "./NewsLetter";
 import Accessibility from "./Accessibility";
+import PopUp from "../shared/CustomModal/PopUp";
 
 export default function LandingPageLayout() {
   const [data, setData] = useState(null);
   const [selectedLocale, setSelectedLocale] = useState("english");
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleOptionChange = async (event) => {
     setSelectedLocale(event.target.value);
@@ -46,9 +49,19 @@ export default function LandingPageLayout() {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowModal(true);
+  //   }, 1000);
+  // }, []);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
     <>
       <main>
+        {showModal && <PopUp onCloseModal={closeModal} />}
         <Slider />
         <Accessibility />
         <Stories />

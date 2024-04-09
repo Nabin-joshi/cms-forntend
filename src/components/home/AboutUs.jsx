@@ -70,18 +70,18 @@ const AboutUs = () => {
 
   return (
     <>
-      <section class="about-us-section my-3">
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
+      <section className="about-us-section my-3">
+        <div className="about-us-container">
+          <div className="card">
+            <div className="card-body">
               {fieldName === "history" && (
-                <h1 class="text-center text-blue">History </h1>
+                <h1 className="text-center text-blue">History </h1>
               )}
               {fieldName === "whoWeAre" && (
-                <h1 class="text-center text-blue">Introduction </h1>
+                <h1 className="text-center text-blue">Introduction </h1>
               )}
               {fieldName === "boardCommittees" && (
-                <h1 class="text-center text-blue">Our Team </h1>
+                <h1 className="text-center text-blue">Our Team </h1>
               )}
 
               {fieldName !== "boardCommittees" && (

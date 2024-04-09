@@ -517,3 +517,27 @@ export const deleteEnglishNews = async (id) => {
   }
   return response;
 };
+
+export const saveAboutUsImages = async (data) => {
+  try {
+    await api.put("/api/aboutUs/updateNavImage", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getAboutUsImages = async () => {
+  let response;
+  try {
+    response = await api.get("/api/aboutUs/getAboutUsImage");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};

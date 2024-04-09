@@ -113,6 +113,13 @@ function AdminSidebar() {
                   <span>Get Involved</span>
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink to="/admin/ourProgram">
+                  <i className="bi bi-circle"></i>
+                  <span>Our Program</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/admin/resources">
                   <i className="bi bi-circle"></i>
@@ -129,6 +136,13 @@ function AdminSidebar() {
                 <NavLink to="/admin/footer">
                   <i className="bi bi-circle"></i>
                   <span>Footer</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/admin/navImages">
+                  <i className="bi bi-circle"></i>
+                  <span>Navbar Images</span>
                 </NavLink>
               </li>
             </ul>

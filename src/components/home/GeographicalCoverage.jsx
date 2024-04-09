@@ -119,7 +119,30 @@ function GeographicalCoverage() {
             onMapClick={(val) => handleProvinceClick(val)}
           />
         </div>
+
         <div className="geo-legend">
+          <div className="legend-item">
+            {selectedProvinceData && (
+              <div>
+                <h3> {selectedProvinceData.name} Data</h3>
+                <ul>
+                  {geoMapData &&
+                    geoMapData.map.map((item) => {
+                      // Filter geoMapData based on selected province name
+                      if (item.provinceName === selectedProvinceData.name) {
+                        return (
+                          <li key={item.provinceName}>
+                            <strong>Office Name:</strong> {item.office}
+                          </li>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                </ul>
+              </div>
+            )}
+          </div>
           <div className="legend-item">
             <div
               className="legend-color"

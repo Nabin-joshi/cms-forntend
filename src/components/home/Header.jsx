@@ -2,17 +2,29 @@ import React, { useEffect, useState } from "react";
 import { donateUs } from "../../services/NewsLetterUserService";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import CustomModal from "../auth/admin/section/NewLetter/popup/CustomModal";
-import DonateModal from "../auth/admin/section/NewLetter/popup/DonateModal";
 import logo from "../../assets/img/logo.png";
 import coverImg from "../../assets/img/cover.jpg";
+import { getAboutUsImages } from "../../services/api";
 
 export default function Header() {
   const [locale, setlocale] = useState("EN");
+  const [aboutUsImages, setAboutUsImages] = useState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let res = await getAboutUsImages();
+        if (res.data) {
+          setAboutUsImages(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching slider content:", error);
+      }
+    };
+    fetchData();
+
     let locale = localStorage.getItem("locale")
       ? localStorage.getItem("locale") === "eng"
         ? "EN"
@@ -162,10 +174,9 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-              <div classNameName="topbar-item px-3">
+              <div className="topbar-item px-3">
                 <div onClick={onLanguageOptionClicked} id="language-btn">
-                  <span>{locale} </span>{" "}
-                  <i classNameName="fas fa-angle-down"></i>
+                  <span>{locale} </span> <i className="fas fa-angle-down"></i>
                 </div>
                 <div id="language-dropdown">
                   <div>
@@ -191,12 +202,14 @@ export default function Header() {
         </div>
         <div className="container d-flex align-items-center justify-content-between">
           <div className="strip d-flex justify-content-between py-1 bg-light">
-            <img
-              src={logo}
-              alt="logo"
-              className=""
-              style={{ height: "90px", width: "237px" }}
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="logo"
+                className=""
+                style={{ height: "90px", width: "237px" }}
+              />
+            </Link>
           </div>
           <div className="right-section-header py-2">
             <div className="d-flex align-items-center">
@@ -238,7 +251,13 @@ export default function Header() {
                         <div className="col-6 col-md-3 nav-item">
                           <NavLink to="/aboutUs/history" className="nav-link">
                             <img
-                              src={coverImg}
+                              src={
+                                aboutUsImages &&
+                                aboutUsImages.aboutUsHistory &&
+                                aboutUsImages.aboutUsHistory !== ""
+                                  ? aboutUsImages.aboutUsHistory
+                                  : coverImg
+                              }
                               alt="menu img"
                               className="nav-img"
                             />
@@ -249,7 +268,13 @@ export default function Header() {
                         <div className="col-6 col-md-3 nav-item position-relative">
                           <NavLink to="/aboutUs/whoWeAre" className="nav-link">
                             <img
-                              src={coverImg}
+                              src={
+                                aboutUsImages &&
+                                aboutUsImages.aboutUsIntroduction &&
+                                aboutUsImages.aboutUsIntroduction !== ""
+                                  ? aboutUsImages.aboutUsIntroduction
+                                  : coverImg
+                              }
                               alt="menu img"
                               className="nav-img"
                             />
@@ -263,7 +288,13 @@ export default function Header() {
                             className="nav-link"
                           >
                             <img
-                              src={coverImg}
+                              src={
+                                aboutUsImages &&
+                                aboutUsImages.aboutUsOurTeam &&
+                                aboutUsImages.aboutUsOurTeam !== ""
+                                  ? aboutUsImages.aboutUsOurTeam
+                                  : coverImg
+                              }
                               alt="menu img"
                               className="nav-img"
                             />
@@ -283,58 +314,82 @@ export default function Header() {
                     <div className="container">
                       <div className="row">
                         <div className="col-6 col-md-3 nav-item">
-                          <NavLink to="#" className="nav-link">
+                          <NavLink
+                            to="ourProgram/advocacyAwarness"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
+                            <span className="submenu-text">
+                              Advocacy Awarness
+                            </span>
                           </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <NavLink to="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="ourProgram/empowermentAndCommunityInclusion"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
+                            <span className="submenu-text">
+                              Empowerment And Community Inclusion
+                            </span>
                           </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <NavLink to="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="ourProgram/strengthenCommunitySupportSystem"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
+                            <span className="submenu-text">
+                              Strengthen Community Support System
+                            </span>
                           </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <NavLink to="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink
+                            to="ourProgram/organizationalDevelopment"
+                            className="nav-link"
+                          >
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
+                            <span className="submenu-text">
+                              Organizational Development
+                            </span>
                           </NavLink>
                         </div>
-                        <div className="col-6 col-md-3 nav-item position-relative">
-                          <NavLink to="#" className="nav-link">
+
+                        <div className="col-6 col-md-3 nav-item">
+                          <NavLink to="ourProgram/ecsc" className="nav-link">
                             <img
                               src={coverImg}
                               alt="menu img"
                               className="nav-img"
                             />
                             <div className="nav-overlay"></div>
-                            <span className="submenu-text">Submenu 1-1</span>
+                            <span className="submenu-text">Ecsc</span>
                           </NavLink>
                         </div>
                       </div>

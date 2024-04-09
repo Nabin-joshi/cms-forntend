@@ -25,10 +25,10 @@ const OurProgramHome = () => {
 
   return (
     <>
-      <section class="about-us-section my-3">
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
+      <section className="about-us-section my-3">
+        <div className="our-work-container">
+          <div className="card">
+            <div className="card-body">
               <div dangerouslySetInnerHTML={{ __html: field }}></div>
             </div>
           </div>
