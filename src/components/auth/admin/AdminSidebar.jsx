@@ -102,6 +102,12 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/contactUs">
+                  <i className="bi bi-circle"></i>
+                  <span>Contact Us</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/getInvolved">
                   <i className="bi bi-circle"></i>
                   <span>Get Involved</span>

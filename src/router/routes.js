@@ -87,12 +87,12 @@ export const mainRoutes = [
         element: AboutUs,
       },
       {
-        path: "/resources",
+        path: "/resources/:fieldName",
         name: "Resources",
         element: ResourcesHome,
       },
       {
-        path: "/getInvolved",
+        path: "/getInvolved/:fieldName",
         name: "Get Involved ",
         element: GetInvolvedHome,
       },
