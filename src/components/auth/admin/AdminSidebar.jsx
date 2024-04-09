@@ -120,6 +120,18 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/admin/nlgmf">
+                  <i className="bi bi-circle"></i>
+                  <span>Newsletter Group Mapping</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/donation">
+                  <i className="bi bi-circle"></i>
+                  <span>Donation</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/admin/footer">
                   <i className="bi bi-circle"></i>
                   <span>Footer</span>

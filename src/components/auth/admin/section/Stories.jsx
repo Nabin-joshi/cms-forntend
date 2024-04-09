@@ -157,54 +157,55 @@ const Stories = () => {
                   <div className="row">
                     {/* a qukc brown fox jumps over the lazy dog. a qukc brown fox
                     jumps over the lazy dog.{" "} */}
-                    <div className="d-flex justify-content-between">
-                      <div className="col-md-5">
-                        <div className="mb-3">
-                          <label className="form-label"> Heading</label>
-                          <input
-                            type="text"
-                            value={storyHeading.heading}
-                            name="heading"
-                            ref={headingRef}
-                            className="form-control"
-                            onChange={(e) =>
-                              setStoryHeading({
-                                ...storyHeading,
-                                heading: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-
-                      <div className="col-md-5">
-                        <div className="mb-3">
-                          <label className="form-label"> Heading Nepali</label>
-                          <input
-                            value={storyHeading.headingNepali}
-                            name="headingNepali"
-                            type="text"
-                            className="form-control"
-                            onChange={(e) =>
-                              setStoryHeading({
-                                ...storyHeading,
-                                headingNepali: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
+                    <div className="col-md-5">
+                      <div className="mb-3">
+                        <label className="form-label"> Heading</label>
+                        <input
+                          type="text"
+                          value={storyHeading.heading}
+                          name="heading"
+                          ref={headingRef}
+                          className="form-control"
+                          onChange={(e) =>
+                            setStoryHeading({
+                              ...storyHeading,
+                              heading: e.target.value,
+                            })
+                          }
+                        />
                       </div>
                     </div>
-                    <div>
+
+                    <div className="col-md-5">
+                      <div className="mb-3">
+                        <label className="form-label"> Heading Nepali</label>
+                        <input
+                          value={storyHeading.headingNepali}
+                          name="headingNepali"
+                          type="text"
+                          className="form-control"
+                          onChange={(e) =>
+                            setStoryHeading({
+                              ...storyHeading,
+                              headingNepali: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="ml-3">
                       <label className="form-label">
                         Read More Button Color
                       </label>
                       <SketchPicker color={color} onChange={setColor} />
                     </div>
-
+                  </div>
+                  <div className="row">
                     <div
                       style={{ marginTop: "10px" }}
-                      className="d-flex justify-content-center"
+                      className="ml-3 d-flex justify-content-center"
                     >
                       <button
                         type="submit"

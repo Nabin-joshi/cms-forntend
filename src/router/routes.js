@@ -36,6 +36,9 @@ import ContactUsHome from "../components/home/ContactUsHome.jsx";
 import GetInTouches from "../components/auth/admin/GetInTouches.jsx";
 import LatestNews from "../components/auth/admin/section/LatestNews.jsx";
 import LatestNewsReadMore from "../components/home/homePageRoutingSection/LatestNewsReadMore.jsx";
+import NewsPaperGroupMappingForm from "../components/auth/admin/section/NewsPaperGroupMappingForm.jsx";
+import Donation from "../components/auth/admin/section/Donation.jsx";
+import DonationHome from "../components/home/DonationHome.jsx";
 
 export const mainRoutes = [
   {
@@ -102,6 +105,11 @@ export const mainRoutes = [
         path: "/contactUs",
         name: "Contact Us  ",
         element: ContactUsHome,
+      },
+      {
+        path: "/donation",
+        name: "Donation home ",
+        element: DonationHome,
       },
     ],
   },
@@ -224,6 +232,16 @@ export const mainRoutes = [
         path: "latestnews",
         name: "Latest News",
         element: LatestNews,
+      },
+      {
+        path: "nlgmf", //newsLetterGroup mapping form
+        name: "NewsPaperGroupMappingForm",
+        element: NewsPaperGroupMappingForm,
+      },
+      {
+        path: "donation",
+        name: "Donation INfo",
+        element: Donation,
       },
     ],
   },
