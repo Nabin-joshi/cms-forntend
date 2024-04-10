@@ -44,27 +44,35 @@ const Stories = () => {
           <div className="row mt-5">
             {stories && stories.contents ? (
               stories.contents.map((story, index) => (
-                <div
-                  key={index}
-                  className="col-12 col-lg-3 d-flex flex-column align-items-center"
-                >
-                  <img src={story.image} alt="" className="testimonials-img" />
-                  <p className="text-center mt-2">
-                    {locale
-                      ? locale === "eng"
-                        ? story.desc
-                        : story.descNepali
-                      : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque impedit accusamus at quia voluptas reiciendismolestias consequatur porro ea maxime cum numquam est nobisassumenda quos ad, ex voluptatibus magni?"}
-                  </p>
-                  <h4 className="font-weight-bold text-blue">
-                    {" "}
-                    {locale
-                      ? locale === "eng"
-                        ? story.person
-                        : story.personNepali
-                      : "John Doe"}
-                  </h4>
-                </div>
+                <>
+                  {story.display && (
+                    <div
+                      key={index}
+                      className="col-12 col-lg-3 d-flex flex-column align-items-center"
+                    >
+                      <img
+                        src={story.image}
+                        alt=""
+                        className="testimonials-img"
+                      />
+                      <p className="text-center mt-2">
+                        {locale
+                          ? locale === "eng"
+                            ? story.desc
+                            : story.descNepali
+                          : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque impedit accusamus at quia voluptas reiciendismolestias consequatur porro ea maxime cum numquam est nobisassumenda quos ad, ex voluptatibus magni?"}
+                      </p>
+                      <h4 className="font-weight-bold text-blue">
+                        {" "}
+                        {locale
+                          ? locale === "eng"
+                            ? story.person
+                            : story.personNepali
+                          : "John Doe"}
+                      </h4>
+                    </div>
+                  )}
+                </>
               ))
             ) : (
               <>

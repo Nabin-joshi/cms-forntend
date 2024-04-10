@@ -213,7 +213,7 @@ export default function Header() {
           </div>
           <div className="right-section-header py-2">
             <div className="d-flex align-items-center">
-              <NavLink to="/" className="donate-btn d-none d-sm-flex">
+              <NavLink to="/donation" className="donate-btn d-none d-sm-flex">
                 <i className="fas fa-hand-holding-heart text-red"></i>
                 <div className="ml-3 d-flex flex-column">
                   <span className="font-weight-bold">

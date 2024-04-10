@@ -36,7 +36,10 @@ import ContactUsHome from "../components/home/ContactUsHome.jsx";
 import GetInTouches from "../components/auth/admin/GetInTouches.jsx";
 import LatestNews from "../components/auth/admin/section/LatestNews.jsx";
 import LatestNewsReadMore from "../components/home/homePageRoutingSection/LatestNewsReadMore.jsx";
+import DonationHome from "../components/home/DonationHome.jsx";
 import NavbarImages from "../components/auth/admin/section/NavbarImages.jsx";
+import Donation from "../components/auth/admin/section/Donation.jsx";
+import NewsPaperGroupMappingForm from "../components/auth/admin/section/NewsPaperGroupMappingForm.jsx";
 
 export const mainRoutes = [
   {
@@ -103,6 +106,11 @@ export const mainRoutes = [
         path: "/contactUs",
         name: "Contact Us  ",
         element: ContactUsHome,
+      },
+      {
+        path: "/donation",
+        name: "Donation home ",
+        element: DonationHome,
       },
     ],
   },
@@ -230,6 +238,16 @@ export const mainRoutes = [
         path: "navImages",
         name: "Navbar Images",
         element: NavbarImages,
+      },
+      {
+        path: "donation",
+        name: "Donation ",
+        element: Donation,
+      },
+      {
+        path: "nlgmf",
+        name: "News Letter Group",
+        element: NewsPaperGroupMappingForm,
       },
     ],
   },

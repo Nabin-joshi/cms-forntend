@@ -107,13 +107,13 @@ function GeographicalCoverage() {
             value="Chauri"
             stroke="#000"
             provinceColor={[
-              "red",
-              "green",
-              "blue",
-              "yellow",
-              "orange",
-              "purple",
-              "cyan",
+              "#3fa9f5",
+              "#92cdea",
+              "#62baef",
+              "#3fa9f5",
+              "#92cdea",
+              "#62baef",
+              "#3fa9f5",
             ]}
             strokeWidth={1}
             onMapClick={(val) => handleProvinceClick(val)}

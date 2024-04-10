@@ -87,6 +87,51 @@ const AboutUs = () => {
               {fieldName !== "boardCommittees" && (
                 <p dangerouslySetInnerHTML={{ __html: fieldValue }}></p>
               )}
+              {fieldName === "boardCommittees" && (
+                <div>
+                  <h5 className="ml-2">Board Members</h5>
+                  <br />
+                  <div
+                    style={{
+                      display: "flex",
+                      direction: "row",
+                      flexWrap: "wrap",
+                      alignContent: "space-between",
+                    }}
+                  >
+                    {fieldName === "boardCommittees" &&
+                      fieldValue &&
+                      Array.isArray(fieldValue) &&
+                      fieldValue.map((item, index) => {
+                        if (item.role === "Board Member") {
+                          return (
+                            <>
+                              <div className="ml-2">
+                                <div className="card">
+                                  <div className="card-body">
+                                    {item.photo && (
+                                      <img
+                                        src={item.photo}
+                                        alt="No Img"
+                                        style={{
+                                          height: "15rem",
+                                          width: "15rem",
+                                        }}
+                                      />
+                                    )}
+                                    <p>{item.name}</p>
+                                    <p>{item.role}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          );
+                        }
+                      })}
+                  </div>
+                </div>
+              )}
+              <hr></hr>
 
               {fieldName === "boardCommittees" && (
                 <div>
@@ -129,51 +174,6 @@ const AboutUs = () => {
                             </>
                           );
                         } else return;
-                      })}
-                  </div>
-                </div>
-              )}
-              <hr></hr>
-              {fieldName === "boardCommittees" && (
-                <div>
-                  <h5 className="ml-2">Board Members</h5>
-                  <br />
-                  <div
-                    style={{
-                      display: "flex",
-                      direction: "row",
-                      flexWrap: "wrap",
-                      alignContent: "space-between",
-                    }}
-                  >
-                    {fieldName === "boardCommittees" &&
-                      fieldValue &&
-                      Array.isArray(fieldValue) &&
-                      fieldValue.map((item, index) => {
-                        if (item.role === "Board Member") {
-                          return (
-                            <>
-                              <div className="ml-2">
-                                <div className="card">
-                                  <div className="card-body">
-                                    {item.photo && (
-                                      <img
-                                        src={item.photo}
-                                        alt="No Img"
-                                        style={{
-                                          height: "15rem",
-                                          width: "15rem",
-                                        }}
-                                      />
-                                    )}
-                                    <p>{item.name}</p>
-                                    <p>{item.role}</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                          );
-                        }
                       })}
                   </div>
                 </div>

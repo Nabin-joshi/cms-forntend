@@ -90,12 +90,6 @@ function AdminSidebar() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin/features">
-                  <i className="bi bi-circle"></i>
-                  <span>Feature</span>
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="/admin/aboutUs">
                   <i className="bi bi-circle"></i>
                   <span>About Us</span>
@@ -130,6 +124,18 @@ function AdminSidebar() {
                 <NavLink to="/admin/getInTouch">
                   <i className="bi bi-circle"></i>
                   <span>Get In Touch</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/nlgmf">
+                  <i className="bi bi-circle"></i>
+                  <span>Newsletter Group Mapping</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/donation">
+                  <i className="bi bi-circle"></i>
+                  <span>Donation</span>
                 </NavLink>
               </li>
               <li>

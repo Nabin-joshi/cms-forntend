@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { createNewsLetterUser } from "../../services/NewsLetterUserService";
 import { getFooter } from "../../services/footerService";
@@ -174,9 +174,12 @@ export default function Footer() {
                 <h4 className="text-white font-weight-bold">
                   Make a difference
                 </h4>
-                <button className="btn btn-blue border mt-2">
-                  <i className="fas fa-hand-holding-heart mr-2"></i>Donate Now{" "}
-                </button>
+                <Link to="/donation">
+                  <button className="btn btn-blue border mt-2">
+                    <i className="fas fa-hand-holding-heart mr-2"></i>
+                    Donate Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
