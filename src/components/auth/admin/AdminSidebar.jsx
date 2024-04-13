@@ -151,6 +151,20 @@ function AdminSidebar() {
                   <span>Navbar Images</span>
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink to="/admin/socialLinks">
+                  <i className="bi bi-circle"></i>
+                  <span>Social Links</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/admin/popup">
+                  <i className="bi bi-circle"></i>
+                  <span>Popup Page</span>
+                </NavLink>
+              </li>
             </ul>
           </li>
 

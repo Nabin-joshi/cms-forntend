@@ -68,7 +68,7 @@ export default function Slider() {
                           ? sliderData.image
                           : slider1
                       }
-                      alt="Slide 1"
+                      alt="Slider Image"
                       className="img-fluid"
                     />
                   </div>

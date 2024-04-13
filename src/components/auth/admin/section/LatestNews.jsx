@@ -21,7 +21,8 @@ const LatestNews = () => {
         _id: "",
         title: "",
         image: "",
-        date: "",
+        day: "",
+        month: "",
         contentDescription: "",
         details: "",
       },
@@ -34,7 +35,8 @@ const LatestNews = () => {
         _id: "",
         title: "",
         image: "",
-        date: "",
+        day: "",
+        month: "",
         contentDescription: "",
         details: "",
       },
@@ -90,7 +92,8 @@ const LatestNews = () => {
         {
           _id: "",
           image: "",
-          Date: "",
+          day: "",
+          month: "",
           contentDescription: "",
           details: "",
         },
@@ -104,7 +107,8 @@ const LatestNews = () => {
         {
           _id: "",
           image: "",
-          Date: "",
+          day: "",
+          month: "",
           contentDescription: "",
           details: "",
         },
@@ -180,7 +184,8 @@ const LatestNews = () => {
       if (formsFieldsEnglish) {
         const formData = new FormData();
         formData.append("title", formsFieldsEnglish.latestNews[index].title);
-        formData.append("date", formsFieldsEnglish.latestNews[index].date);
+        formData.append("day", formsFieldsEnglish.latestNews[index].day);
+        formData.append("month", formsFieldsEnglish.latestNews[index].month);
         formData.append(
           "contentDescription",
           formsFieldsEnglish.latestNews[index].contentDescription
@@ -197,7 +202,8 @@ const LatestNews = () => {
       if (formsFieldsNepali) {
         const formData = new FormData();
         formData.append("title", formsFieldsNepali.latestNews[index].title);
-        formData.append("date", formsFieldsNepali.latestNews[index].date);
+        formData.append("day", formsFieldsNepali.latestNews[index].day);
+        formData.append("month", formsFieldsNepali.latestNews[index].month);
         formData.append(
           "contentDescription",
           formsFieldsNepali.latestNews[index].contentDescription
@@ -329,12 +335,24 @@ const LatestNews = () => {
                                 />
                               </div>
                               <div className=" mb-3">
-                                <label className="form-label">Date</label>
+                                <label className="form-label">Day</label>
                                 <input
                                   type="text"
                                   className="form-control"
-                                  value={news.date}
-                                  name="date"
+                                  value={news.day}
+                                  name="day"
+                                  onChange={(e) =>
+                                    handleEnglishInputChange(index, e)
+                                  }
+                                />
+                              </div>
+                              <div className=" mb-3">
+                                <label className="form-label">Month</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={news.month}
+                                  name="month"
                                   onChange={(e) =>
                                     handleEnglishInputChange(index, e)
                                   }
@@ -396,18 +414,38 @@ const LatestNews = () => {
                               </div>
 
                               <div className="mb-3">
-                                <label className="form-label">Date</label>
+                                <label className="form-label">Day</label>
                                 <input
                                   type="text"
                                   className="form-control"
                                   value={
-                                    formsFieldsNepali.latestNews[index].date
+                                    formsFieldsNepali.latestNews[index].day
                                   }
-                                  name="date"
+                                  name="day"
                                   onChange={(e) =>
                                     handleNepaliInputChange(index, {
                                       target: {
-                                        name: "date",
+                                        name: "day",
+                                        value: e.target.value,
+                                      },
+                                    })
+                                  }
+                                />
+                              </div>
+
+                              <div className="mb-3">
+                                <label className="form-label">Month</label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={
+                                    formsFieldsNepali.latestNews[index].month
+                                  }
+                                  name="month"
+                                  onChange={(e) =>
+                                    handleNepaliInputChange(index, {
+                                      target: {
+                                        name: "month",
                                         value: e.target.value,
                                       },
                                     })

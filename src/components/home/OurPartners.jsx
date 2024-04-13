@@ -19,7 +19,6 @@ const OurPartners = () => {
   async function fetchAllourPartners() {
     try {
       const response = await getOurPartnerHeading();
-      console.log("partner", response.data.data);
       setourPartners(response.data.data);
     } catch (error) {}
   }

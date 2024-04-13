@@ -170,9 +170,12 @@ function OurWork() {
           </div>
 
           <div className="d-flex justify-content-center">
-            <a href="/ourWork/viewAll" className="btn btn-blue-inverted mt-3">
+            <NavLink
+              to="/ourWork/viewAll"
+              className="btn btn-blue-inverted mt-3"
+            >
               View All <i className="fas fa-circle-arrow-right ml-2"></i>
-            </a>
+            </NavLink>
           </div>
         </div>
       </section>

@@ -40,6 +40,9 @@ import DonationHome from "../components/home/DonationHome.jsx";
 import NavbarImages from "../components/auth/admin/section/NavbarImages.jsx";
 import Donation from "../components/auth/admin/section/Donation.jsx";
 import NewsPaperGroupMappingForm from "../components/auth/admin/section/NewsPaperGroupMappingForm.jsx";
+import SocialLinks from "../components/auth/admin/section/SocialLinks.jsx";
+import PopupPage from "../components/auth/admin/section/PopupPage.jsx";
+import AboutUsOurPartners from "../components/home/AboutUsOurPartners.jsx";
 
 export const mainRoutes = [
   {
@@ -111,6 +114,11 @@ export const mainRoutes = [
         path: "/donation",
         name: "Donation home ",
         element: DonationHome,
+      },
+      {
+        path: "aboutUsOurPartners",
+        name: "Our Partners Page",
+        element: AboutUsOurPartners,
       },
     ],
   },
@@ -248,6 +256,16 @@ export const mainRoutes = [
         path: "nlgmf",
         name: "News Letter Group",
         element: NewsPaperGroupMappingForm,
+      },
+      {
+        path: "socialLinks",
+        name: "socialLinks",
+        element: SocialLinks,
+      },
+      {
+        path: "popup",
+        name: "Popup Page",
+        element: PopupPage,
       },
     ],
   },

@@ -103,7 +103,7 @@ function GeographicalCoverage() {
       <div className="geo-blue-bg">
         <div className="nepal-map">
           <ProvinceMap
-            hoverColor="darkGray"
+            hoverColor="white"
             value="Chauri"
             stroke="#000"
             provinceColor={[

@@ -149,7 +149,7 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="col-12 col-lg-4">
+            <div style={{ paddingLeft: "215px" }} className="col-12 col-lg-4">
               <div className="footer-social-icons">
                 <h4 className="text-white font-weight-bold">Follow us</h4>
                 <div className="d-flex">

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getResourcesData } from "../../services/resourcesService";
 import { useParams } from "react-router-dom";
+import { getResourcesImages } from "../../services/api";
+import coverImage from "../../assets/img/cover.jpg";
 
 export const ResourcesHome = () => {
   const [media, setMedia] = useState("");
@@ -11,6 +13,8 @@ export const ResourcesHome = () => {
   const [blog, setBlog] = useState("");
   const [locale, setLocale] = useState("nep");
   let { fieldName } = useParams();
+  const [currentLocale, setcurrentLocale] = useState("EN");
+  const [navbarImages, setNavBarImages] = useState();
 
   const stateDatas = {
     media: setMedia,
@@ -40,43 +44,181 @@ export const ResourcesHome = () => {
         fetchResourceData(state, "Nepali");
       }
     });
+
+    let currentLocale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale") === "eng"
+        ? "EN"
+        : "NP"
+      : "EN";
+    setcurrentLocale(currentLocale);
+    fetchData();
   }, []);
 
+  const fetchData = async () => {
+    try {
+      const res = await getResourcesImages();
+      const resData = res.data;
+      if (resData) {
+        setNavBarImages(resData);
+      }
+    } catch (error) {}
+  };
+
   return (
-    <div>
-      <section className="about-us-section my-3">
+    <>
+      <section className="about-us-section ">
+        {fieldName === "vacancy" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.vacancy
+                  ? navbarImages.vacancy
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Media" : "मिडिया"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "procurement" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.procurement
+                  ? navbarImages.procurement
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Resources" : "स्रोतहरू"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "volunteer" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.volunteer
+                  ? navbarImages.volunteer
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Resources" : "स्रोतहरू"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "digitalLibrary" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.digitalLibrary
+                  ? navbarImages.digitalLibrary
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Resources" : "स्रोतहरू"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "lives" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.transformingLives
+                  ? navbarImages.transformingLives
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Resources" : "स्रोतहरू"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "blog" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                navbarImages && navbarImages.blog
+                  ? navbarImages.blog
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN" ? "Resources" : "स्रोतहरू"}
+              </h1>
+            </div>
+          </div>
+        )}
+
         <div className="container">
-          <div className="card">
+          <div className="">
             <div className="card-body">
               {fieldName && fieldName === "vacancy" && (
                 <>
-                  <h3 className="text-center mt-3">Vacancy</h3>
+                  <h3>{currentLocale === "EN" ? "Vacancy" : "रिक्ति"}</h3>
                   <p dangerouslySetInnerHTML={{ __html: media }}></p>
                 </>
               )}
 
               {fieldName && fieldName === "procurement" && (
                 <>
-                  <h3 className="text-center mt-3">Procurement </h3>
+                  <h3>{currentLocale === "EN" ? "News" : "समाचार"} </h3>
                   <p
                     dangerouslySetInnerHTML={{ __html: newsAndPressRelease }}
                   ></p>
-                </>
-              )}
 
-              {fieldName && fieldName === "volunteer" && (
-                <>
-                  <div className="card p-3 mt-3">
-                    <h3 className="text-center mt-3">Volunteer </h3>
+                  <>
+                    <h3>{currentLocale === "EN" ? "Events" : "कार्यक्रम"} </h3>
                     <p dangerouslySetInnerHTML={{ __html: events }}></p>
-                  </div>
+                  </>
                 </>
               )}
 
               {fieldName && fieldName === "digitalLibrary" && (
                 <>
-                  <div className="card p-3 mt-3">
-                    <h3 className="text-center mt-3">Digital Library</h3>
+                  <div>
+                    <h3>
+                      {currentLocale === "EN"
+                        ? "Digital Library"
+                        : "डिजिटल पुस्तकालय"}
+                    </h3>
                     <p dangerouslySetInnerHTML={{ __html: digitalLibrary }}></p>
                   </div>
                 </>
@@ -84,8 +226,10 @@ export const ResourcesHome = () => {
 
               {fieldName && fieldName === "lives" && (
                 <>
-                  <div className="card p-3 mt-3">
-                    <h3 className="text-center mt-3">Transforming Lives</h3>
+                  <div>
+                    <h3>
+                      {currentLocale === "EN" ? "Publications" : "प्रकाशन"}
+                    </h3>
                     <p
                       dangerouslySetInnerHTML={{ __html: transformingLives }}
                     ></p>
@@ -95,8 +239,8 @@ export const ResourcesHome = () => {
 
               {fieldName && fieldName === "blog" && (
                 <>
-                  <div className="card p-3 mt-3">
-                    <h3 className="text-center mt-3">Blog</h3>
+                  <div>
+                    <h3>{currentLocale === "EN" ? "Blog" : "ब्लग"}</h3>
                     <p dangerouslySetInnerHTML={{ __html: blog }}></p>
                   </div>
                 </>
@@ -105,6 +249,6 @@ export const ResourcesHome = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };

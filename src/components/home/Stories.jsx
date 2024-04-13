@@ -4,6 +4,7 @@ import testimonialsImage1 from "../../assets/img/testimonials-1.png";
 import testimonialsImage2 from "../../assets/img/testimonials-2.png";
 import testimonialsImage3 from "../../assets/img/testimonials-3.png";
 import testimonialsImage4 from "../../assets/img/testimonials-4.png";
+import { NavLink } from "react-router-dom";
 
 const Stories = () => {
   const [stories, setStories] = useState();
@@ -31,12 +32,12 @@ const Stories = () => {
       <section className="testimonials">
         <div className="testimonials-topbar text-center">
           <div className="container">
-            <span className="text-white">Want to experience a change?</span>
+            <span className="text-white">Want to experience a change? </span>
             <span className="text-yellow topbar-underline">
               Read impact stories at{" "}
-              <a href="#" className="font-weight-bold text-yellow">
+              <NavLink to="#" className="font-weight-bold text-yellow">
                 Transforming Lives
-              </a>
+              </NavLink>
             </span>
           </div>
         </div>
@@ -137,9 +138,12 @@ const Stories = () => {
           </div>
 
           <div className="d-flex justify-content-center">
-            <a href="/stories/readmore" className="btn btn-blue-inverted mt-3">
+            <NavLink
+              to="/stories/readmore"
+              className="btn btn-blue-inverted mt-3"
+            >
               Read More <i className="fas fa-circle-arrow-right ml-2"></i>
-            </a>
+            </NavLink>
           </div>
         </div>
       </section>

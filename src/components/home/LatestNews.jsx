@@ -65,7 +65,7 @@ function LatestNews() {
                   }}
                   modules={[Navigation]}
                 >
-                  {latestNews && latestNews.news ? (
+                  {latestNews &&
                     latestNews.news.map((item, index) => (
                       <SwiperSlide key={index}>
                         <div className="swiper-slide">
@@ -78,8 +78,8 @@ function LatestNews() {
                               />
                               <div className="news-date d-flex flex-column">
                                 <h2>
-                                  {item.date
-                                    ? item.date.split("-")[0]
+                                  {item && item.day
+                                    ? item.day
                                     : locale
                                     ? locale === "eng"
                                       ? "14"
@@ -87,8 +87,8 @@ function LatestNews() {
                                     : "14"}
                                 </h2>
                                 <h4 className="mt-n2">
-                                  {item.date
-                                    ? item.date.split("-")[1]
+                                  {item.month
+                                    ? item.month
                                     : locale
                                     ? locale === "eng"
                                       ? "Jan"
@@ -151,98 +151,15 @@ function LatestNews() {
                           </div>
                         </div>
                       </SwiperSlide>
-                    ))
-                  ) : (
-                    <>
-                      <SwiperSlide>
-                        <div className="swiper-slide">
-                          <div className="news-card text-left">
-                            <div className="position-relative text-center">
-                              <img
-                                src={newsImage}
-                                alt={
-                                  locale
-                                    ? locale === "eng"
-                                      ? "News 1"
-                                      : "समाचार १"
-                                    : "News 1"
-                                }
-                                className="img-fluid"
-                              />
-                              <div className="news-date d-flex flex-column">
-                                <h2>
-                                  {locale
-                                    ? locale === "eng"
-                                      ? "14"
-                                      : "१४"
-                                    : "14"}
-                                </h2>
-                                <h4 className="mt-n2">
-                                  {locale
-                                    ? locale === "eng"
-                                      ? "Jan"
-                                      : "जनवरी"
-                                    : "Jan"}
-                                </h4>
-                              </div>
-                            </div>
-                            <h3 className="font-weight-bold text-blue mt-5">
-                              {locale
-                                ? locale === "eng"
-                                  ? "Empowering Communities Through Education"
-                                  : "शिक्षा द्वारा समुदायको सशक्तिकरण"
-                                : "Empowering Communities Through Education"}
-                            </h3>
-                            <p className="">
-                              {locale
-                                ? locale === "eng"
-                                  ? "Our organization has been actively involved in providing education to underprivileged communities, thereby empowering them to create a better future for themselves."
-                                  : "हाम्रो संस्था गरिब समुदायहरूलाई शिक्षा प्रदान गर्दै समुदायलाई आफ्नो भविष्यको लागि राम्रो बनाउन सशक्तिकरण गरिरहेको छ।"
-                                : "Our organization has been actively involved in providing education to underprivileged communities, thereby empowering them to create a better future for themselves."}
-                            </p>
-                            <a href="/learnMore" className="text-blue mb-2">
-                              {locale
-                                ? locale === "eng"
-                                  ? "Read More"
-                                  : "थप पढ्नुहोस्"
-                                : "Read More"}{" "}
-                              <i className="fas fa-circle-arrow-right ml-2"></i>
-                            </a>
-                            <div className="news-card-bottom pt-2 border-top d-flex justify-content-between">
-                              <div className="d-flex align-items-center">
-                                <i className="fas fa-user"></i>
-                                <span className="ml-2">
-                                  {locale
-                                    ? locale === "eng"
-                                      ? "John Doe"
-                                      : "जोन डो"
-                                    : "John Doe"}
-                                </span>
-                              </div>
-                              <div className="d-flex align-items-center">
-                                <i className="fas fa-share"></i>
-                                <span className="ml-2">
-                                  {locale
-                                    ? locale === "eng"
-                                      ? "Share"
-                                      : "शेयर"
-                                    : "Share"}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    </>
-                  )}
+                    ))}
                 </Swiper>
               </div>
             </div>
           </div>
 
           <div className="d-flex justify-content-center">
-            <a
-              href="/latestNews/viewAll"
+            <NavLink
+              to="/latestNews/viewAll"
               className="btn btn-blue-inverted mt-3"
             >
               {locale
@@ -251,7 +168,7 @@ function LatestNews() {
                   : "सबै हेर्नुहोस्"
                 : "View All"}{" "}
               <i className="fas fa-circle-arrow-right ml-2"></i>
-            </a>
+            </NavLink>
           </div>
         </div>
       </section>

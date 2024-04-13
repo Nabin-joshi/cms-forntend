@@ -22,6 +22,7 @@ const ContactUsHome = () => {
     email: "",
     message: "",
   });
+  const [currentLocale, setcurrentLocale] = useState("EN");
 
   const handleGetInTouchOnChange = (event) => {
     const touchName = event.target.name;
@@ -38,7 +39,6 @@ const ContactUsHome = () => {
       toast.error(error.response.data.errormessage);
     }
   };
-
   const [locale, setLocale] = useState("nep");
   const fetchContactUs = async () => {
     try {
@@ -72,6 +72,12 @@ const ContactUsHome = () => {
 
   useEffect(() => {
     fetchContactUs();
+    let currentLocale = localStorage.getItem("locale")
+      ? localStorage.getItem("currentLocale") === "eng"
+        ? "EN"
+        : "NP"
+      : "EN";
+    setcurrentLocale(currentLocale);
   }, []);
   return (
     <>
@@ -89,21 +95,32 @@ const ContactUsHome = () => {
             }}
           >
             <div className="banner-content">
-              <h1 className="text-white text-center">Contact Koshish</h1>
+              <h1 className="text-white text-center">
+                {" "}
+                {currentLocale === "EN"
+                  ? "Contact Koshish"
+                  : "कोशिशसँग सम्पर्क "}
+              </h1>
             </div>
           </div>
         </section>
 
         <section className="about-us-section my-3">
           <div className="container">
-            <div className="card">
+            <div className="">
               <section className="container my-5">
                 <div className="row">
                   <div className="col-12 col-lg-6">
-                    <h2>Contact Us</h2>
+                    <h2>
+                      {" "}
+                      {currentLocale === "EN"
+                        ? "Contact Us"
+                        : "हामीसँग सम्पर्क "}
+                    </h2>
                     <p>
-                      For any queries, feedback or suggestions, feel free to
-                      contact us. We are here to help you.
+                      {currentLocale === "EN"
+                        ? "For any queries, feedback or suggestions, feel free to contact us. We are here to help you."
+                        : "कुनै प्रश्न, प्रतिक्रिया वा सुझावका लागि, आफ्नो सुविधाका लागि हामीसँग सम्पर्क गर्नुहोस्। हामी तपाईंको सहयोगमा छौं। "}
                     </p>
 
                     <div className="contact-info">
@@ -122,40 +139,65 @@ const ContactUsHome = () => {
                     </div>
                   </div>
                   <div className="col-12 col-lg-6">
-                    <h2>Get in Touch</h2>
+                    <h2>
+                      {" "}
+                      {currentLocale === "EN"
+                        ? "Get in Touch"
+                        : "सम्पर्कमा रहनुहोस् "}
+                    </h2>
                     <form>
                       <div className="form-group">
-                        <label for="name">Name </label>
+                        <label for="name">
+                          {currentLocale === "EN" ? "Name" : "नाम"}{" "}
+                        </label>
                         <Input
                           type="text"
                           className="form-control"
                           id="name"
                           name="name"
-                          placeholder="Enter your name"
+                          placeholder={
+                            currentLocale === "EN"
+                              ? "Enter your name"
+                              : "तपाईंको नाम के हो "
+                          }
                           value={getInTouch.name}
                           onChange={handleGetInTouchOnChange}
                         />
                       </div>
                       <div className="form-group">
-                        <label for="email">Email address</label>
+                        <label for="email">
+                          {currentLocale === "EN"
+                            ? "Email address"
+                            : "ईमेल ठेगाना"}
+                        </label>
                         <Input
                           type="email"
                           className="form-control"
                           id="email"
                           name="email"
-                          placeholder="Enter your email"
+                          placeholder={
+                            currentLocale === "EN"
+                              ? "Enter your name"
+                              : "तपाईंको इमेल ठेगाना के छ "
+                          }
                           value={getInTouch.email}
                           onChange={handleGetInTouchOnChange}
                         />
                       </div>
                       <div className="form-group">
-                        <label for="message">Message</label>
+                        <label for="message">
+                          {currentLocale === "EN" ? "Message" : "सन्देश"}
+                        </label>
                         <textarea
                           className="form-control"
                           id="message"
                           name="message"
                           rows="5"
-                          placeholder="Enter your message"
+                          placeholder={
+                            currentLocale === "EN"
+                              ? "Enter your message"
+                              : "तपाईंको सन्देश के हो"
+                          }
                           value={getInTouch.message}
                           onChange={handleGetInTouchOnChange}
                         ></textarea>
@@ -164,12 +206,17 @@ const ContactUsHome = () => {
                         className="btn btn-primary"
                         onClick={submitGetInTouch}
                       >
-                        Submit
+                        {currentLocale === "EN" ? "Submit" : "पेश गर्नुहोस्"}
                       </button>
                     </form>
 
                     <div className="mt-4">
-                      <h5>Connect with Us</h5>
+                      <h5>
+                        {" "}
+                        {currentLocale === "EN"
+                          ? "Connect with Us"
+                          : "हामीसँग जडान गर्नुहोस्"}{" "}
+                      </h5>
                       <ul className="list-inline">
                         <li className="list-inline-item">
                           <a href="https://www.facebook.com/koshishnepalofficial">

@@ -1,33 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { getAboutUs } from "../../services/aboutUsService";
 import { json, useParams } from "react-router-dom";
+import { getAboutUsImages } from "../../services/api";
+import { toastError } from "../../services/ToastService";
+import coverImage from "../../assets/img/cover.jpg";
+import { getContactUsData } from "../../services/ContactUsService";
 
 const AboutUs = () => {
-  const [history, setHistory] = useState("");
-  const [whoWeAre, setWhoWeAre] = useState("");
-  const [ourValues, setOurValues] = useState("");
-  const [vision, setVision] = useState("");
-  const [mission, setMission] = useState("");
-  const [goal, setGoal] = useState("");
-  const [ourThematicAreas, setOurThematicAreas] = useState([]);
-  const [boardCommittees, setBoardCommittees] = useState([]);
-  const [ourApproach, setOurApproach] = useState("");
-  const [locale, setLocale] = useState("eng");
-  const stateDatas = {
-    // history: setHistory,
-    // whoWeAre: setWhoWeAre,
-    // ourValues: setOurValues,
-    // vision: setVision,
-    // mission: setMission,
-    // goal: setGoal,
-    // ourThematicAreas: setOurThematicAreas,
-    // boardCommittees: setBoardCommittees,
-    // ourApproach: setOurApproach,
+  const [currentLocale, setcurrentLocale] = useState("EN");
+  const [aboutUsImages, setAboutUsImages] = useState({
+    aboutUsHistory: "",
+    aboutUsIntroduction: "",
+    aboutUsOurTeam: "",
+  });
+
+  const [contactUs, setContactUs] = useState({
+    header: "",
+    headerImage: "",
+    description: "",
+    phone: "",
+    address: "",
+    email: "",
+  });
+
+  const fetchData = async () => {
+    try {
+      const res = await getAboutUsImages();
+      const resData = res.data;
+
+      let aboutusData = {
+        aboutUsHistory: "",
+        aboutUsIntroduction: "",
+        aboutUsOurTeam: "",
+      };
+
+      aboutusData.aboutUsHistory = resData.aboutUsHistory;
+      aboutusData.aboutUsIntroduction = resData.aboutUsIntroduction;
+      aboutusData.aboutUsOurTeam = resData.aboutUsOurTeam;
+      setAboutUsImages(aboutusData);
+    } catch (error) {}
   };
 
   const [fieldValue, setFieldValue] = useState("");
   const { fieldName } = useParams();
 
+  const [locale, setLocale] = useState("eng");
   useEffect(() => {
     const fetchFieldData = async (field, locale = "") => {
       try {
@@ -42,16 +59,17 @@ const AboutUs = () => {
     } else if (locale === "nep") {
       fetchFieldData(fieldName, "Nepali");
     }
+
     // const fieldsArray = Object.keys(stateDatas);
 
-    // async function fetchAboutUs(field, locale = "") {
+    // async function fetchAboutUs(field, currentLocale = "") {
     //   try {
-    //     const resp = getAboutUs(field + locale);
+    //     const resp = getAboutUs(field + currentLocale);
     //     const data = (await resp).data.data;
     //     let fieldkey = field;
 
     //     const setData = stateDatas[fieldkey];
-    //     setData(data[fieldkey + locale]);
+    //     setData(data[fieldkey + currentLocale]);
     //   } catch (error) {}
     // }
 
@@ -59,29 +77,102 @@ const AboutUs = () => {
     //   if (field === "ourThematicAreas" || field === "boardCommittees") {
     //     fetchAboutUs(field);
     //   } else {
-    //     if (locale === "eng") {
+    //     if (currentLocale === "eng") {
     //       fetchAboutUs(field);
-    //     } else if (locale === "nep") {
+    //     } else if (currentLocale === "nep") {
     //       fetchAboutUs(field, "Nepali");
     //     }
     //   }
     // });
   }, [fieldName]);
 
+  useEffect(() => {
+    fetchData();
+    let currentLocale = localStorage.getItem("locale")
+      ? localStorage.getItem("locale") === "eng"
+        ? "EN"
+        : "NP"
+      : "EN";
+    setcurrentLocale(currentLocale);
+  }, []);
+
   return (
     <>
-      <section className="about-us-section my-3">
-        <div className="about-us-container">
-          <div className="card">
+      <section className="about-us-section ">
+        {fieldName === "history" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                aboutUsImages && aboutUsImages.aboutUsHistory
+                  ? aboutUsImages.aboutUsHistory
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {currentLocale === "EN" ? "About Koshish" : "कोशिश बारेमा"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "whoWeAre" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                aboutUsImages && aboutUsImages.aboutUsIntroduction
+                  ? aboutUsImages.aboutUsIntroduction
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {currentLocale === "EN" ? "About Koshish" : "कोशिश बारेमा"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        {fieldName === "boardCommittees" && (
+          <div
+            className="banner"
+            style={{
+              backgroundImage: `url(${
+                aboutUsImages && aboutUsImages.aboutUsOurTeam
+                  ? aboutUsImages.aboutUsOurTeam
+                  : coverImage
+              })`,
+            }}
+          >
+            <div className="banner-content">
+              <h1 className="text-white text-center">
+                {currentLocale === "EN" ? "About Koshish" : "कोशिश बारेमा"}
+              </h1>
+            </div>
+          </div>
+        )}
+
+        <div className="container">
+          <div>
             <div className="card-body">
               {fieldName === "history" && (
-                <h1 className="text-center text-blue">History </h1>
+                <h1 className="text-center text-blue">
+                  {currentLocale === "EN" ? "History" : "इतिहास"}{" "}
+                </h1>
               )}
               {fieldName === "whoWeAre" && (
-                <h1 className="text-center text-blue">Introduction </h1>
+                <h1 className="text-center text-blue">
+                  {currentLocale === "EN" ? "Introduction" : "परिचय"}{" "}
+                </h1>
               )}
               {fieldName === "boardCommittees" && (
-                <h1 className="text-center text-blue">Our Team </h1>
+                <h1 className="text-center text-blue">
+                  {currentLocale === "EN" ? "Our Team" : "हाम्रा टोलीहरू"}{" "}
+                </h1>
               )}
 
               {fieldName !== "boardCommittees" && (
@@ -89,7 +180,11 @@ const AboutUs = () => {
               )}
               {fieldName === "boardCommittees" && (
                 <div>
-                  <h5 className="ml-2">Board Members</h5>
+                  <h5 className="ml-2">
+                    {currentLocale === "EN"
+                      ? "Board Members"
+                      : "बोर्ड सदस्यहरू"}
+                  </h5>
                   <br />
                   <div
                     style={{

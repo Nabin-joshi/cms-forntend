@@ -468,7 +468,7 @@ export const saveEnglishGeoMapData = async (data) => {
 
 export const saveNepaliLatestNews = async (data) => {
   try {
-    await api.put("/api/latestNews/updateGeoMap/nep", data, {
+    await api.put("/api/latestNews/updateLatestNews/nep", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -540,4 +540,136 @@ export const getAboutUsImages = async () => {
     console.log(error);
   }
   return response;
+};
+
+export const getOurWorkImages = async () => {
+  let response;
+  try {
+    response = await api.get("/api/ourProgram/getOurWorkImage");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveOurWorkImages = async (data) => {
+  try {
+    await api.put("/api/ourProgram/updateOurWorkImage", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getGetInvolvedImages = async () => {
+  let response;
+  try {
+    response = await api.get("/api/getInvolved/getGetInvolvedImages");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveGetInvolvedImages = async (data) => {
+  try {
+    await api.put("/api/getInvolved/updateGetInvolvedImage", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getResourcesImages = async () => {
+  let response;
+  try {
+    response = await api.get("/api/resources/getResourcesImage");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveResourcesImages = async (data) => {
+  try {
+    await api.put("/api/resources/updateResourcesImage", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getSocialLinks = async () => {
+  let response;
+  try {
+    response = await api.get("/api/socialLinks/getSocialLinks");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const saveSocialLinks = async (data) => {
+  try {
+    await api.put("/api/socialLinks/updateSocialLinks", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getAllPopupPage = async () => {
+  let response;
+  try {
+    response = await api.get("/api/popup/getAllPopupPage");
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const getPopupPage = async () => {
+  let response;
+  try {
+    response = await api.get(`/api/popup/getPopupPage/${locale}`);
+  } catch (error) {
+    console.log(error);
+  }
+  return response;
+};
+
+export const savePopupPageEnglish = async (data) => {
+  try {
+    await api.put("/api/popup/updatePopupPage/eng", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const savePopupPageNepali = async (data) => {
+  try {
+    await api.put("/api/popup/updatePopupPage/nep", data);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };

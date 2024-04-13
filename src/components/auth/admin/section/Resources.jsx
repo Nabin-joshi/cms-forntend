@@ -235,7 +235,7 @@ const Resources = () => {
 
         <hr />
 
-        {/* Digital Library */}
+        {/* Digital Library
         <div className="row card">
           <div className="col-md-12 card-body">
             <div className="mb-3">
@@ -268,14 +268,14 @@ const Resources = () => {
             </Button>
           </div>
         </div>
-        <hr />
+        <hr /> */}
 
         {/* Transforming Lives */}
         <div className="row card">
           <div className="col-md-12 card-body">
             <div className="mb-3">
               <label className="form-label" htmlFor="">
-                Transforming Lives
+                Publications
               </label>
               <JoditEditor
                 value={transformingLives}
@@ -286,7 +286,7 @@ const Resources = () => {
           <div className="col-md-12 card-body">
             <div className="mb-3">
               <label className="form-label" htmlFor="">
-                Transforming Lives (Nepali)
+                Publications (Nepali)
               </label>
               <JoditEditor
                 value={transformingLivesNepali}
@@ -299,7 +299,7 @@ const Resources = () => {
               onClick={() => updateFieldTransformingLives()}
               style={{ float: "right" }}
             >
-              Update Transforming Lives
+              Update Publications
             </Button>
           </div>
         </div>

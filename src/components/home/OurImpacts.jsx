@@ -29,7 +29,6 @@ const OurImpacts = () => {
     const ourImpactSection = document.getElementById("our-impact-section");
     if (!ourImpactSection) return;
     const rect = ourImpactSection.getBoundingClientRect();
-    console.log(rect.top);
 
     const isVisible =
       rect.top >= -120 && rect.bottom <= window.innerHeight + 120;
